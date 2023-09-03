@@ -1,4 +1,7 @@
-﻿namespace TWYK.Core.Domain
+﻿using System.Security.AccessControl;
+using System.Xml.Linq;
+
+namespace TWYK.Core.Domain
 {
     /// <summary>
     /// Represents a product

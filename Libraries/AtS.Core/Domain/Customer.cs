@@ -6,7 +6,7 @@ namespace TWYK.Core.Domain
     public class Customer : BaseEntity
     {
         private ICollection<ShoppingCartItem> _shoppingCartItems;
-
+        private ICollection<Topic> _topics;
         /// <summary>
         /// Ctor
         /// </summary>
@@ -65,6 +65,11 @@ namespace TWYK.Core.Domain
         public virtual ICollection<ShoppingCartItem> ShoppingCartItems {
             get { return _shoppingCartItems ?? (_shoppingCartItems = new List<ShoppingCartItem>()); }
             protected set { _shoppingCartItems = value; }
+        }
+
+        public virtual ICollection<Topic> Topics {
+            get => _topics ?? (_topics = new List<Topic>());
+            set => _topics = value;
         }
     }
 }
