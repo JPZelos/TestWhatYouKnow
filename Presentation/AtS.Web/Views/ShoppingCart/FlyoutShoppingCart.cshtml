@@ -1,0 +1,41 @@
+﻿@using TWYK.Core.Domain
+@model TWYK.Web.Models.ShoppingCartModel
+@{
+    Layout = null;
+}
+
+<style>
+   /* .shopping-cart {
+        box-shadow: 0 6px 20px 0 rgb(0 0 0 / 19%);
+        border-radius: 1rem;
+        border: transparent;
+    }
+
+        .shopping-cart .bi-cart2 {
+            font-size: 1rem;
+        }
+*/
+</style>
+
+
+<div id="flyout-cart" class="shopping-cart" style="display: none;">
+    <div class="shopping-cart-header">
+        <i class="bi bi-cart2"></i> <span class="badge cart-qty">@Model.TotalProducts</span>
+        <div class="shopping-cart-total">
+            <span class="lighter-text">Total:</span>
+            <span class="main-color-text">€@Model.SubTotal</span>
+        </div>
+    </div>
+
+    <ul class="shopping-cart-items">
+        @foreach (var sci in Model.Items) {
+            <li class="clearfix">
+                <img src="~/Content/Images/Products/@(sci.Product.Picture)" alt="item1" />
+                <span class="item-name">@sci.Product.Name</span>
+                <span class="item-price">€@sci.Product.GetTotalPrice()</span>
+                <span class="item-quantity">Quantity: @sci.Quantity</span>
+            </li>
+        }
+    </ul>
+    <a href="@Url.RouteUrl("ShoppingCart")" class="button">Checkout</a>
+</div>

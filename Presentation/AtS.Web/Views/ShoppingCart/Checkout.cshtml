@@ -1,0 +1,69 @@
+﻿@model TWYK.Web.Models.ShoppingCartModel
+@{
+    ViewBag.Title = "Thank you";
+
+    var rand = new Random();
+}
+
+<div class="ats-shoping-card">
+
+    <div class="row">
+
+        <div class="col-md-8 cart">
+
+            <div class="title">
+                <div class="row">
+                    <div class="col">
+                        <h4><b>Your Order - Order Code: ORD-@rand.Next(234, 2000)</b></h4>
+                    </div>
+                    <div class="col align-self-center text-right text-muted">@Model.TotalProducts items</div>
+                </div>
+            </div>
+            @foreach (var item in Model.Items)
+            {
+                var borderClass = Model.Items.First() == item ? "row border-top border-bottom" : "row border-bottom";
+
+                <div class="@borderClass">
+                    <div class="row main align-items-center d-flex justify-content-center">
+                        <div class="col-2">
+                            <img class="img-fluid" src="~/Content/Images/Products/@(item.Product.Picture)">
+                        </div>
+                        <div class="col">
+                            <div class="row text-muted"><a href="@Url.RouteUrl("Product", new {productId = item.ProductId})" style="padding: 0;">@item.Product.Name</a></div>
+                            <div class="row">@item.Product.Category.Name</div>
+                        </div>
+
+                        <div class="col">
+                            <label class="form-label" for="typeNumber">Quantity</label>
+                            <div class="input-group input-group-sm mb-3">
+                                @(item.Quantity)
+                                @*<input name="itemquantity@(item.Id)" type="number" value="@(item.Quantity)" class="form-control cart-item-qty" />*@
+                            </div>
+                        </div>
+
+                        <div class="col d-flex justify-content-center">
+                            <div class="col d-flex align-items-center">&euro;&nbsp;@Math.Round(item.Product.Price * item.Quantity, 2)</div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="col-md-4 summary">
+
+            <div><h5><b>Summary</b></h5></div>
+
+            <div class="row">
+                <div class="col" style="padding-left: 0;">ITEMS @Model.TotalProducts</div>
+                <div class="col text-right">&euro; @Model.SubTotal</div>
+            </div>
+
+            <p>SHIPPING</p>
+            <div class="col"><span>Standard-Delivery- &euro;5.00</span></div>
+
+        </div>
+
+    </div>
+
+</div>

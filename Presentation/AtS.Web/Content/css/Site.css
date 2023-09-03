@@ -1,0 +1,71 @@
+﻿body {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+  white-space: normal;
+}
+
+/*********** NOTIFICATIONS & POPUPS  ***********/
+#bar-notification {
+  display: none;
+  position: fixed;
+  top: calc((100vh - 110px) / 2);
+  left: 37.5vw;
+  z-index: 1000;
+  width: 25vw;
+  height: 110px;
+  padding: 15px 25px 15px 10px;
+  line-height: 16px;
+  color: #fff;
+  opacity: 0.95;
+  padding: 50px;
+}
+#bar-notification.success {
+  background-color: #4bb07a;
+}
+#bar-notification.error {
+  background-color: #e4444c;
+}
+#bar-notification.warning {
+  background-color: #f39c12;
+}
+#bar-notification .content {
+  margin: 0 10px 0 0;
+}
+#bar-notification .content a {
+  color: #fff;
+  text-decoration: underline;
+}
+#bar-notification .content .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  margin: 7px;
+  background: #fff url("../images/close.png") center no-repeat;
+  cursor: pointer;
+}
+
+/*********** LOGIN AND REGISTER  ***********/
+.inner form {
+  width: 50%;
+  padding-top: 36px;
+  padding-left: 45px;
+  padding-right: 45px;
+}
+
+.form-group {
+  display: flex;
+}

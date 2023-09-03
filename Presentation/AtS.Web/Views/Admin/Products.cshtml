@@ -1,0 +1,40 @@
+﻿@model List<TWYK.Web.Models.ProductModel>
+@{
+    ViewBag.Title = "Products";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="row">
+    <h2>Products</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Picture</th>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Price</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var prd in Model) {
+            <tr>
+                <th scope="row">@prd.Id</th>
+                <td style="width: 100px;"><img class="card-img-top" src="~/Content/Images/Products/@prd.Picture" alt="..." /></td>
+                <td style="width: 45%;">@prd.Name</td>
+                <td style="width: 45%;">@prd.Category.Name</td>
+                <td style="width: 45%; text-align: right;">€ @prd.TotalPrice</td>
+                <td style="text-align: center;"><a href="#" 
+                                                   data-bs-toggle="tooltip" 
+                                                   data-bs-placement="top" 
+                                                   title="Click to Edit"><i class="bi bi-pencil-square"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+

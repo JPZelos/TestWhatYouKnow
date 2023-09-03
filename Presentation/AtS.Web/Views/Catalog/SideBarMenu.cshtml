@@ -1,0 +1,20 @@
+﻿@model List<TWYK.Web.Models.CategoryModel>
+<div class="flex-shrink-0 p-3 bg-white side-bar" style="width: 200px;">
+    <ul class="list-unstyled ps-0">
+        <li class="mb-1">
+            <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                Categories
+            </button>
+            <div class="collapse show" id="home-collapse" style="">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    
+                    @foreach (var item in Model) {
+                        <li class="@item.ActiveClass"><a href="@Url.RouteUrl("Category", new {categoryId = item.Id})" class="link-dark rounded">@item.Name</a></li>
+                    }
+
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+</div>

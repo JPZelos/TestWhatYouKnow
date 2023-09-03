@@ -1,0 +1,48 @@
+﻿<nav id="sidebar">
+    <div class="custom-menu">
+        <button type="button" id="sidebarCollapse" class="btn btn-primary">
+            <i class="fa fa-bars"></i>
+            <span class="sr-only">Toggle Menu</span>
+        </button>
+    </div>
+    <div class="p-4 pt-5">
+        <h1><a href="/" class="logo"><span>Athletic Shop</span></a></h1>
+
+        <ul class="list-unstyled components mb-5">
+            <li>
+                <a href="#homeSubmenu" data-bs-toggle="collapse" role="button" class="dropdown-toggle">Catalog</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li>
+                        <a href="@Url.RouteUrl("AdminCategories")">Categories</a>
+                    </li>
+                    <li>
+                        <a href="@Url.RouteUrl("AdminProducts")">Products</a>
+                    </li>
+                    <li>
+                        <a href="#">Orders</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#usersSubmenu" data-bs-toggle="collapse" role="button" class="dropdown-toggle">Users</a>
+                <ul class="collapse list-unstyled" id="usersSubmenu">
+                    <li>
+                        <a href="#">Users</a>
+                    </li>
+                    <li>
+                        <a href="#">Roles</a>
+                    </li>
+                    <li>
+                        <a href="#">Permitions</a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+
+        <div class="footer">
+            <p>Copyright &copy; @DateTime.Now.Year Athlet Shop All rights reserved </p>
+        </div>
+
+    </div>
+</nav>

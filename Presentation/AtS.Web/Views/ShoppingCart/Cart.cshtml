@@ -1,0 +1,107 @@
+﻿@model TWYK.Web.Models.ShoppingCartModel
+@{
+    ViewBag.Title = "Cart";
+}
+
+@if (Model.Items.Count > 0) {
+    using (Html.BeginRouteForm("ShoppingCart", FormMethod.Post, new { @class = "not-padding" })) {
+        <div class="ats-shoping-card">
+
+            <div class="row">
+
+                <div class="col-md-8 cart">
+
+                    <div class="title">
+                        <div class="row">
+                            <div class="col">
+                                <h4>
+                                    <b>Shopping Cart</b>
+                                </h4>
+                            </div>
+                            <div class="col align-self-center text-right text-muted">@Model.TotalProducts items</div>
+                        </div>
+                    </div>
+                    @foreach (var item in Model.Items) {
+                        var borderClass = Model.Items.First() == item? "row border-top border-bottom": "row border-bottom";
+
+                        <div class="@borderClass">
+                            <div class="row main align-items-center d-flex justify-content-center">
+                                <div class="col-2">
+                                    <img class="img-fluid" src="~/Content/Images/Products/@(item.Product.Picture)">
+                                </div>
+                                <div class="col">
+                                    <div class="row text-muted"><a href="@Url.RouteUrl("Product", new {productId = item.ProductId})" style="padding: 0;">@item.Product.Name</a></div>
+                                    <div class="row">@item.Product.Category.Name</div>
+                                </div>
+
+                                <div class="col">
+                                    <label class="form-label" for="typeNumber">Quantity</label>
+                                    <div class="input-group input-group-sm mb-3">
+                                        <input name="itemquantity@(item.Id)" type="number" value="@(item.Quantity)" class="form-control cart-item-qty" />
+                                    </div>
+                                </div>
+
+                                <div class="col d-flex justify-content-center">
+                                    <div class="col d-flex align-items-center">&euro;&nbsp;@Math.Round(item.Product.Price * item.Quantity, 2)</div>
+                                    
+                                    <div class="col d-flex align-items-center">
+                                        <input type="checkbox" class="form-check-input" id="removefromcart-@(item.Id)" name="removefromcart" value="@(item.Id)" />
+                                        <label class="form-check-label" for="removefromcart-@(item.Id)"><i class="bi bi-trash" style="display: inline-block; margin: 5px 0 0 5px; "></i></label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+
+                    <div class="back-to-shop">
+                        <button>&leftarrow; <span class="text-muted">Back to shop</span></button>
+                        <button type="submit" class="update-cart" name="updatecart">Update Cart</button>
+                    </div>
+                </div>
+
+                <div class="col-md-4 summary">
+                    <div>
+                        <h5>
+                            <b>Summary</b>
+                        </h5>
+                    </div>
+                    <div class="row">
+                        <div class="col" style="padding-left: 0;">ITEMS @Model.TotalProducts</div>
+                        <div class="col text-right">&euro; @Model.SubTotal</div>
+                    </div>
+                    <form>
+                        <p>SHIPPING</p>
+                        <select>
+                            <option class="text-muted">Standard-Delivery- &euro;5.00</option>
+                        </select>
+                        <p>GIVE CODE</p>
+                        <input id="code" placeholder="Enter your code">
+                    </form>
+                    <div class="row" style="border-top: 1px solid rgba(0, 0, 0, .1); padding: 2vh 0;">
+                        <div class="col">TOTAL PRICE</div>
+                        <div class="col text-right">&euro; @(Model.SubTotal + 5)</div>
+                    </div>
+                    <button type="submit" id="checkout" name="checkout" value="checkout" class="btn">CHECKOUT</button>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+}
+else {
+    <div class="row">
+        <div class="col">
+            <h4><b>Shopping Cart</b></h4>
+        </div>
+        <!-- Force next columns to break to new line -->
+        <div class="w-100"></div>
+
+        <div class="col">
+            There is no items in your cart.
+        </div>
+    </div>
+}

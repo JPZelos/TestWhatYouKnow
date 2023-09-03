@@ -1,0 +1,183 @@
+﻿$color_1: rgb(65, 65, 65);
+$color_2: transparent;
+$color_3: white;
+$color_4: black;
+$background-color_1: #fff;
+$background-color_2: #ddd;
+$background-color_3: rgb(247, 247, 247);
+$background-color_4: #000;
+$border-color_1: #000;
+
+.ats-shoping-card {
+    margin: auto;
+    width: 90%;
+    background-color: $background-color_1;
+    padding: 34px 40px;
+
+    .summary {
+        background-color: $background-color_2;
+        /*  border-top-right-radius: 1rem;
+        border-bottom-right-radius: 1rem;*/
+
+        padding: 34px;
+        color: $color_1;
+
+        .col-2 {
+            padding: 0;
+        }
+
+        .col-10 {
+            padding: 0;
+        }
+    }
+
+    .row {
+        margin: 0;
+    }
+
+    .title {
+        b {
+            font-size: 1.5rem;
+        }
+    }
+
+    .main {
+        margin: 0;
+        padding: 2vh 0;
+        width: 100%;
+    }
+
+    .col-2 {
+        padding: 0 1vh;
+    }
+
+    .col {
+        padding: 0 1vh;
+    }
+
+    a {
+        padding: 0 1vh;
+        color: $color_4;
+
+        &:hover {
+            color: $color_4;
+            text-decoration: none;
+        }
+    }
+
+    .close {
+        margin-left: auto;
+        font-size: 0.7rem;
+    }
+    /* img {
+        width: 3.5rem;
+    }*/
+
+    .back-to-shop {
+        margin-top: 4.5rem;
+
+        button {
+            border: 0 !important;
+            background: transparent;
+        }
+
+        button.update-cart {
+            background: #ddd;
+            float: right;
+            padding: 0.2rem 1rem;
+            color: black;
+
+            &:hover {
+                background: black;
+                color: white;
+            }
+        }
+    }
+
+    h5 {
+        margin-top: 4vh;
+    }
+
+    hr {
+        margin-top: 1.25rem;
+    }
+
+    form:not(.not-padding) {
+        padding: 2vh 0;
+    }
+
+    select {
+        border: 1px solid rgba(0, 0, 0, 0.137);
+        padding: 1.5vh 1vh;
+        margin-bottom: 4vh;
+        outline: none;
+        width: 100%;
+        background-color: $background-color_3;
+    }
+
+    input:not(.form-check-input) {
+        border: 1px solid rgba(0, 0, 0, 0.137);
+        padding: 0 .4em;
+        margin-bottom: 0;
+        outline: none;
+        width: 100%;
+        background-color: $background-color_3;
+
+        &:focus {
+            &::-webkit-input-placeholder {
+                color: $color_2;
+            }
+        }
+    }
+
+    .btn {
+        background-color: $background-color_4;
+        border-color: $border-color_1;
+        color: $color_3;
+        width: 100%;
+        font-size: 0.7rem;
+        margin-top: 4vh;
+        padding: 1vh;
+        border-radius: 0;
+
+        &:focus {
+            box-shadow: none;
+            outline: none;
+            box-shadow: none;
+            color: $color_3;
+            -webkit-box-shadow: none;
+            -webkit-user-select: none;
+            transition: none;
+        }
+
+        &:hover {
+            color: $color_3;
+        }
+    }
+
+    #code {
+        background-image: linear-gradient(to left, rgba(255, 255, 255, 0.253), rgba(255, 255, 255, 0.185)), url("https://img.icons8.com/small/16/000000/long-arrow-right.png");
+        background-repeat: no-repeat;
+        background-position-x: 95%;
+        background-position-y: center;
+    }
+
+    .cart-item-qty {
+        margin: 0;
+        max-width: 60%;
+    }
+}
+
+@media (max-width:767px) {
+    .ats-shoping-card {
+        margin: 0 auto;
+        padding: 0;
+        border-bottom-left-radius: unset;
+        border-top-right-radius: unset;
+    }
+
+    .summary {
+        border-top-right-radius: unset;
+        border-bottom-left-radius: unset;
+    }
+}
