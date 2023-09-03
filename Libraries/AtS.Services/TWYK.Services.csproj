@@ -97,9 +97,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Answers\AnswerService.cs" />
     <Compile Include="Authentication\FormsAuthenticationService.cs" />
     <Compile Include="Authentication\IAuthenticationService.cs" />
     <Compile Include="Categories\CategoryService.cs" />
+    <Compile Include="Chapters\ChapterService.cs" />
     <Compile Include="Customers\CustomerService.cs" />
     <Compile Include="Customers\ICustomerService.cs" />
     <Compile Include="Installation\FakeProductFactory.cs" />
@@ -109,9 +111,12 @@
     <Compile Include="Products\FakeProductFactory.cs" />
     <Compile Include="Products\ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Questions\QuestionService.cs" />
     <Compile Include="Security\IPermissionService.cs" />
     <Compile Include="Security\PermissionService.cs" />
     <Compile Include="Seo\SeoExtensions.cs" />
+    <Compile Include="TestResults\TestResultService.cs" />
+    <Compile Include="Topics\TopicService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AtS.Core\TWYK.Core.csproj">
@@ -127,6 +132,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('..\..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
