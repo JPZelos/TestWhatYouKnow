@@ -30,6 +30,22 @@ namespace TWYK.Web.Infrastructure.Mapper
 
                 cfg.CreateMap<ShoppingCartItem, ShoppingCartItemModel>();
                 cfg.CreateMap<ShoppingCartItemModel, ShoppingCartItem>();
+
+
+                cfg.CreateMap<Topic, TopicModel>();
+                cfg.CreateMap<TopicModel, Topic>();
+
+                cfg.CreateMap<Chapter, ChapterModel>();
+                cfg.CreateMap<ChapterModel, Chapter>();
+
+                cfg.CreateMap<Question, QuestionModel>();
+                cfg.CreateMap<QuestionModel, Question>();
+
+                cfg.CreateMap<Answer, AnswerModel>();
+                cfg.CreateMap<AnswerModel, Answer>();
+
+                cfg.CreateMap<TestResult, TestResultModel>();
+                cfg.CreateMap<TestResultModel, TestResult>();
             };
 
             return action;

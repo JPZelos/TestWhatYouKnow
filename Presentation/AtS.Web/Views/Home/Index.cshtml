@@ -1,16 +1,19 @@
-﻿@model List<TWYK.Web.Models.CategoryModel>
+﻿@model List<TWYK.Web.Models.TopicModel>
 @{
     ViewBag.Title = "Home Page";
 }
 
-@foreach (var categoryModel in Model) {
+@foreach (var topic in Model) {
     <div class="row justify-content-center">
         <div class="row">
-            <h2>Best of <strong>@categoryModel.Name</strong> Shoes</h2>
+            <h2>Best of <strong>@topic.Name</strong> Shoes</h2>
         </div>
-
-        @foreach (var prd in categoryModel.Products) {
-            @Html.Partial("_ProductBox", prd)
-        }
+        
+        <ul>
+            @foreach (var chapter in topic.Chapters) {
+                <li>@chapter.Name</li>
+            }
+        </ul>
+        
     </div>
 }

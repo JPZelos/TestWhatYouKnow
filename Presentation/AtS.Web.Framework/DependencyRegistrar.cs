@@ -12,13 +12,18 @@ using TWYK.Core.Fakes;
 using TWYK.Core.Infrastructure;
 using TWYK.Core.Infrastructure.DependencyManagement;
 using TWYK.Data;
+using TWYK.Services.Answers;
 using TWYK.Services.Authentication;
 using TWYK.Services.Categories;
+using TWYK.Services.Chapters;
 using TWYK.Services.Customers;
 using TWYK.Services.Installation;
 using TWYK.Services.Orders;
 using TWYK.Services.Products;
+using TWYK.Services.Questions;
 using TWYK.Services.Security;
+using TWYK.Services.TestResults;
+using TWYK.Services.Topics;
 
 namespace TWYK.Web.Framework
 {
@@ -92,6 +97,13 @@ namespace TWYK.Web.Framework
             builder.RegisterType<ShoppingCartService>().As<IShoppingCartService>().InstancePerLifetimeScope();
             builder.RegisterType<CategoryService>().As<ICategoryService>().InstancePerLifetimeScope();
             builder.RegisterType<InstallationService>().As<IInstallationService>().InstancePerLifetimeScope();
+
+
+            builder.RegisterType<AnswerService>().As<IAnswerService>().InstancePerLifetimeScope();
+            builder.RegisterType<ChapterService>().As<IChapterService>().InstancePerLifetimeScope();
+            builder.RegisterType<QuestionService>().As<IQuestionService>().InstancePerLifetimeScope();
+            builder.RegisterType<TopicService>().As<ITopicService>().InstancePerLifetimeScope();
+            builder.RegisterType<TestResultService>().As<ITestResultService>().InstancePerLifetimeScope();
 
         }
 
