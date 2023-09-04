@@ -91,7 +91,57 @@ namespace TWYK.Web.Controllers
 
             return View(model);
         }
-        
+
+        private void AddDefaultAdministrator_DD()
+        {
+            var customers = _customerService.GetAll();
+            var newCustomer = new Customer
+            {
+                FirstName = "Jason",
+                LastName = "Zelos Prapas",
+                UserName = "admin",
+                Email = "i.p.zelos@gmail.com",
+                Password = "123",
+                Address = "Agiou Spiridionos 45",
+                Address2 = null,
+                City = "Egaleo",
+                State = "Attiki",
+                Zip = "12243",
+                RoleNames = "Registered,Administrators",
+                IsAdmin = true,
+                HasShoppingCartItems = false,
+                LastLoginDateUtc = DateTime.UtcNow
+            };
+
+            if (customers == null)
+            {
+                _customerService.InsertCustomer(newCustomer);
+            }
+            else
+            {
+                string adminRole = SystemCustomerRoleNames.Administrators;
+                bool adminExist = false;
+
+                foreach (var c in customers)
+                {
+                    //if (c.RoleNames != null && c.RoleNames.Contains(adminRole)) {
+                    //    adminExist = true;
+                    //    break;
+                    //}
+
+                    if (c.IsInCustomerRole(SystemCustomerRoleNames.Administrators))
+                    {
+                        adminExist = true;
+                        break;
+                    }
+                }
+
+                if (!adminExist)
+                {
+                    _customerService.InsertCustomer(newCustomer);
+                }
+            }
+        }
 
         private void AddDefaultAdministrator() {
             var customers = _customerService.GetAll();

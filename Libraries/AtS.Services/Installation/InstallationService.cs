@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TWYK.Core.Data;
 using TWYK.Core.Domain;
@@ -17,12 +18,42 @@ namespace TWYK.Services.Installation
         private readonly IRepository<Product> _productRepository;
         private readonly IRepository<Category> _categoryRepository;
 
-        public InstallationService(IRepository<Product> productRepository, IRepository<Category> categoryRepository) {
+
+        private readonly IRepository<Customer> _customerRepository;
+        private readonly IRepository<Topic> _topicRepository;
+        private readonly IRepository<Chapter> _chapterRepository;
+        private readonly IRepository<Question> _questionRepository;
+        private readonly IRepository<Answer> _answerRepository;
+        private readonly IRepository<TestResult> _testResultRepository;
+
+        public InstallationService(
+            IRepository<Product> productRepository, 
+            IRepository<Category> categoryRepository,
+            IRepository<Customer> customerRepository, 
+            IRepository<Topic> topicRepository,
+            IRepository<Chapter> chapterRepository, 
+            IRepository<Question> questionRepository,
+            IRepository<Answer> answerRepository, 
+            IRepository<TestResult> testResultRepository
+        ) {
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
+            _customerRepository = customerRepository;
+            _topicRepository = topicRepository;
+            _chapterRepository = chapterRepository;
+            _questionRepository = questionRepository;
+            _answerRepository = answerRepository;
+            _testResultRepository = testResultRepository;
         }
 
         public void InstallSampleData() {
+
+            AddCustomers();
+            AddTopics();
+            AddChapter();
+            AddQuestions();
+            AddAnswers();
+
             var categories = _categoryRepository.Table.ToList();
             var products = _productRepository.Table.ToList();
 
@@ -83,6 +114,309 @@ namespace TWYK.Services.Installation
             };
             _categoryRepository.Insert(categories);
             return categories;
+        }
+
+        public void AddCustomers() {
+            var customers = new List<Customer> {
+                new Customer {
+                    FirstName = "Jason",
+                    LastName = "Zelos Prapas",
+                    UserName = "admin",
+                    Email = "i.p.zelos@gmail.com",
+                    Password = "123",
+                    Address = "Agiou Spiridionos 45",
+                    Address2 = null,
+                    City = "Egaleo",
+                    State = "Attiki",
+                    Zip = "12243",
+                    RoleNames = "Registered,Administrators",
+                    IsAdmin = true,
+                    HasShoppingCartItems = false,
+                    LastLoginDateUtc = DateTime.UtcNow
+                },
+                new Customer {
+                    Address = "Aigaleo",
+                    Address2 = "UniWa",
+                    City = "Aigaleo",
+                    //CustomerGuid = new Guid(),
+                    Email = "teacher_a@uniwa.gr",
+                    UserName = "teacher_a",
+                    Password = "123",
+                    FirstName = "Teacher",
+                    LastName = "A",
+                    HasShoppingCartItems = false,
+                    IsAdmin = false,
+                    RoleNames = "Registered,Teachers"
+                },
+                new Customer {
+                    Address = "Aigaleo",
+                    Address2 = "UniWa",
+                    City = "Aigaleo",
+                    //CustomerGuid = new Guid(),
+                    Email = "teacher_b@uniwa.gr",
+                    UserName = "teacher_b",
+                    FirstName = "Teacher",
+                    LastName = "B",
+                    HasShoppingCartItems = false,
+                    IsAdmin = false,
+                    RoleNames = "Registered,Teachers"
+                },
+                new Customer {
+                    Address = "Aigaleo",
+                    Address2 = "UniWa",
+                    City = "Aigaleo",
+                    //CustomerGuid = new Guid(),
+                    Email = "std_a@uniwa.gr",
+                    UserName = "std_a",
+                    Password = "123",
+                    FirstName = "Student",
+                    LastName = "A",
+                    HasShoppingCartItems = false,
+                    IsAdmin = false,
+                    RoleNames = "Registered,Students"
+                },
+                new Customer {
+                    Address = "Aigaleo",
+                    Address2 = "UniWa",
+                    City = "Aigaleo",
+                    //CustomerGuid = new Guid(),
+                    Email = "std_b@uniwa.gr",
+                    UserName = "std_b",
+                    Password = "123",
+                    FirstName = "Student",
+                    LastName = "B",
+                    HasShoppingCartItems = false,
+                    IsAdmin = false,
+                    RoleNames = "Registered,Students"
+                }
+            };
+            _customerRepository.Insert(customers);
+        }
+
+        public void AddTopics()
+        {
+            var topics = new List<Topic> {
+                new Topic {
+                    CustomerId = 2,
+                    Name = "Βοτανολογία",
+                    Description  = "Περιγραφή Βοτανολογίας"
+                },
+                new Topic {
+                    CustomerId = 3,
+                    Name = "Ιχθυολογία",
+                    Description  = "Περιγραφή Ιχθυολογίας"
+                },
+
+            };
+            _topicRepository.Insert(topics);
+        }
+
+        public void AddChapter()
+        {
+            var chapters = new List<Chapter> {
+                new Chapter {
+                    TopicId = 1,
+                    Name = "Πότισμα",
+                    Description  = "Περιγραφή για το πότισμα των φυτών"
+                },
+                new Chapter {
+                    TopicId = 1,
+                    Name = "Λίπανση",
+                    Description  = "Περιγραφή για την λίπανση των φυτών"
+                },
+                new Chapter {
+                    TopicId = 1,
+                    Name = "Κλάδεμα",
+                    Description  = "Περιγραφή για το κλάδεμα των φυτών"
+                },
+
+                new Chapter {
+                    TopicId = 2,
+                    Name = "Ωκεανογραφία",
+                    Description  = "Περιγραφή για την Ωκεανογραφία"
+                },
+                new Chapter {
+                    TopicId = 2,
+                    Name = "Αλιεία",
+                    Description  = "Περιγραφή για την Αλιεία των ψαριών"
+                }
+            };
+            _chapterRepository.Insert(chapters);
+        }
+
+        public void AddQuestions() {
+
+            var questions = new List<Question> {
+                new Question {
+                    ChapterId = 1,
+                    Description = "Κάθε πότε ποτίζουμε τα φυτά",
+                    Score = 60,
+                    SuccessMsg = "Σωστό, κάθε φυτό έχει διαφορετική συχνότητα ποτίσματος",
+                    FaultMsg = "Λάθος, κάθε φυτό έχει διαφορετική συχνότητα ποτίσματος",
+                    SuccessValue = 3
+                },
+                new Question {
+                    ChapterId = 1,
+                    Description = "Πόση ποσότητα νερού απαιτείται κατά το πότισμα των φυτών",
+                    Score = 40,
+                    SuccessMsg = "Σωστό, κάθε φυτό έχει διαφορετικές απαιτήσεις σε νερό",
+                    FaultMsg = "Λάθος, κάθε φυτό έχει διαφορετικές απαιτήσεις σε νερό",
+                    SuccessValue = 2
+                },
+
+                new Question {
+                    ChapterId = 2,
+                    Description = "Τι λίπασμα χρησιμοποιούμε",
+                    Score = 50,
+                    SuccessMsg = "Σωστό, κάθε φυτό έχει άλλες ανάγκες λίπανσης",
+                    FaultMsg = "Λάθος, κάθε φυτό έχει άλλες ανάγκες λίπανσης",
+                    SuccessValue = 1
+                },
+
+                //4
+                new Question {
+                    ChapterId = 2,
+                    Description = "Κάθε πότε λιπαίνουμε",
+                    Score = 50,
+                    SuccessMsg = "Σωστό, κάθε φυτό έχει διαφορετική συχνότητα λίπανσης",
+                    FaultMsg = "Λάθος, κάθε φυτό έχει διαφορετική συχνότητα λίπανσης",
+                    SuccessValue = 4
+                },
+
+                //5
+                new Question {
+                    ChapterId = 3,
+                    Description = "Πότε κλαδεύουμε",
+                    Score = 70,
+                    SuccessMsg = "Σωστό, κάθε φυτό έχει άλλες ανάγκες κλαδέματος",
+                    FaultMsg = "Λάθος, κάθε φυτό έχει άλλες ανάγκες κλαδέματος",
+                    SuccessValue = 2
+                },
+
+                //6
+                new Question {
+                    ChapterId = 3,
+                    Description = "Είναι το ψαροκόκαλο το καλύτερο σχήμα κλάδευσης",
+                    Score = 30,
+                    SuccessMsg = "Σωστό, κάθε φυτό επιδέχεται κάποια από τα σχήματα κλάδευσης",
+                    FaultMsg = "Λάθος, κάθε φυτό επιδέχεται κάποια από τα σχήματα κλάδευσης",
+                    SuccessValue = 3
+                },
+            };
+
+            _questionRepository.Insert(questions);
+
+        }
+
+        public void AddAnswers() {
+            var answers = new List<Answer> {
+                new Answer {
+                    QuestionId = 1,
+                    Label = "Κάθε μέρα",
+                    Value = 1
+                },
+                new Answer {
+                    QuestionId = 1,
+                    Label = "Κάθε εβδομάδα",
+                    Value = 2
+                },
+                new Answer {
+                    QuestionId = 1,
+                    Label = "Κάθε φυτό έχει άλλη συχνόητα ποτίσματος",
+                    Value = 3
+                },
+
+                new Answer {
+                    QuestionId = 2,
+                    Label = "Πέντε λίτρα",
+                    Value = 1
+                },
+                new Answer {
+                    QuestionId = 2,
+                    Label = "Κάθε φυτό έχει άλλες ανάγκες ποτίσματος",
+                    Value = 2
+                },
+                new Answer {
+                    QuestionId = 2,
+                    Label = "Πέντε λίτρα",
+                    Value = 3
+                },
+
+                // id 3
+                new Answer {
+                    QuestionId = 3,
+                    Label = "Κάθε φυτό χρειάζεται διαφορετικό λίπασμα",
+                    Value = 1
+                },
+                new Answer {
+                    QuestionId = 3,
+                    Label = "Φώσφορο και Μαγνήσιο",
+                    Value = 2
+                },
+                new Answer {
+                    QuestionId = 3,
+                    Label = "Φώσφορο, Μαγνήσιο και Κάλιο",
+                    Value = 3
+                },
+
+                //4
+                new Answer {
+                    QuestionId = 4,
+                    Label = "Κάθε δεκαπέντε μέρες",
+                    Value = 1
+                },
+                new Answer {
+                    QuestionId = 4,
+                    Label = "Κάθε μήνα",
+                    Value = 2
+                },
+                new Answer {
+                    QuestionId = 4,
+                    Label = "Μία φορά τον χρόνο",
+                    Value = 3
+                },
+                new Answer {
+                    QuestionId = 4,
+                    Label = "Κάθε φυτό έχει διαφορετική συχνότητα λίπανσης",
+                    Value = 4
+                },
+
+                //5
+                new Answer {
+                    QuestionId = 5,
+                    Label = "Την Άνοιξη",
+                    Value = 1
+                },
+                new Answer {
+                    QuestionId = 5,
+                    Label = "Ανάλογα με το φυτό",
+                    Value = 2
+                },
+                new Answer {
+                    QuestionId = 5,
+                    Label = "Το Φθινόπωρο",
+                    Value = 3
+                },
+
+                //6
+                new Answer {
+                    QuestionId = 5,
+                    Label = "Το Ψαροκόκκαλο είναι το καταλληλότερο",
+                    Value = 1
+                },
+                new Answer {
+                    QuestionId = 5,
+                    Label = "Το Κύπελο είναι το καταλληλότερο",
+                    Value = 2
+                },
+                new Answer {
+                    QuestionId = 5,
+                    Label = "Κάθε φυτό επιδέχεται ένα ή περισσότερα σχήματα κλάδευσης",
+                    Value = 3
+                },
+            };
+
+            _answerRepository.Insert(answers);
         }
     }
 }
