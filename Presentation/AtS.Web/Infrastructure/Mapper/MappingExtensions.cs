@@ -7,9 +7,7 @@ namespace TWYK.Web.Infrastructure.Mapper
 {
     public static class MappingExtensions
     {
-        public static TDestination MapTo<TSource, TDestination>(
-            this TSource source
-        ) {
+        public static TDestination MapTo<TSource, TDestination>(this TSource source) {
             return AutoMapperConfiguration.Mapper.Map<TSource, TDestination>(source);
         }
 
@@ -20,36 +18,25 @@ namespace TWYK.Web.Infrastructure.Mapper
             return AutoMapperConfiguration.Mapper.Map(source, destination);
         }
 
-        public static List<TDestination> MapToList<TSource, TDestination>(
-            this IList<TSource> source
-        ) {
+        public static List<TDestination> MapToList<TSource, TDestination>(this IList<TSource> source) {
             return AutoMapperConfiguration.Mapper.Map<IList<TSource>, List<TDestination>>(source);
         }
 
         #region Category
 
-        public static CategoryModel ToModel(
-            this Category entity
-        ) {
+        public static CategoryModel ToModel(this Category entity) {
             return entity.MapTo<Category, CategoryModel>();
         }
 
-        public static Category ToEntity(
-            this CategoryModel model
-        ) {
+        public static Category ToEntity(this CategoryModel model) {
             return model.MapTo<CategoryModel, Category>();
         }
 
-        public static Category ToEntity(
-            this CategoryModel model,
-            Category destination
-        ) {
+        public static Category ToEntity(this CategoryModel model, Category destination) {
             return model.MapTo(destination);
         }
 
-        public static List<CategoryModel> ToModelList(
-            this IList<Category> entities
-        ) {
+        public static List<CategoryModel> ToModelList(this IList<Category> entities) {
             return entities.MapToList<Category, CategoryModel>();
         }
 
@@ -57,28 +44,19 @@ namespace TWYK.Web.Infrastructure.Mapper
 
         #region Product
 
-        public static ProductModel ToModel(
-            this Product entity
-        ) {
+        public static ProductModel ToModel(this Product entity) {
             return entity.MapTo<Product, ProductModel>();
         }
 
-        public static Product ToEntity(
-            this ProductModel model
-        ) {
+        public static Product ToEntity(this ProductModel model) {
             return model.MapTo<ProductModel, Product>();
         }
 
-        public static Product ToEntity(
-            this ProductModel model,
-            Product destination
-        ) {
+        public static Product ToEntity(this ProductModel model, Product destination) {
             return model.MapTo(destination);
         }
 
-        public static List<ProductModel> ToModelList(
-            this IList<Product> entities
-        ) {
+        public static List<ProductModel> ToModelList(this IList<Product> entities) {
             return entities.MapToList<Product, ProductModel>();
         }
 
@@ -86,15 +64,11 @@ namespace TWYK.Web.Infrastructure.Mapper
 
         #region Customer
 
-        public static CustomerModel ToModel(
-            this Customer entity
-        ) {
+        public static CustomerModel ToModel(this Customer entity) {
             return entity.MapTo<Customer, CustomerModel>();
         }
 
-        public static Customer ToEntity(
-            this CustomerModel model
-        ) {
+        public static Customer ToEntity(this CustomerModel model) {
             return model.MapTo<CustomerModel, Customer>();
         }
 
@@ -105,9 +79,7 @@ namespace TWYK.Web.Infrastructure.Mapper
             return model.MapTo(destination);
         }
 
-        public static List<CustomerModel> ToModelList(
-            this IList<Customer> entities
-        ) {
+        public static List<CustomerModel> ToModelList(this IList<Customer> entities) {
             return entities.MapToList<Customer, CustomerModel>();
         }
 
@@ -115,28 +87,19 @@ namespace TWYK.Web.Infrastructure.Mapper
 
         #region ShoppingCartItem
 
-        public static ShoppingCartItemModel ToModel(
-            this ShoppingCartItem entity
-        ) {
+        public static ShoppingCartItemModel ToModel(this ShoppingCartItem entity) {
             return entity.MapTo<ShoppingCartItem, ShoppingCartItemModel>();
         }
 
-        public static ShoppingCartItem ToEntity(
-            this ShoppingCartItemModel model
-        ) {
+        public static ShoppingCartItem ToEntity(this ShoppingCartItemModel model) {
             return model.MapTo<ShoppingCartItemModel, ShoppingCartItem>();
         }
 
-        public static ShoppingCartItem ToEntity(
-            this ShoppingCartItemModel model,
-            ShoppingCartItem destination
-        ) {
+        public static ShoppingCartItem ToEntity(this ShoppingCartItemModel model, ShoppingCartItem destination) {
             return model.MapTo(destination);
         }
 
-        public static List<ShoppingCartItemModel> ToModelList(
-            this IList<ShoppingCartItem> entities
-        ) {
+        public static List<ShoppingCartItemModel> ToModelList(this IList<ShoppingCartItem> entities) {
             return entities.MapToList<ShoppingCartItem, ShoppingCartItemModel>();
         }
 
@@ -144,28 +107,19 @@ namespace TWYK.Web.Infrastructure.Mapper
 
         #region Topic
 
-        public static TopicModel ToModel(
-            this Topic entity
-        ) {
+        public static TopicModel ToModel(this Topic entity) {
             return entity.MapTo<Topic, TopicModel>();
         }
 
-        public static Topic ToEntity(
-            this TopicModel model
-        ) {
+        public static Topic ToEntity(this TopicModel model) {
             return model.MapTo<TopicModel, Topic>();
         }
 
-        public static Topic ToEntity(
-            this TopicModel model,
-            Topic destination
-        ) {
+        public static Topic ToEntity(this TopicModel model, Topic destination) {
             return model.MapTo(destination);
         }
 
-        public static List<TopicModel> ToModelList(
-            this IList<Topic> entities
-        ) {
+        public static List<TopicModel> ToModelList(this IList<Topic> entities) {
             return entities.MapToList<Topic, TopicModel>();
         }
 
@@ -173,28 +127,19 @@ namespace TWYK.Web.Infrastructure.Mapper
 
         #region Chapter
 
-        public static ChapterModel ToModel(
-            this Chapter entity
-        ) {
+        public static ChapterModel ToModel(this Chapter entity) {
             return entity.MapTo<Chapter, ChapterModel>();
         }
 
-        public static Chapter ToEntity(
-            this ChapterModel model
-        ) {
+        public static Chapter ToEntity(this ChapterModel model) {
             return model.MapTo<ChapterModel, Chapter>();
         }
 
-        public static Chapter ToEntity(
-            this ChapterModel model,
-            Chapter destination
-        ) {
+        public static Chapter ToEntity(this ChapterModel model, Chapter destination) {
             return model.MapTo(destination);
         }
 
-        public static List<ChapterModel> ToModelList(
-            this IList<Chapter> entities
-        ) {
+        public static List<ChapterModel> ToModelList(this IList<Chapter> entities) {
             return entities.MapToList<Chapter, ChapterModel>();
         }
 
@@ -202,28 +147,19 @@ namespace TWYK.Web.Infrastructure.Mapper
 
         #region Question
 
-        public static QuestionModel ToModel(
-            this Question entity
-        ) {
+        public static QuestionModel ToModel(this Question entity) {
             return entity.MapTo<Question, QuestionModel>();
         }
 
-        public static Question ToEntity(
-            this QuestionModel model
-        ) {
+        public static Question ToEntity(this QuestionModel model) {
             return model.MapTo<QuestionModel, Question>();
         }
 
-        public static Question ToEntity(
-            this QuestionModel model,
-            Question destination
-        ) {
+        public static Question ToEntity(this QuestionModel model, Question destination) {
             return model.MapTo(destination);
         }
 
-        public static List<QuestionModel> ToModelList(
-            this IList<Question> entities
-        ) {
+        public static List<QuestionModel> ToModelList(this IList<Question> entities) {
             return entities.MapToList<Question, QuestionModel>();
         }
 
@@ -231,28 +167,19 @@ namespace TWYK.Web.Infrastructure.Mapper
 
         #region Answer
 
-        public static AnswerModel ToModel(
-            this Answer entity
-        ) {
+        public static AnswerModel ToModel(this Answer entity) {
             return entity.MapTo<Answer, AnswerModel>();
         }
 
-        public static Answer ToEntity(
-            this AnswerModel model
-        ) {
+        public static Answer ToEntity(this AnswerModel model) {
             return model.MapTo<AnswerModel, Answer>();
         }
 
-        public static Answer ToEntity(
-            this AnswerModel model,
-            Answer destination
-        ) {
+        public static Answer ToEntity(this AnswerModel model, Answer destination) {
             return model.MapTo(destination);
         }
 
-        public static List<AnswerModel> ToModelList(
-            this IList<Answer> entities
-        ) {
+        public static List<AnswerModel> ToModelList(this IList<Answer> entities) {
             return entities.MapToList<Answer, AnswerModel>();
         }
 
@@ -260,28 +187,19 @@ namespace TWYK.Web.Infrastructure.Mapper
 
         #region TestResult
 
-        public static TestResultModel ToModel(
-            this TestResult entity
-        ) {
+        public static TestResultModel ToModel(this TestResult entity) {
             return entity.MapTo<TestResult, TestResultModel>();
         }
 
-        public static TestResult ToEntity(
-            this TestResultModel model
-        ) {
+        public static TestResult ToEntity(this TestResultModel model) {
             return model.MapTo<TestResultModel, TestResult>();
         }
 
-        public static TestResult ToEntity(
-            this TestResultModel model,
-            TestResult destination
-        ) {
+        public static TestResult ToEntity(this TestResultModel model, TestResult destination) {
             return model.MapTo(destination);
         }
 
-        public static List<TestResultModel> ToModelList(
-            this IList<TestResult> entities
-        ) {
+        public static List<TestResultModel> ToModelList(this IList<TestResult> entities) {
             return entities.MapToList<TestResult, TestResultModel>();
         }
 

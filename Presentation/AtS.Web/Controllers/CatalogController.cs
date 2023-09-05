@@ -1,8 +1,13 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using TWYK.Services.Answers;
 using TWYK.Services.Categories;
+using TWYK.Services.Chapters;
 using TWYK.Services.Products;
+using TWYK.Services.Questions;
 using TWYK.Services.Security;
+using TWYK.Services.TestResults;
+using TWYK.Services.Topics;
 using TWYK.Web.Infrastructure.Mapper;
 
 namespace TWYK.Web.Controllers
@@ -14,14 +19,30 @@ namespace TWYK.Web.Controllers
         private readonly ICategoryService _categoryService;
         private readonly IPermissionService _permissionService;
 
+        private readonly ITopicService _topicService;
+        private readonly IChapterService _chapterService;
+        private readonly IQuestionService _questionService;
+        private readonly IAnswerService _answerService;
+        private readonly ITestResultService _testResultService;
+
         public CatalogController(
             IProductService productService,
             ICategoryService categoryService,
-            IPermissionService permissionService
+            IPermissionService permissionService,
+            ITopicService topicService,
+            IChapterService chapterService,
+            IQuestionService questionService,
+            IAnswerService answerService,
+            ITestResultService testResultService
         ) {
             _productService = productService;
             _categoryService = categoryService;
             _permissionService = permissionService;
+            _topicService = topicService;
+            _chapterService = chapterService;
+            _questionService = questionService;
+            _answerService = answerService;
+            _testResultService = testResultService;
         }
 
         // GET: Catalog
@@ -67,6 +88,32 @@ namespace TWYK.Web.Controllers
 
             return View(model);
         }
+
+        public ActionResult ChaptertDetails(int chapterId) {
+            if (!_permissionService.Authorize("Catalog.ChaptertDetails"))
+                return RedirectToAction("ChaptertSummary", new { chapterId = chapterId });
+
+            var chapter = _chapterService.GetChapterById(chapterId);
+
+            //TODO: need to move this in factory class
+            var model = chapter.ToModel();
+
+
+            return View(model);
+        }
+
+        public ActionResult ChaptertSummary(int chapterId) {
+
+            var chapter = _chapterService.GetChapterById(chapterId);
+
+            //TODO: need to move this in factory class
+            var model = chapter.ToModel();
+
+
+            return View(model);
+        }
+
+
 
         [ChildActionOnly]
         public ActionResult TopMenu() {

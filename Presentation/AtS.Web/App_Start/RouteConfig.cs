@@ -14,6 +14,24 @@ namespace TWYK.Web
                 url: "catalog/product/{productId}",
                 new { controller = "catalog", action = "ProductDetails" });
 
+            
+            
+            //twyn
+            routes.MapRoute(
+                name: "Chapter",
+                url: "catalog/chapter/{chapterId}",
+                new { controller = "catalog", action = "ChaptertDetails" });
+
+            //twyn
+            routes.MapRoute(
+                name: "DoTest",
+                url: "catalog/DoTest/{chapterId}",
+                new { controller = "answer", action = "DoTest" });
+
+
+
+
+
             //shopping cart
             routes.MapRoute(
                 name: "ShoppingCart",

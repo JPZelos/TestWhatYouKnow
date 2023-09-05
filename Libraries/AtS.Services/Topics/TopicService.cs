@@ -15,24 +15,22 @@ namespace TWYK.Services.Topics
     {
         private readonly IRepository<Topic> _topicRepository;
 
-        public TopicService(IRepository<Topic> topicRepository)
-        {
+        public TopicService(IRepository<Topic> topicRepository) {
             _topicRepository = topicRepository;
         }
 
-        public IList<Topic> GetAllTopics()
-        {
+        public IList<Topic> GetAllTopics() {
             return _topicRepository.Table.ToList();
         }
 
-        public Topic GetTopicById(int topicId)
-        {
-            if (topicId == 0)
-            {
+        public Topic GetTopicById(int topicId) {
+            if (topicId == 0) {
                 return null;
             }
 
             return _topicRepository.GetById(topicId);
         }
+
+       
     }
 }

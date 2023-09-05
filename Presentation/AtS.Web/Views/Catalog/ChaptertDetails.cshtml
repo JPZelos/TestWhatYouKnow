@@ -1,0 +1,24 @@
+﻿@using TWYK.Core
+@model TWYK.Web.Models.ChapterModel
+@{
+    ViewBag.Title = "ChaptertDetails";
+}
+
+<h2>@Model.Topic.Name / @Model.Name</h2>
+
+
+
+<p>@Model.Description</p>
+
+
+<h3><span>Καθηγητής:</span> @(Model.Topic.Customer.FirstName) @(Model.Topic.Customer.LastName)</h3>
+
+
+<h3>Ερωτήσεις</h3>
+<ul>
+    @foreach (var q in Model.Questions) {
+        <li>@q.Description</li>
+    }
+</ul>
+
+<a href="@Url.RouteUrl("DoTest", new {chapterId = Model.Id})" class="btn btn-primary">Κάντε αυτό το τεστ</a>

@@ -6,12 +6,13 @@
 @foreach (var topic in Model) {
     <div class="row justify-content-center">
         <div class="row">
-            <h2>Best of <strong>@topic.Name</strong> Shoes</h2>
+            <h2>Μάθημα: <strong>@topic.Name</strong></h2>
         </div>
         
+        <h3>Κεφάλαια</h3>
         <ul>
             @foreach (var chapter in topic.Chapters) {
-                <li>@chapter.Name</li>
+                <li><a href="@Url.RouteUrl("Chapter", new{chapterId=@chapter.Id})"> @chapter.Name</a></li>
             }
         </ul>
         

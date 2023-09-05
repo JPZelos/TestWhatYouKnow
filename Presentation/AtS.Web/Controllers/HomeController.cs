@@ -53,16 +53,10 @@ namespace TWYK.Web.Controllers
             //install some sample data in case of fresh install
             _installationService.InstallSampleData();
 
-            //TODO: need to move this in factory class
-            //var model = _categoryService.GetAllCategories().ToModelList();
-            //foreach (var category in model) {
-            //    category.Products = _productService.GetProductsByCategory(category.Id).Take(4).ToList().ToModelList();
-            //}
-            //return View(model.ToList());
 
             var model = _topicService.GetAllTopics().ToModelList();
             foreach (var topic in model) {
-                topic.Chapters = _chapterService.GetAllChapters().ToModelList();
+                topic.Chapters = _chapterService.GetChaptersByTopic(topic.Id).ToModelList();
             }
 
             return View(model);

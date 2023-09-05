@@ -1,0 +1,30 @@
+﻿@using TWYK.Core
+@model TWYK.Web.Models.ChapterModel
+@{
+    ViewBag.Title = "DoTest";
+}
+
+<div>
+
+    @Html.LabelFor(model => model.Name);
+
+    <p>Select the correct option.</p>
+
+    @foreach (var q in Model.Questions)
+    {
+
+        <strong>@q.Description</strong>
+        <br />
+        foreach (var a in q.Answers)
+        {
+            @a.Label
+            @Html.RadioButtonFor(model => mod ,a.Value)
+            <br />
+        }
+        <br /><br />
+    }
+
+
+
+</div>
+

@@ -18,7 +18,6 @@ namespace TWYK.Services.Installation
         private readonly IRepository<Product> _productRepository;
         private readonly IRepository<Category> _categoryRepository;
 
-
         private readonly IRepository<Customer> _customerRepository;
         private readonly IRepository<Topic> _topicRepository;
         private readonly IRepository<Chapter> _chapterRepository;
@@ -27,13 +26,13 @@ namespace TWYK.Services.Installation
         private readonly IRepository<TestResult> _testResultRepository;
 
         public InstallationService(
-            IRepository<Product> productRepository, 
+            IRepository<Product> productRepository,
             IRepository<Category> categoryRepository,
-            IRepository<Customer> customerRepository, 
+            IRepository<Customer> customerRepository,
             IRepository<Topic> topicRepository,
-            IRepository<Chapter> chapterRepository, 
+            IRepository<Chapter> chapterRepository,
             IRepository<Question> questionRepository,
-            IRepository<Answer> answerRepository, 
+            IRepository<Answer> answerRepository,
             IRepository<TestResult> testResultRepository
         ) {
             _productRepository = productRepository;
@@ -47,12 +46,25 @@ namespace TWYK.Services.Installation
         }
 
         public void InstallSampleData() {
+            var customers = _customerRepository.Table.ToList();
+            var topics = _topicRepository.Table.ToList();
+            var chapters = _chapterRepository.Table.ToList();
+            var questions = _questionRepository.Table.ToList();
+            var answers = _answerRepository.Table.ToList();
 
-            AddCustomers();
-            AddTopics();
-            AddChapter();
-            AddQuestions();
-            AddAnswers();
+            if (
+                customers.Count == 0 &&
+                topics.Count == 0 &&
+                chapters.Count == 0 &&
+                questions.Count == 0 &&
+                answers.Count == 0
+            ) {
+                AddCustomers();
+                AddTopics();
+                AddChapter();
+                AddQuestions();
+                AddAnswers();
+            }
 
             var categories = _categoryRepository.Table.ToList();
             var products = _productRepository.Table.ToList();
@@ -193,59 +205,55 @@ namespace TWYK.Services.Installation
             _customerRepository.Insert(customers);
         }
 
-        public void AddTopics()
-        {
+        public void AddTopics() {
             var topics = new List<Topic> {
                 new Topic {
                     CustomerId = 2,
                     Name = "Βοτανολογία",
-                    Description  = "Περιγραφή Βοτανολογίας"
+                    Description = "Περιγραφή Βοτανολογίας"
                 },
                 new Topic {
                     CustomerId = 3,
                     Name = "Ιχθυολογία",
-                    Description  = "Περιγραφή Ιχθυολογίας"
+                    Description = "Περιγραφή Ιχθυολογίας"
                 },
-
             };
             _topicRepository.Insert(topics);
         }
 
-        public void AddChapter()
-        {
+        public void AddChapter() {
             var chapters = new List<Chapter> {
                 new Chapter {
                     TopicId = 1,
                     Name = "Πότισμα",
-                    Description  = "Περιγραφή για το πότισμα των φυτών"
+                    Description = "Περιγραφή για το πότισμα των φυτών"
                 },
                 new Chapter {
                     TopicId = 1,
                     Name = "Λίπανση",
-                    Description  = "Περιγραφή για την λίπανση των φυτών"
+                    Description = "Περιγραφή για την λίπανση των φυτών"
                 },
                 new Chapter {
                     TopicId = 1,
                     Name = "Κλάδεμα",
-                    Description  = "Περιγραφή για το κλάδεμα των φυτών"
+                    Description = "Περιγραφή για το κλάδεμα των φυτών"
                 },
 
                 new Chapter {
                     TopicId = 2,
                     Name = "Ωκεανογραφία",
-                    Description  = "Περιγραφή για την Ωκεανογραφία"
+                    Description = "Περιγραφή για την Ωκεανογραφία"
                 },
                 new Chapter {
                     TopicId = 2,
                     Name = "Αλιεία",
-                    Description  = "Περιγραφή για την Αλιεία των ψαριών"
+                    Description = "Περιγραφή για την Αλιεία των ψαριών"
                 }
             };
             _chapterRepository.Insert(chapters);
         }
 
         public void AddQuestions() {
-
             var questions = new List<Question> {
                 new Question {
                     ChapterId = 1,
@@ -305,7 +313,6 @@ namespace TWYK.Services.Installation
             };
 
             _questionRepository.Insert(questions);
-
         }
 
         public void AddAnswers() {

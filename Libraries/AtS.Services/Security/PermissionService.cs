@@ -25,6 +25,16 @@ namespace TWYK.Services.Security
                     "Catalog.AddProduct"
                 });
 
+                permitionRecords.Add(SystemCustomerRoleNames.Teachers, new List<string> {
+                    "AdminPanel"
+                });
+
+                permitionRecords.Add(SystemCustomerRoleNames.Students, new List<string> {
+                    "Catalog.List",
+                    "Catalog.ChaptertDetails",
+                    "Answer.DoTest"
+                });
+
                 return permitionRecords;
             }
         } // = new Dictionary<string, List<string>>();

@@ -1,0 +1,13 @@
+﻿@using TWYK.Core
+@model TWYK.Web.Models.ChapterModel
+@{
+    ViewBag.Title = "ChaptertSummary";
+}
+
+<h2>@Model.Topic.Name / @Model.Name</h2>
+
+<p>Παρακαλούμε για εάν ενδιαφέρεστε να κάνετε τα τεστ για αυτό το κεφάλαιο, εάν είστε ήδη χρήστες συνδεθείτε με τους κωδικούς σας ή εγγραφή τε για να σας αποσταλλούν οι κωδικοί πρόσβασης</p>
+
+<a href="@Url.RouteUrl("Login")" class="btn btn-primary">Σύνδεση</a>
+<a href="@Url.RouteUrl("Login")" class="btn btn-primary">Εγγραφή</a>
+
