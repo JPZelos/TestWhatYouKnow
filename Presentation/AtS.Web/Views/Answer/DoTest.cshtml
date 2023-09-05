@@ -1,30 +1,30 @@
-﻿@using TWYK.Core
-@model TWYK.Web.Models.ChapterModel
+﻿@model  List<QuestionModel>
 @{
     ViewBag.Title = "DoTest";
 }
 
-<div>
+@using (Html.BeginForm("TestResult", "Answer", FormMethod.Post, new { @class = "well" }))
+{
 
-    @Html.LabelFor(model => model.Name);
-
-    <p>Select the correct option.</p>
-
-    @foreach (var q in Model.Questions)
-    {
-
-        <strong>@q.Description</strong>
-        <br />
-        foreach (var a in q.Answers)
+    <div class="quiz">
+        @{ int idx = 0; }
+        @foreach (var questionModel in Model)
         {
-            @a.Label
-            @Html.RadioButtonFor(model => mod ,a.Value)
-            <br />
+            <h4>@questionModel.Description</h4>
+            foreach (var answer in questionModel.Answers) {
+                <div class="checkbox">
+                    <label>
+                        <span>
+                            <input type="radio" name="@questionModel.Id" value="@answer.Value" />
+                            @answer.Label
+                        </span>
+                    </label>
+                </div>
+            }
+           
         }
-        <br /><br />
-    }
-
-
-
-</div>
-
+    </div>
+    <div class="form-actions">
+        <input type="submit" class="btn btn-primary" value="Send" />
+    </div>
+}

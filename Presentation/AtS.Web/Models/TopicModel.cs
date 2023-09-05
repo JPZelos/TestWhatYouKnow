@@ -8,8 +8,8 @@ namespace TWYK.Web.Models
 {
     public class TopicModel : BaseEntity {
 
-        [Display(Name = "Topic Id")]
-        public int Id { get; set; }
+        //[Display(Name = "Topic Id")]
+        //public int Id { get; set; }
 
 
         [Display(Name = "User Id")]

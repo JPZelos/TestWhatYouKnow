@@ -407,17 +407,17 @@ namespace TWYK.Services.Installation
 
                 //6
                 new Answer {
-                    QuestionId = 5,
+                    QuestionId = 6,
                     Label = "Το Ψαροκόκκαλο είναι το καταλληλότερο",
                     Value = 1
                 },
                 new Answer {
-                    QuestionId = 5,
+                    QuestionId = 6,
                     Label = "Το Κύπελο είναι το καταλληλότερο",
                     Value = 2
                 },
                 new Answer {
-                    QuestionId = 5,
+                    QuestionId = 6,
                     Label = "Κάθε φυτό επιδέχεται ένα ή περισσότερα σχήματα κλάδευσης",
                     Value = 3
                 },

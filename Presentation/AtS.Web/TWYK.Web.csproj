@@ -215,6 +215,7 @@
     <Compile Include="Models\ShoppingCartItemModel.cs" />
     <Compile Include="Models\ShoppingCartModel.cs" />
     <Compile Include="Models\TestResultModel.cs" />
+    <Compile Include="Models\TestResults.cs" />
     <Compile Include="Models\TopicModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -352,6 +353,7 @@
     <Content Include="Views\Catalog\ChaptertDetails.cshtml" />
     <Content Include="Views\Catalog\ChaptertSummary.cshtml" />
     <Content Include="Views\Answer\DoTest.cshtml" />
+    <Content Include="Views\Answer\TestResult.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

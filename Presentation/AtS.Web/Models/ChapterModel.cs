@@ -9,8 +9,8 @@ namespace TWYK.Web.Models
     public class ChapterModel : BaseEntity
 
     {
-        [Display(Name = "Chapter Id")]
-        public int Id { get; set; }
+        //[Display(Name = "Chapter Id")]
+        //public int Id { get; set; }
 
         [Display(Name = "Chapter TopicId")]
         public int TopicId { get; set; }

@@ -9,8 +9,8 @@ namespace TWYK.Web.Models
     public class QuestionModel : BaseEntity
     {
 
-        [Display(Name = "Question Id")]
-        public int Id { get; set; }
+        //[Display(Name = "Question Id")]
+        //public int Id { get; set; }
 
 
         [Display(Name = "Question Description")]
@@ -34,6 +34,8 @@ namespace TWYK.Web.Models
 
         [Display(Name = "Question Success Value")]
         public int SuccessValue { get; set; }
+
+        public bool IsSuccess { get; set; }
 
         public virtual Chapter Chapter { get; set; }
         

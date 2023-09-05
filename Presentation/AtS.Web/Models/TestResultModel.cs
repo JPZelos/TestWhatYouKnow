@@ -8,8 +8,8 @@ namespace TWYK.Web.Models
     public class TestResultModel : BaseEntity
     {
         
-        [Display(Name = "Test Result Id")]
-        public int Id { get; set; }
+        //[Display(Name = "Test Result Id")]
+        //public int Id { get; set; }
 
 
         [Display(Name = "Test Result_CustomerId")]
@@ -22,6 +22,8 @@ namespace TWYK.Web.Models
 
         [Display(Name = "TestResult Score")]
         public int Score { get; set; }
+
+        public bool IsSuccess { get; set; }
 
         public virtual AnswerModel Answer { get; set; }
     }

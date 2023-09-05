@@ -1,0 +1,20 @@
+﻿@model TestResults
+@{
+    ViewBag.Title = "TestResult";
+}
+
+<h2>TestResult</h2>
+
+@foreach (var q in Model.Questions)
+{
+    <h3>@q.Description</h3>
+    if (q.IsSuccess)
+    {
+        <p>@q.SuccessMsg</p>
+    }
+    else
+    {
+        <p>@q.FaultMsg</p>
+    }
+}
+
