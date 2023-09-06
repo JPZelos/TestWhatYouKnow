@@ -220,6 +220,24 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\assets\css\animation.css" />
+    <Content Include="Content\assets\css\Bootstrap\bootstrap.min.css" />
+    <Content Include="Content\assets\css\FontAwesome\all.min.css" />
+    <Content Include="Content\assets\css\responsive.css" />
+    <Content Include="Content\assets\css\result_style.css" />
+    <Content Include="Content\assets\css\style.css" />
+    <Content Include="Content\assets\fonts\font.css" />
+    <Content Include="Content\assets\images\bg.jpg" />
+    <Content Include="Content\assets\images\bh-clip.png" />
+    <Content Include="Content\assets\images\loading.gif" />
+    <Content Include="Content\assets\images\question-sign.png" />
+    <Content Include="Content\assets\images\result.jpg" />
+    <Content Include="Content\assets\images\resultinside.jpg" />
+    <Content Include="Content\assets\images\side.png" />
+    <Content Include="Content\assets\js\Bootstrap\bootstrap.min.js" />
+    <Content Include="Content\assets\js\custom.js" />
+    <Content Include="Content\assets\js\jQuery\jquery-3.6.3.min.js" />
+    <Content Include="Content\assets\js\result.js" />
     <Content Include="Content\css\admin.css" />
     <Content Include="Content\css\admin.min.css" />
     <Content Include="Content\css\admin_old.css" />
@@ -287,6 +305,16 @@
     <Content Include="Content\js\custom\public.ajaxcart.js" />
     <Content Include="Content\js\custom\public.common.js" />
     <Content Include="App_Data\HM_askisi.docx" />
+    <Content Include="Content\assets\fonts\MYRIADPRO-BOLD.woff" />
+    <Content Include="Content\assets\fonts\MYRIADPRO-BOLDCOND.woff" />
+    <Content Include="Content\assets\fonts\MYRIADPRO-BOLDCONDIT.woff" />
+    <Content Include="Content\assets\fonts\MYRIADPRO-BOLDIT.woff" />
+    <Content Include="Content\assets\fonts\MYRIADPRO-COND.woff" />
+    <Content Include="Content\assets\fonts\MYRIADPRO-CONDIT.woff" />
+    <Content Include="Content\assets\fonts\MyriadPro-Light.woff" />
+    <Content Include="Content\assets\fonts\MYRIADPRO-REGULAR.woff" />
+    <Content Include="Content\assets\fonts\MYRIADPRO-SEMIBOLD.woff" />
+    <Content Include="Content\assets\fonts\MYRIADPRO-SEMIBOLDIT.woff" />
     <None Include="Content\js\jquery-3.4.1.intellisense.js" />
     <Content Include="Content\js\jquery-3.4.1.js" />
     <Content Include="Content\js\jquery-3.4.1.min.js" />
@@ -354,6 +382,8 @@
     <Content Include="Views\Catalog\ChaptertSummary.cshtml" />
     <Content Include="Views\Answer\DoTest.cshtml" />
     <Content Include="Views\Answer\TestResult.cshtml" />
+    <Content Include="Views\Shared\_LayoutQuiz.cshtml" />
+    <Content Include="Views\Answer\DoTest - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

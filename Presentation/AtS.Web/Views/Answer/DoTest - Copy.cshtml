@@ -1,0 +1,46 @@
+﻿@model  List<QuestionModel>
+@{
+    ViewBag.Title = "DoTest";
+    Layout = "~/Views/Shared/_LayoutQuiz.cshtml";
+}
+
+
+<!-- step-number -->
+<div class="step-number">
+    <div class="step-number-inner">
+        Question <span id="activeStep">1</span>/@Model.Count
+    </div>
+</div>
+
+
+<div class="container">
+
+</div>
+
+
+
+
+@using (Html.BeginForm("TestResult", "Answer", FormMethod.Post, new { @class = "well" }))
+{<div class="quiz">
+        @{ int idx = 0; }
+        @foreach (var questionModel in Model)
+        {
+            <h4>@questionModel.Description</h4>
+            foreach (var answer in questionModel.Answers)
+            {
+                <div class="checkbox">
+                    <label>
+                        <span>
+                            <input type="radio" name="@questionModel.Id" value="@answer.Value" />
+                            @answer.Label
+                        </span>
+                    </label>
+                </div>
+            }
+
+        }
+    </div>
+    <div class="form-actions">
+        <input type="submit" class="btn btn-primary" value="Send" />
+    </div>
+}

@@ -16,9 +16,9 @@
     
     <div id="bar-notification"></div>
 
-@Html.Action("NavLinks", "Common")
+    @Html.Action("NavLinks", "Common")
 
-@Html.Partial("_Header")
+    @Html.Partial("_Header")
 
     <!-- Section-->
     <section class="py-5">
@@ -29,8 +29,14 @@
 
     @Html.Partial("_Footer")
 
-    @Scripts.Render("~/bundles/jquery")
-    <script src="~/Content/css/bootstrap.bundle.min.js"></script>
+
+
+
+
+    @Scripts.Render("~/bundles/mitsos")
+
+    @*<script src="~/Content/css/bootstrap.bundle.min.js"></script>*@
+
     @Scripts.Render("~/bundles/ajaxcart")
     @RenderSection("scripts", required: false)
 
