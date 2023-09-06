@@ -30,9 +30,8 @@
 
             <!-- bar -->
             <div class="step-bar">
-                @{ var idx = 1;}
-                @foreach (var q in Model)
-                {
+                @{ var idx = 1; }
+                @foreach (var q in Model) {
                     var load = idx == 1 ? "w-100 fill" : "fill";
                     <div class="bar">
                         <div class="@load"></div>
@@ -44,9 +43,8 @@
 
         <div class="tab-100 col-md-7">
             <div class="show-section wrapper">
-                @{ var idx1 = 1;}
-                @foreach (var q in Model)
-                {
+                @{ var idx1 = 1; }
+                @foreach (var q in Model) {
                     <section class="steps">
                         <!-- form -->
                         <form id="step@(idx1)" method="post" novalidate>
@@ -57,8 +55,7 @@
 
                             <!-- form field -->
                             <div class="form-inner">
-                                @foreach (var answer in q.Answers)
-                                {
+                                @foreach (var answer in q.Answers) {
                                     <div class="bounce-left radio-field">
                                         <input class="checkmark" type="radio" name="@q.Id" value="@answer.Value">
                                         <label>@answer.Label</label>
@@ -66,8 +63,7 @@
                                 }
                             </div>
                             <!-- next previous button -->
-                            @if (idx1 == Model.Count)
-                            {
+                            @if (idx1 == Model.Count) {
                                 <div class="next-prev">
                                     <button type="button" class="prev">
                                         <i class="fa-solid fa-arrow-left"></i>last question
@@ -77,8 +73,7 @@
                                     </button>
                                 </div>
                             }
-                            else
-                            {
+                            else {
                                 <div class="next-prev">
                                     <button type="button" class="prev">
                                         <i class="fa-solid fa-arrow-left"></i>last question
@@ -94,7 +89,7 @@
                     </section>
                     idx1++;
                 }
-                
+
                 <div class="question overflow-hidden">
                     <img src="~/Content/assets/images/question-sign.png" alt="question">
                 </div>
@@ -145,7 +140,7 @@
 
 @section scripts {
     @*<script src="~/Content/assets/js/custom.js"></script>*@
-<script>
+    <script>
         var stepsLenth = @Model.Count;
         // next prev
         var divs = $('.show-section section');
@@ -262,18 +257,13 @@
                 }
             })
 
-            function showresult()
-            {
+            function showresult() {
                 $('.loadingresult').css('display', 'grid');
 
-                setTimeout(function()
-                {
+                setTimeout(function() {
                     $('.result_page').addClass('result_page_show');
-
                 },1000)
             };
-
-
 
             //correct answers
             var correct_answers = [3,2];
@@ -285,39 +275,33 @@
 
             console.log(steps);
 
-            function countresult(resultnumber)
-            {
-                $('#step'+resultnumber+' .radio-field input').each(function()
-                {
-                    for(var i = 0; i<=correct_answers.length; i++)
-                    {
-                        if($(this).is(':checked'))
-                    {
-                        if($(this).val() == correct_answers[i])
-                        {
+            function countresult(resultnumber) {
 
+              $('#step' + resultnumber + ' .radio-field input').each(function () {
 
-                            correct++;
+                //Here we can use Ajax to check the correct answer
+                for (var i = 0; i <= correct_answers.length; i++) {
 
-                            break;
+                    if ($(this).is(':checked')) {
 
+                        if ($(this).val() == correct_answers[i]) {
+                            correct++
+                            break
                         }
                     }
-                    }
-
-                })
-
-                var correctprcnt = correct / steps * 100;
-
-                $('.u_prcnt').html(correctprcnt + '%');
-                $('.u_result span').html(correctprcnt + ' Points');
-
-                if(correctprcnt >=80)
-                {
-                    $('.pass_check').html('<i class="fa-solid fa-check"></i> You Passed!');
-                    $('.result_msg').html('You passed the test!');
                 }
-                }
+              })
+
+              var correctprcnt = (correct / steps) * 100
+
+              $('.u_prcnt').html(correctprcnt + '%')
+              $('.u_result span').html(correctprcnt + ' Points')
+
+              if (correctprcnt >= 80) {
+                $('.pass_check').html('<i class="fa-solid fa-check"></i> You Passed!')
+                $('.result_msg').html('You passed the test!')
+              }
+            };
 
 
             function toBackEnd(stepNum) {
@@ -332,10 +316,10 @@
                     contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                     data: valdata
                 });
-            }
+            };
 
         })
 
-</script>
+    </script>
 
 }
