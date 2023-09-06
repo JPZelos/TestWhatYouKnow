@@ -114,12 +114,11 @@ main
 
 
 
-.q-heading
-{
-  font-size: 40px;
-  font-family: "Sen";
-  color: var(--text-color);
-  font-weight: 900;
+.q-heading {
+    font-size: 40px;
+    font-family: "Roboto";
+    color: var(--text-color);
+    font-weight: 900;
 }
 form
 {
@@ -161,16 +160,15 @@ form
     transition: 0.4s;
 
 }
-.radio-field label
-{
-    position: relative;
-    z-index: 10;
-    font-size: 22px;
-    font-family: "Sen";
-    font-weight: 800;
-    color: var(--text-color);
-    pointer-events: none;
-}
+    .radio-field label {
+        position: relative;
+        z-index: 10;
+        font-size: 22px;
+        font-family: "Roboto";
+        font-weight: 800;
+        color: var(--text-color);
+        pointer-events: none;
+    }
 
 .radio-field input:checked
 {
@@ -200,20 +198,19 @@ form
     bottom: 60px;
 }
 
-.next-prev button
-{
-    width: 242px;
-    height: 74px;
-    border: solid 1px rgb(225,225,225);
-    border-radius: 9px;
-    background-color: rgb(255, 255, 255);
-    box-shadow: 0px 2px 21px 0px rgba(0, 0, 0, 0.03);
-    font-size: 18px;
-    font-family: "Sen";
-    color: var(--text-color);
-    font-weight: 800;
-    text-transform: uppercase;
-}
+    .next-prev button {
+        width: 242px;
+        height: 74px;
+        border: solid 1px rgb(225,225,225);
+        border-radius: 9px;
+        background-color: rgb(255, 255, 255);
+        box-shadow: 0px 2px 21px 0px rgba(0, 0, 0, 0.03);
+        font-size: 18px;
+        font-family: "Roboto";
+        color: var(--text-color);
+        font-weight: 800;
+        text-transform: uppercase;
+    }
   
 .next-prev .next, .next-prev .apply
 

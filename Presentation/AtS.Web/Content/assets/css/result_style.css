@@ -80,10 +80,9 @@
     height: 106%;
     z-index: -1;
 }
-.result_inner h2
-{
+.result_inner h2 {
     font-size: 42px;
-    font-family: "Sen";
+    font-family: "Roboto";
     color: rgb(0, 0, 0);
     font-weight: 900;
     margin-bottom: 40px;
@@ -99,12 +98,11 @@
     display: flex;
     overflow: hidden;
 }
-.u_score,.p_score
-{
+.u_score, .p_score {
     height: 100%;
     min-width: 45%;
     font-size: 28px;
-    font-family: "Sen";
+    font-family: "Roboto";
     color: rgb(0, 0, 0);
     font-weight: 900;
     background-color: rgb(226, 226, 226);
@@ -116,8 +114,7 @@
     position: relative;
     z-index: 10;
 }
-.u_prcnt,.p_prcnt
-{
+.u_prcnt, .p_prcnt {
     position: absolute;
     top: 0;
     left: 0;
@@ -127,7 +124,7 @@
     background-color: rgb(237, 237, 237);
     z-index: 9;
     font-size: 30px;
-    font-family: "Sen";
+    font-family: "Roboto";
     color: rgb(0, 0, 0);
     font-weight: 700;
     display: grid;
@@ -135,10 +132,9 @@
     text-align: right;
     padding-right: 50px;
 }
-.u_result span,.p_result span
-{
+.u_result span, .p_result span {
     font-size: 30px;
-    font-family: "Sen";
+    font-family: "Roboto";
     color: rgb(0, 0, 0);
     font-weight: 700;
     display: grid;
@@ -168,10 +164,9 @@
     margin: 0 auto;
       
 }
-.pass_check
-{
+.pass_check {
     font-size: 20px;
-    font-family: "Sen";
+    font-family: "Roboto";
     color: rgb(0, 0, 0);
     display: flex;
     align-items: center;
@@ -183,9 +178,8 @@
     font-size: 24px;
     margin-right: 10px;
 }
-.result_msg
-{
-    font-family: "Sen";
+.result_msg {
+    font-family: "Roboto";
     color: rgb(0, 0, 0);
     font-size: 25px;
     margin-top: 30px;
