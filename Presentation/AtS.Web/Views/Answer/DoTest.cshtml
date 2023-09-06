@@ -145,7 +145,7 @@
 
 @section scripts {
     @*<script src="~/Content/assets/js/custom.js"></script>*@
-    <script>
+<script>
         var stepsLenth = @Model.Count;
         // next prev
         var divs = $('.show-section section');
@@ -216,6 +216,8 @@
 
                     }
                     else {
+                        toBackEnd(@(i));
+
                         if ((now+1)==@(Model.Count)){
                             countresult(@(Model.Count));
                             showresult();
@@ -251,6 +253,8 @@
                 }
 
                 else {
+                    toBackEnd(stepsLenth);
+
                     countresult(stepsLenth);
                     showresult();
                     $("#sub").html('done');
@@ -315,10 +319,41 @@
                 }
                 }
 
+
+
+
+            function toBackEnd(stepNum) {
+                var steId = "#step" + stepNum;
+                var valdata = $(steId).serialize();
+
+                alert(valdata);
+                $.ajax({
+                    url: "/Answer/TestResult",
+                    type: "POST",
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    data: valdata
+                });
+            }
+
+            //$("#btnsubmit").click(function (e) {
+            //    //Serialize the form datas.
+            //    var valdata = $("#friendform").serialize();
+            //    //to get alert popup
+            //    alert(valdata);
+            //    $.ajax({
+            //        url: "/Friend/AddFriend",
+            //        type: "POST",
+            //        dataType: 'json',
+            //        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            //        data: valdata
+            //    });
+            //});
+
         })
 
-    
-    </script>
+
+</script>
 
     @*<script src="~/Content/assets/js/result.js"></script>*@
 }
