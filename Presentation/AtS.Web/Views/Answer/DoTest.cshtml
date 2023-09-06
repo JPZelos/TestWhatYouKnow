@@ -89,7 +89,7 @@
                                 </div>
                             }
 
-                           
+
                         </form>
                     </section>
                     idx1++;
@@ -142,7 +142,8 @@
 
 @section scripts {
     @*<script src="~/Content/assets/js/custom.js"></script>*@
-<script>
+    <script>
+        var stepsLenth = @Model.Count;
         // next prev
         var divs = $('.show-section section');
         var now = 0; // currently shown div
@@ -195,7 +196,7 @@
 
         // form validation
         $(document).ready(function () {
-            @for (var i = 1; i < Model.Count-1; i++) {
+            @for (var i = 1; i < Model.Count; i++) {
                 <text>
                 $("#step" + @(i) + "btn").on('click', function () {
                     radiovalidate( @(i) );
@@ -230,9 +231,29 @@
                 </text>
             }
 
+            // check last step
+            $("#sub").on('click', function () {
+                radiovalidate(stepsLenth);
 
+                if (checkedradio == false) {
 
+                    (function (el) {
+                        setTimeout(function () {
+                            el.children().remove('.reveal');
+                        }, 3000);
+                    }($('#error').append('<div class="reveal alert alert-danger">Choose an option!</div>')));
 
+                    radiovalidate(stepsLenth);
+
+                }
+
+                else {
+                    countresult(stepsLenth);
+                    showresult();
+                    $("#sub").html('done');
+
+                }
+            })
 
             function showresult()
             {
@@ -293,7 +314,8 @@
 
         })
 
-</script>
+    
+    </script>
 
     @*<script src="~/Content/assets/js/result.js"></script>*@
 }
