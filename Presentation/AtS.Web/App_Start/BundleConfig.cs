@@ -28,15 +28,6 @@ namespace TWYK.Web
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            //bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-            //            "~/Content/js/jquery-{version}.js"));
-
-            //var mitsos = (new Bundle("~/bundles/mitsos").Include(
-            //    "~/Content/assets/js/Bootstrap/bootstrap.min.js",
-            //    "~/Content/assets/js/jQuery/jquery-3.6.3.min.js",
-            //    "~/Content/assets/js/result.js",
-            //    "~/Content/assets/js/custom.js"
-            //));
 
             var mitsos = (new Bundle("~/bundles/mitsos").Include(
                 "~/Content/assets/js/Bootstrap/bootstrap.min.js",
@@ -58,14 +49,6 @@ namespace TWYK.Web
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Content/js/modernizr-*"));
-
-
-
-            //bundles.Add(new StyleBundle("~/Content/css").Include(
-            //          "~/Content/css/styles.css",
-            //          "~/Content/css/cart2.css",
-            //          "~/Content/css/shoping-cart.css",
-            //          "~/Content/css/site.css"));
 
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

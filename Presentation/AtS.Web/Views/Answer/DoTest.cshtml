@@ -320,13 +320,11 @@
                 }
 
 
-
-
             function toBackEnd(stepNum) {
                 var steId = "#step" + stepNum;
                 var valdata = $(steId).serialize();
 
-                alert(valdata);
+                //alert(valdata);
                 $.ajax({
                     url: "/Answer/TestResult",
                     type: "POST",
@@ -336,24 +334,8 @@
                 });
             }
 
-            //$("#btnsubmit").click(function (e) {
-            //    //Serialize the form datas.
-            //    var valdata = $("#friendform").serialize();
-            //    //to get alert popup
-            //    alert(valdata);
-            //    $.ajax({
-            //        url: "/Friend/AddFriend",
-            //        type: "POST",
-            //        dataType: 'json',
-            //        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            //        data: valdata
-            //    });
-            //});
-
         })
-
 
 </script>
 
-    @*<script src="~/Content/assets/js/result.js"></script>*@
 }
