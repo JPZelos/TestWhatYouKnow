@@ -27,6 +27,10 @@ namespace TWYK.Core.Domain
         [Display(Name = "TestResult Score")]
         public int Score { get; set; }
 
+        [Column("Success")]
+        [Display(Name = "TestResult Success")]
+        public bool Success { get; set; }
+
         public virtual Answer Answer { get; set; }
     }
 

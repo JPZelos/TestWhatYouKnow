@@ -23,7 +23,9 @@ namespace TWYK.Web.Models
         [Display(Name = "TestResult Score")]
         public int Score { get; set; }
 
-        public bool IsSuccess { get; set; }
+        [Column("Success")]
+        [Display(Name = "TestResult Success")]
+        public bool Success { get; set; }
 
         public virtual AnswerModel Answer { get; set; }
     }

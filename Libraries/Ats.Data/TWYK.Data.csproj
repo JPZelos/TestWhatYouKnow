@@ -105,11 +105,16 @@
     <Compile Include="EfRepository.cs" />
     <Compile Include="IDapperRepository.cs" />
     <Compile Include="IDbContext.cs" />
+    <Compile Include="Mapping\AnswerMap.cs" />
     <Compile Include="Mapping\AtsEntityTypeConfiguration.cs" />
     <Compile Include="Mapping\CategoryMap.cs" />
+    <Compile Include="Mapping\ChapterMap.cs" />
     <Compile Include="Mapping\CustomerMap.cs" />
     <Compile Include="Mapping\ProductMap.cs" />
+    <Compile Include="Mapping\QuestionMap.cs" />
     <Compile Include="Mapping\ShoppingCartItemMap.cs" />
+    <Compile Include="Mapping\TestResultMap.cs" />
+    <Compile Include="Mapping\TopicMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
