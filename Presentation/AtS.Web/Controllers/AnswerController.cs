@@ -57,39 +57,52 @@ namespace TWYK.Web.Controllers
             var queryPairs = queryString.Split('&');
 
             List<QuestionModel> questions = new List<QuestionModel>();
-
             List<TestResultModel> testResults = new List<TestResultModel>();
 
+            bool success = true;
+            string message = "Success";
+
             foreach (var pair in queryPairs) {
-                var questionId = int.Parse(pair.Split('=')[0]);
+                // Get question Id and User Answwe Value
+                var questionId = 152;// int.Parse(pair.Split('=')[0]);
                 var answeredValue = int.Parse(pair.Split('=')[1]);
 
+                // Get question and answered answer records from db
                 var question = _questionService.GetQuestionById(questionId);
                 var answers = _answerRepository.Table.Where(x => x.Question.Id == questionId);
                 var answered = answers.FirstOrDefault(x => x.Value == answeredValue);
 
-                var testResult = new TestResultModel {
-                    Score = question.Score
-                };
                 if (answered != null) {
-                    testResult.AnswerId = answered.Id;
+                    // Declare view model
+                    var testResult = new TestResultModel
+                    {
+                        Score = question.Score,
+                    };
+                    if (answered != null)
+                    {
+                        testResult.AnswerId = answered.Id;
+                    }
+                    testResult.CustomerId = _workContext.CurrentCustomer.Id;
+                    testResult.Answer = answered.ToModel();
+
+                    testResults.Add(testResult);
+                    var qModel = question.ToModel();
+                    qModel.IsSuccess = question.SuccessValue == answered?.Value;
+
+                    questions.Add(qModel);
+
+                    
                 }
-                testResult.CustomerId = _workContext.CurrentCustomer.Id;
-                testResult.Answer = answered.ToModel();
-
-                testResults.Add(testResult);
-                var qModel = question.ToModel();
-                qModel.IsSuccess = question.SuccessValue == answered?.Value;
-
-                questions.Add(qModel);
+                else {
+                    success = false;
+                    message = "An error occured";
+                    Response.StatusCode = 500;
+                    break;
+                }
             }
 
-            var model = new TestResults {
-                Questions = questions,
-                Results = testResults
-            };
+            return Json(new { success = success, responseText = message }, JsonRequestBehavior.AllowGet);
 
-            return View(model);
         }
     }
 }
