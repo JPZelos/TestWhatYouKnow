@@ -7,6 +7,7 @@ namespace TWYK.Core.Domain
     {
         private ICollection<ShoppingCartItem> _shoppingCartItems;
         private ICollection<Topic> _topics;
+        private ICollection<Quiz> _quizzes;
         /// <summary>
         /// Ctor
         /// </summary>
@@ -63,8 +64,13 @@ namespace TWYK.Core.Domain
         /// Gets or sets shopping cart items
         /// </summary>
         public virtual ICollection<ShoppingCartItem> ShoppingCartItems {
-            get { return _shoppingCartItems ?? (_shoppingCartItems = new List<ShoppingCartItem>()); }
-            protected set { _shoppingCartItems = value; }
+            get => _shoppingCartItems ?? (_shoppingCartItems = new List<ShoppingCartItem>());
+            set  => _shoppingCartItems = value;
+        }
+
+        public virtual ICollection<Quiz> Quizzes {
+            get => _quizzes ?? (_quizzes = new List<Quiz>());
+             set => _quizzes = value;
         }
 
         public virtual ICollection<Topic> Topics {

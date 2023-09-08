@@ -134,6 +134,7 @@
     <Compile Include="Domain\CustomerLoginResults.cs" />
     <Compile Include="Domain\Product.cs" />
     <Compile Include="Domain\Question.cs" />
+    <Compile Include="Domain\Quiz.cs" />
     <Compile Include="Domain\RoundingHelper.cs" />
     <Compile Include="Domain\ShoppingCartItem.cs" />
     <Compile Include="Domain\SystemCustomerRoleNames.cs" />

@@ -112,6 +112,7 @@
     <Compile Include="Mapping\CustomerMap.cs" />
     <Compile Include="Mapping\ProductMap.cs" />
     <Compile Include="Mapping\QuestionMap.cs" />
+    <Compile Include="Mapping\QuizMap.cs" />
     <Compile Include="Mapping\ShoppingCartItemMap.cs" />
     <Compile Include="Mapping\TestResultMap.cs" />
     <Compile Include="Mapping\TopicMap.cs" />
