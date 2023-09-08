@@ -64,7 +64,7 @@ namespace TWYK.Web.Controllers
 
             foreach (var pair in queryPairs) {
                 // Get question Id and User Answwe Value
-                var questionId = 152;// int.Parse(pair.Split('=')[0]);
+                var questionId = int.Parse(pair.Split('=')[0]);
                 var answeredValue = int.Parse(pair.Split('=')[1]);
 
                 // Get question and answered answer records from db
