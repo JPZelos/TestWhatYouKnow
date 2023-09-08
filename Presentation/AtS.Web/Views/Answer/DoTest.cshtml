@@ -6,16 +6,33 @@
 
 @{
     var barWidth = 100 / Model.Count;
+    var answers = new List<int>();
+    foreach (var ca in Model) {
+        answers.Add(ca.SuccessValue);
+    }
+    var allAnswers = string.Join(",", answers);
 }
 <style>
     .step-bar .bar{
         width: @(barWidth)% !important;
     }
+    .step-number-inner {
+        text-transform: capitalize;
+        font-family: 'Roboto';
+    }
+    .next-prev button {
+        text-transform: capitalize;
+    }
+    .radio-field label {
+        font-size: 1.2rem;
+        text-align:center;
+        padding:1rem;
+    }
 </style>
 <!-- step-number -->
 <div class="step-number">
     <div class="step-number-inner">
-        Question <span id="activeStep">1</span>/@Model.Count
+        Ερώτηση <span id="activeStep">1</span>/@Model.Count
     </div>
 </div>
 
@@ -42,7 +59,7 @@
         </div>
 
         <div class="tab-100 col-md-7">
-            <div class="show-section wrapper">
+            <div class="show-section wrapper" id="quiz-wrapper">
                 @{ var idx1 = 1; }
                 @foreach (var q in Model) {
                     <section class="steps">
@@ -66,20 +83,20 @@
                             @if (idx1 == Model.Count) {
                                 <div class="next-prev">
                                     <button type="button" class="prev">
-                                        <i class="fa-solid fa-arrow-left"></i>last question
+                                        <i class="fa-solid fa-arrow-left"></i>προηγούμενη
                                     </button>
                                     <button type="button" class="apply" id="sub">
-                                        Submit<i class="fa-solid fa-arrow-right"></i>
+                                        Υποβολή<i class="fa-solid fa-arrow-right"></i>
                                     </button>
                                 </div>
                             }
                             else {
                                 <div class="next-prev">
                                     <button type="button" class="prev">
-                                        <i class="fa-solid fa-arrow-left"></i>last question
+                                        <i class="fa-solid fa-arrow-left"></i>προηγούμενη
                                     </button>
                                     <button type="button" data-id="@(idx1)" class="next" id="step@(idx1)btn">
-                                        next question<i class="fa-solid fa-arrow-right"></i>
+                                        επόμενη<i class="fa-solid fa-arrow-right"></i>
                                     </button>
                                 </div>
                             }
@@ -106,29 +123,29 @@
 <div class="result_page">
     <div class="result_inner">
         <div class="result_inner2">
-            <h2>Knowledge Check</h2>
+            <h2>Τέστ Γνώσεων</h2>
             <div class="u_result">
-                <div class="u_score">Your Score: </div>
+                <div class="u_score">Οι πόντοι σας: </div>
                 <div class="u_prcnt">
                     20%
                 </div>
-                <span>20 Points</span>
+                <span>20 Πόντοι</span>
             </div>
             <div class="p_result">
-                <div class="p_score">Passing Score: </div>
+                <div class="p_score">Ελάχιστο όριο: </div>
                 <div class="p_prcnt">
                     80%
                 </div>
-                <span>80 Points</span>
+                <span>80 Πόντοι</span>
             </div>
             <div class="line"></div>
             <div class="result_show">
-                <h2>Result</h2>
+                <h2>Αποτελέσματα</h2>
                 <div class="pass_check">
-                    <i class="fa-solid fa-xmark"></i>You did not Pass
+                    <i class="fa-solid fa-xmark"></i>Δυστυχώς δεν περάσατε
                 </div>
                 <div class="result_msg">
-                    Better Luck Next Time!
+                    Με μεγαλύτερη προσπάθεια θα έχετε καλύτερη τύχη την επόμενη φορά!
                 </div>
             </div>
         </div>
@@ -140,4 +157,7 @@
 
 @section scripts {
     <script src="~/Content/assets/js/custom-2.js"></script>
+    <script>
+        var quiz = $("#quiz-wrapper").Quiz({stepLenth:@Model.Count, correctAnswers: [@allAnswers]});
+    </script>
 }
