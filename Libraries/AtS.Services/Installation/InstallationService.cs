@@ -226,28 +226,33 @@ namespace TWYK.Services.Installation
                 new Chapter {
                     TopicId = 1,
                     Name = "Πότισμα",
-                    Description = "Περιγραφή για το πότισμα των φυτών"
+                    Description = "Περιγραφή για το πότισμα των φυτών",
+                    PasScore = 50
                 },
                 new Chapter {
                     TopicId = 1,
                     Name = "Λίπανση",
-                    Description = "Περιγραφή για την λίπανση των φυτών"
+                    Description = "Περιγραφή για την λίπανση των φυτών",
+                    PasScore = 50
                 },
                 new Chapter {
                     TopicId = 1,
                     Name = "Κλάδεμα",
-                    Description = "Περιγραφή για το κλάδεμα των φυτών"
+                    Description = "Περιγραφή για το κλάδεμα των φυτών",
+                    PasScore = 50
                 },
 
                 new Chapter {
                     TopicId = 2,
                     Name = "Ωκεανογραφία",
-                    Description = "Περιγραφή για την Ωκεανογραφία"
+                    Description = "Περιγραφή για την Ωκεανογραφία",
+                    PasScore = 50
                 },
                 new Chapter {
                     TopicId = 2,
                     Name = "Αλιεία",
-                    Description = "Περιγραφή για την Αλιεία των ψαριών"
+                    Description = "Περιγραφή για την Αλιεία των ψαριών",
+                    PasScore = 50
                 }
             };
             _chapterRepository.Insert(chapters);
@@ -345,7 +350,7 @@ namespace TWYK.Services.Installation
                 },
                 new Answer {
                     QuestionId = 2,
-                    Label = "Πέντε λίτρα",
+                    Label = "Δεκαπέντε λίτρα",
                     Value = 3
                 },
 
