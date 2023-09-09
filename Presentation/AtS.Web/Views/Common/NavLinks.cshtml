@@ -24,10 +24,11 @@
                     <a class="nav-link" href="@Url.Action("Contact", "Home")">Contact</a>
                 </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                    @Html.Action("TopMenu", "Catalog")
-                </li>
+                @if (Model.Customer.IsInCustomerRole(SystemCustomerRoleNames.Students)) {
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Results", "Answer")">Αποτελέσματα</a>
+                    </li>
+                }
 
 
             </ul>
@@ -41,22 +42,19 @@
                     </a>
                 }
                 else {
-                    <a href="@Url.Action("Index", "Admin")" class="btn btn-outline-dark flex-shrink-0" type="button">
-                        <i class="bi bi-gear"></i>
-                        Administration
-                    </a>
+                    if (Model.Customer.IsInCustomerRole(SystemCustomerRoleNames.Administrators)) {
+                        <a href="@Url.Action("Index", "Admin")" class="btn btn-outline-dark flex-shrink-0" type="button">
+                            <i class="bi bi-gear"></i>
+                            Administration
+                        </a>
+                    }
+                   
                     <a href="@Url.Action("SignOut", "Account")" class="btn btn-outline-dark flex-shrink-0" type="button">
                         <i class="bi bi-box-arrow-right"></i>
                         Logout
                     </a>
                 }
-
-                <button id="cart" class="btn btn-outline-dark flex-shrink-0" type="button">
-                    <i class="bi bi-cart2"></i>
-                    Cart <span class="cart-qty"> @Model.ShoppingCartItems</span>
-                </button>
-
-                @Html.Action("FlyoutShoppingCart", "ShoppingCart")
+                
             </div>
         </div>
     </div>

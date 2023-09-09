@@ -9,12 +9,15 @@ namespace TWYK.Web.Models
     public class ChapterModel : BaseEntity
 
     {
-        //[Display(Name = "Chapter Id")]
-        //public int Id { get; set; }
+       
+        public ChapterModel() {
+            Quizzes = new List<Quiz>();
+        }
 
         [Display(Name = "Chapter TopicId")]
         public int TopicId { get; set; }
 
+        public int QuizId { get; set; }
 
         [Display(Name = "Chapter Name")]
         public string Name { get; set; }
@@ -29,7 +32,8 @@ namespace TWYK.Web.Models
 
         public IList<QuestionModel> Questions { get; set; }
 
-        public int QuizId { get; set; }
+        public IList<Quiz> Quizzes { get; set; }
+
     }
 
 

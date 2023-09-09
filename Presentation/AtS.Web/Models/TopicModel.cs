@@ -25,6 +25,8 @@ namespace TWYK.Web.Models
         public virtual CustomerModel Customer { get; set; }
 
         public IList<ChapterModel> Chapters { get; set; }
+
+       
     }
 
 

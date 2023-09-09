@@ -212,6 +212,7 @@
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\QuestionModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\ResultModel.cs" />
     <Compile Include="Models\ShoppingCartItemModel.cs" />
     <Compile Include="Models\ShoppingCartModel.cs" />
     <Compile Include="Models\TestResultModel.cs" />
@@ -385,6 +386,7 @@
     <Content Include="Views\Answer\TestResult.cshtml" />
     <Content Include="Views\Shared\_LayoutQuiz.cshtml" />
     <Content Include="Views\Answer\DoTest - Copy.cshtml" />
+    <Content Include="Views\Answer\Results.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

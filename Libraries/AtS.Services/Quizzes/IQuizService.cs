@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using TWYK.Core.Data;
@@ -12,6 +13,9 @@ namespace TWYK.Services.Quizzes
         Quiz GetQuizById(int quizId);
         void InsertQuiz(Quiz quiz);
         void UpdateQuiz(Quiz quiz);
+
+        List<Quiz> GetAllUserQuizs(int userId);
+
         int GetMaxQuizTries(int userId, int chapterId);
     }
 
@@ -29,6 +33,19 @@ namespace TWYK.Services.Quizzes
             }
 
             return _quizRepository.GetById(quizId);
+        }
+
+        public List<Quiz> GetAllUserQuizs(int userId) {
+            var userQuizzes = _quizRepository.Table.Where(q => q.CustomerId == userId).ToList();
+            
+            //IEnumerable<IGrouping<int, Quiz>> groups = from quiz in userQuizzes
+            //    group quiz by quiz.Chapter.TopicId;
+            
+            //List<Quiz> groupedQuizzes = new List<Quiz>();
+            //IEnumerable<Quiz> quizzes = groups.SelectMany(g => g);
+            //groupedQuizzes = quizzes.ToList();
+
+            return userQuizzes;
         }
 
         public int GetMaxQuizTries(int userId, int chapterId) {

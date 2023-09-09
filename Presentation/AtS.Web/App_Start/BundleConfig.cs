@@ -29,14 +29,14 @@ namespace TWYK.Web
         public static void RegisterBundles(BundleCollection bundles)
         {
 
-            var mitsos = (new Bundle("~/bundles/mitsos").Include(
+            var jqueryBootstrap = (new Bundle("~/bundles/jqueryBootstrap").Include(
                 "~/Content/assets/js/Bootstrap/bootstrap.min.js",
                 "~/Content/assets/js/jQuery/jquery-3.6.3.min.js"
             ));
 
             //see: https://stackoverflow.com/questions/19323409/asp-net-mvc-bundle-config-order
-            mitsos.Orderer = new NonOrderingBundleOrderer();
-            bundles.Add(mitsos);
+            jqueryBootstrap.Orderer = new NonOrderingBundleOrderer();
+            bundles.Add(jqueryBootstrap);
 
             bundles.Add(new ScriptBundle("~/bundles/ajaxcart").Include(
                         "~/Content/js/custom/public.common.js",

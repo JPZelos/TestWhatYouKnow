@@ -11,6 +11,7 @@ using TWYK.Services.Questions;
 using TWYK.Services.Quizzes;
 using TWYK.Services.Security;
 using TWYK.Services.TestResults;
+using TWYK.Services.Topics;
 using TWYK.Web.Infrastructure.Mapper;
 using TWYK.Web.Models;
 
@@ -23,6 +24,7 @@ namespace TWYK.Web.Controllers
         private readonly IQuestionService _questionService;
         private readonly IAnswerService _answerService;
         private readonly IQuizService _quizService;
+        private readonly ITopicService _topicService;
 
         private readonly IRepository<Answer> _answerRepository;
         private readonly IRepository<Chapter> _chapteRepository;
@@ -32,17 +34,72 @@ namespace TWYK.Web.Controllers
         private readonly ITestResultService _testResultService;
         private readonly IWorkContext _workContext;
 
-        public AnswerController(IPermissionService permissionService, IChapterService chapterService, IQuestionService questionService, IAnswerService answerService, IQuizService quizService, IRepository<Answer> answerRepository, IRepository<Chapter> chapteRepository, IRepository<TestResult> testResultRepository, ITestResultService testResultService, IWorkContext workContext) {
+        public AnswerController(IPermissionService permissionService, IChapterService chapterService, IQuestionService questionService, IAnswerService answerService, IQuizService quizService, ITopicService topicService, IRepository<Answer> answerRepository, IRepository<Chapter> chapteRepository, IRepository<TestResult> testResultRepository, ITestResultService testResultService, IWorkContext workContext) {
             _permissionService = permissionService;
             _chapterService = chapterService;
             _questionService = questionService;
             _answerService = answerService;
             _quizService = quizService;
+            _topicService = topicService;
             _answerRepository = answerRepository;
             _chapteRepository = chapteRepository;
             _testResultRepository = testResultRepository;
             _testResultService = testResultService;
             _workContext = workContext;
+        }
+
+        public ActionResult Results() {
+            if (!_permissionService.Authorize("Answer.Results")) {
+                return RedirectToRoute("Login");
+            }
+            var model = new ResultModel();
+            var user = _workContext.CurrentCustomer;
+            var userQuizzes = _quizService.GetAllUserQuizs(user.Id);
+            var topicIds = userQuizzes.Select(q => q.Chapter.TopicId).Distinct().ToList();
+
+            //List<Topic> userTopics = new List<Topic>();
+            //foreach (var topicId in topicIds) {
+            //    var topic = new Topic
+            //    userTopics.Add();
+            //}
+
+
+
+
+            model.FullName = user.FirstName + " " + user.LastName;
+
+            
+
+            var modelTopics = new List<TopicModel>();
+
+            foreach (var topicId in topicIds) {
+                var topic = _topicService.GetTopicById(topicId).ToModel();
+                var chapterIds = userQuizzes.Select(q => q.ChapterId).Distinct().ToList();
+                foreach (var chapterId in chapterIds)
+                {
+                    var chapterModel = _chapterService.GetChapterById(chapterId).ToModel();
+                    chapterModel.Quizzes = userQuizzes.Where(q => q.ChapterId == chapterId).ToList();
+                    topic.Chapters.Add(chapterModel);
+                }
+
+                modelTopics.Add(topic);
+
+                //var chapterIds = quizzes.Select(q => q.ChapterId).Distinct().ToList();
+                //foreach (var chapterId in chapterIds)
+                //{
+                //    var chapterModel = _chapterService.GetChapterById(chapterId).ToModel();
+                //    chapterModel.Quizzes = quizzes.Where(q => q.ChapterId == chapterId).ToList();
+                //    model.Chapters.Add(chapterModel);
+                //}
+
+            }
+            model.Topics = modelTopics;
+
+            
+
+
+
+            return View(model);
         }
 
         // GET: Answer
@@ -54,12 +111,7 @@ namespace TWYK.Web.Controllers
             var chapter = _chapterService.GetChapterById(chapterId);
 
             var userId = _workContext.CurrentCustomer.Id;
-            //var userChapterQuizzes = _quizRepository.Table
-            //    .Where(q => q.CustomerId == userId && q.ChapterId == chapterId).ToList();
-            //var tries = userChapterQuizzes.Any() ? userChapterQuizzes.Max(q => q.Tries) + 1 : 1;
-
             var tries = _quizService.GetMaxQuizTries(userId, chapterId);
-
 
             Quiz quiz = new Quiz {
                 CustomerId = userId,
@@ -90,7 +142,7 @@ namespace TWYK.Web.Controllers
             string message = "Success";
 
             var quizId = queryPairs[0].Split('=')[1];
-            var quiz = _quizService.GetQuizById( int.Parse(quizId)); 
+            var quiz = _quizService.GetQuizById(int.Parse(quizId));
 
             foreach (var pair in queryPairs) {
                 var isQuiz = pair.Split('=')[0] == "QuizId";

@@ -8,10 +8,9 @@
     --text-color: rgb(0, 0, 0);
     --field-color: rgb(255,255,255);
 }
-  
-body
-{
-    font-family: "Jost";
+
+body {
+    font-family: "Roboto";
     background-image: url(../images/bg.jpg);
     background-size: cover;
     width: 100%;

@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using TWYK.Core;
 using TWYK.Core.Domain;
 using TWYK.Services.Orders;
+using TWYK.Web.Infrastructure.Mapper;
 using TWYK.Web.Models;
 
 namespace TWYK.Web.Controllers
@@ -51,7 +52,8 @@ namespace TWYK.Web.Controllers
             var alertMessage = string.Empty;
 
             var model = new NavLinksModel {
-                IsAuthenticated = customer.IsRegistered()
+                IsAuthenticated = customer.IsRegistered(),
+                Customer = customer
             };
 
             //performance optimization (use "HasShoppingCartItems" property)

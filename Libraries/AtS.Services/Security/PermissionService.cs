@@ -32,7 +32,8 @@ namespace TWYK.Services.Security
                 permitionRecords.Add(SystemCustomerRoleNames.Students, new List<string> {
                     "Catalog.List",
                     "Catalog.ChaptertDetails",
-                    "Answer.DoTest"
+                    "Answer.DoTest",
+                    "Answer.Results"
                 });
 
                 return permitionRecords;
