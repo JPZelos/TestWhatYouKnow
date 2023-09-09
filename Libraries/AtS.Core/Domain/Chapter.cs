@@ -32,6 +32,9 @@ namespace TWYK.Core.Domain
         public string Description { get; set; }
 
 
+        public int PasScore { get; set; } = 50;
+
+
         public virtual Topic Topic { get; set; }
 
         public virtual ICollection<Question> Questions {

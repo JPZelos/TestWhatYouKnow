@@ -22,7 +22,9 @@ namespace TWYK.Web.Models
 
         [Display(Name = "Chapter Description")]
         public string Description { get; set; }
-        
+
+        public int PasScore { get; set; } = 50;
+
         public  TopicModel Topic { get; set; }
 
         public IList<QuestionModel> Questions { get; set; }

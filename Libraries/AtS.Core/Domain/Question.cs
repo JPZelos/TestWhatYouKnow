@@ -24,6 +24,7 @@ namespace TWYK.Core.Domain
         [Column("Score")]
         [Display(Name = "Question Score")]
         public int Score { get; set; }
+
         
         [Column("SuccessMsg")]
         [Display(Name = "Question Success Msg")]

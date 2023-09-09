@@ -21,6 +21,7 @@ using TWYK.Services.Installation;
 using TWYK.Services.Orders;
 using TWYK.Services.Products;
 using TWYK.Services.Questions;
+using TWYK.Services.Quizzes;
 using TWYK.Services.Security;
 using TWYK.Services.TestResults;
 using TWYK.Services.Topics;
@@ -104,6 +105,7 @@ namespace TWYK.Web.Framework
             builder.RegisterType<QuestionService>().As<IQuestionService>().InstancePerLifetimeScope();
             builder.RegisterType<TopicService>().As<ITopicService>().InstancePerLifetimeScope();
             builder.RegisterType<TestResultService>().As<ITestResultService>().InstancePerLifetimeScope();
+            builder.RegisterType<QuizService>().As<IQuizService>().InstancePerLifetimeScope();
 
         }
 

@@ -112,6 +112,7 @@
     <Compile Include="Products\ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Questions\QuestionService.cs" />
+    <Compile Include="Quizzes\IQuizService.cs" />
     <Compile Include="Security\IPermissionService.cs" />
     <Compile Include="Security\PermissionService.cs" />
     <Compile Include="Seo\SeoExtensions.cs" />

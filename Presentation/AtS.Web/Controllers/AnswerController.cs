@@ -8,6 +8,7 @@ using TWYK.Core.Domain;
 using TWYK.Services.Answers;
 using TWYK.Services.Chapters;
 using TWYK.Services.Questions;
+using TWYK.Services.Quizzes;
 using TWYK.Services.Security;
 using TWYK.Services.TestResults;
 using TWYK.Web.Infrastructure.Mapper;
@@ -21,23 +22,24 @@ namespace TWYK.Web.Controllers
         private readonly IChapterService _chapterService;
         private readonly IQuestionService _questionService;
         private readonly IAnswerService _answerService;
+        private readonly IQuizService _quizService;
 
         private readonly IRepository<Answer> _answerRepository;
         private readonly IRepository<Chapter> _chapteRepository;
-        private readonly IRepository<Quiz> _quizRepository;
+
         private readonly IRepository<TestResult> _testResultRepository;
 
         private readonly ITestResultService _testResultService;
         private readonly IWorkContext _workContext;
 
-        public AnswerController(IPermissionService permissionService, IChapterService chapterService, IQuestionService questionService, IAnswerService answerService, IRepository<Answer> answerRepository, IRepository<Chapter> chapteRepository, IRepository<Quiz> quizRepository, IRepository<TestResult> testResultRepository, ITestResultService testResultService, IWorkContext workContext) {
+        public AnswerController(IPermissionService permissionService, IChapterService chapterService, IQuestionService questionService, IAnswerService answerService, IQuizService quizService, IRepository<Answer> answerRepository, IRepository<Chapter> chapteRepository, IRepository<TestResult> testResultRepository, ITestResultService testResultService, IWorkContext workContext) {
             _permissionService = permissionService;
             _chapterService = chapterService;
             _questionService = questionService;
             _answerService = answerService;
+            _quizService = quizService;
             _answerRepository = answerRepository;
             _chapteRepository = chapteRepository;
-            _quizRepository = quizRepository;
             _testResultRepository = testResultRepository;
             _testResultService = testResultService;
             _workContext = workContext;
@@ -52,9 +54,13 @@ namespace TWYK.Web.Controllers
             var chapter = _chapterService.GetChapterById(chapterId);
 
             var userId = _workContext.CurrentCustomer.Id;
-            var userChapterQuizzes = _quizRepository.Table.Where(q=>q.CustomerId==userId && q.ChapterId==chapterId).ToList();
-            var tries = userChapterQuizzes.Any() ? userChapterQuizzes.Max(q => q.Tries) + 1 : 1;
-            
+            //var userChapterQuizzes = _quizRepository.Table
+            //    .Where(q => q.CustomerId == userId && q.ChapterId == chapterId).ToList();
+            //var tries = userChapterQuizzes.Any() ? userChapterQuizzes.Max(q => q.Tries) + 1 : 1;
+
+            var tries = _quizService.GetMaxQuizTries(userId, chapterId);
+
+
             Quiz quiz = new Quiz {
                 CustomerId = userId,
                 ChapterId = chapterId,
@@ -62,8 +68,8 @@ namespace TWYK.Web.Controllers
                 Tries = tries,
                 Success = false
             };
-            _quizRepository.Insert(quiz);
-            
+            _quizService.InsertQuiz(quiz);
+
             var model = chapter.ToModel();
             model.QuizId = quiz.Id;
 
@@ -84,6 +90,7 @@ namespace TWYK.Web.Controllers
             string message = "Success";
 
             var quizId = queryPairs[0].Split('=')[1];
+            var quiz = _quizService.GetQuizById( int.Parse(quizId)); 
 
             foreach (var pair in queryPairs) {
                 var isQuiz = pair.Split('=')[0] == "QuizId";
@@ -97,29 +104,31 @@ namespace TWYK.Web.Controllers
                     var question = _questionService.GetQuestionById(questionId);
                     var answers = _answerRepository.Table.Where(x => x.Question.Id == questionId);
                     var answered = answers.FirstOrDefault(x => x.Value == answeredValue);
+                    var chapter = _chapterService.GetChapterById(question.ChapterId);
 
-                    if (answered != null)
-                    {
+                    if (answered != null) {
                         // Declare view model
-                        var testResult = new TestResult
-                        {
+                        var testResult = new TestResult {
                             Score = question.SuccessValue == answered.Value ? question.Score : 0,
                             AnswerId = answered.Id,
                             CustomerId = _workContext.CurrentCustomer.Id,
                             Success = question.SuccessValue == answered.Value,
                             QuizId = int.Parse(quizId)
                         };
+
+                        quiz.Score += question.SuccessValue == answered.Value ? question.Score : 0;
+                        quiz.Success = quiz.Score >= chapter.PasScore;
+                        _quizService.UpdateQuiz(quiz);
+
                         _testResultRepository.Insert(testResult);
                     }
-                    else
-                    {
+                    else {
                         success = false;
                         message = "An error occured";
                         Response.StatusCode = 500;
                         break;
                     }
                 }
-                
             }
 
             return Json(new { success, responseText = message }, JsonRequestBehavior.AllowGet);
