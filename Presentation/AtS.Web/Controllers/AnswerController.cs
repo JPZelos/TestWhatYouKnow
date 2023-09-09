@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -22,36 +21,58 @@ namespace TWYK.Web.Controllers
         private readonly IChapterService _chapterService;
         private readonly IQuestionService _questionService;
         private readonly IAnswerService _answerService;
+
         private readonly IRepository<Answer> _answerRepository;
+        private readonly IRepository<Chapter> _chapteRepository;
+        private readonly IRepository<Quiz> _quizRepository;
+        private readonly IRepository<TestResult> _testResultRepository;
+
         private readonly ITestResultService _testResultService;
         private readonly IWorkContext _workContext;
 
-        public AnswerController(IPermissionService permissionService, IChapterService chapterService, IQuestionService questionService, IAnswerService answerService, IRepository<Answer> answerRepository, ITestResultService testResultService, IWorkContext workContext) {
+        public AnswerController(IPermissionService permissionService, IChapterService chapterService, IQuestionService questionService, IAnswerService answerService, IRepository<Answer> answerRepository, IRepository<Chapter> chapteRepository, IRepository<Quiz> quizRepository, IRepository<TestResult> testResultRepository, ITestResultService testResultService, IWorkContext workContext) {
             _permissionService = permissionService;
             _chapterService = chapterService;
             _questionService = questionService;
             _answerService = answerService;
             _answerRepository = answerRepository;
+            _chapteRepository = chapteRepository;
+            _quizRepository = quizRepository;
+            _testResultRepository = testResultRepository;
             _testResultService = testResultService;
             _workContext = workContext;
         }
 
         // GET: Answer
         public ActionResult DoTest(int chapterId) {
-            if (!_permissionService.Authorize("Answer.DoTest"))
+            if (!_permissionService.Authorize("Answer.DoTest")) {
                 return RedirectToRoute("Login");
+            }
 
             var chapter = _chapterService.GetChapterById(chapterId);
 
-            //TODO: need to move this in factory class
+            var userId = _workContext.CurrentCustomer.Id;
+            var userChapterQuizzes = _quizRepository.Table.Where(q=>q.CustomerId==userId && q.ChapterId==chapterId).ToList();
+            var tries = userChapterQuizzes.Any() ? userChapterQuizzes.Max(q => q.Tries) + 1 : 1;
+            
+            Quiz quiz = new Quiz {
+                CustomerId = userId,
+                ChapterId = chapterId,
+                Score = 0,
+                Tries = tries,
+                Success = false
+            };
+            _quizRepository.Insert(quiz);
+            
             var model = chapter.ToModel();
+            model.QuizId = quiz.Id;
 
-            return View(model.Questions.ToList());
+            return View(model);
         }
 
         [HttpPost]
         public ActionResult TestResult() {
-            var form = ((System.Web.HttpRequestWrapper)Request).Form;
+            var form = ((HttpRequestWrapper)Request).Form;
 
             var queryString = form.ToString();
             var queryPairs = queryString.Split('&');
@@ -62,47 +83,46 @@ namespace TWYK.Web.Controllers
             bool success = true;
             string message = "Success";
 
+            var quizId = queryPairs[0].Split('=')[1];
+
             foreach (var pair in queryPairs) {
-                // Get question Id and User Answwe Value
-                var questionId = int.Parse(pair.Split('=')[0]);
-                var answeredValue = int.Parse(pair.Split('=')[1]);
+                var isQuiz = pair.Split('=')[0] == "QuizId";
 
-                // Get question and answered answer records from db
-                var question = _questionService.GetQuestionById(questionId);
-                var answers = _answerRepository.Table.Where(x => x.Question.Id == questionId);
-                var answered = answers.FirstOrDefault(x => x.Value == answeredValue);
+                if (!isQuiz) {
+                    // Get question Id and User Answwe Value
+                    var questionId = int.Parse(pair.Split('=')[0]);
+                    var answeredValue = int.Parse(pair.Split('=')[1]);
 
-                if (answered != null) {
-                    // Declare view model
-                    var testResult = new TestResultModel
-                    {
-                        Score = question.Score,
-                    };
+                    // Get question and answered answer records from db
+                    var question = _questionService.GetQuestionById(questionId);
+                    var answers = _answerRepository.Table.Where(x => x.Question.Id == questionId);
+                    var answered = answers.FirstOrDefault(x => x.Value == answeredValue);
+
                     if (answered != null)
                     {
-                        testResult.AnswerId = answered.Id;
+                        // Declare view model
+                        var testResult = new TestResult
+                        {
+                            Score = question.SuccessValue == answered.Value ? question.Score : 0,
+                            AnswerId = answered.Id,
+                            CustomerId = _workContext.CurrentCustomer.Id,
+                            Success = question.SuccessValue == answered.Value,
+                            QuizId = int.Parse(quizId)
+                        };
+                        _testResultRepository.Insert(testResult);
                     }
-                    testResult.CustomerId = _workContext.CurrentCustomer.Id;
-                    testResult.Answer = answered.ToModel();
-
-                    testResults.Add(testResult);
-                    var qModel = question.ToModel();
-                    qModel.IsSuccess = question.SuccessValue == answered?.Value;
-
-                    questions.Add(qModel);
-
-                    
+                    else
+                    {
+                        success = false;
+                        message = "An error occured";
+                        Response.StatusCode = 500;
+                        break;
+                    }
                 }
-                else {
-                    success = false;
-                    message = "An error occured";
-                    Response.StatusCode = 500;
-                    break;
-                }
+                
             }
 
-            return Json(new { success = success, responseText = message }, JsonRequestBehavior.AllowGet);
-
+            return Json(new { success, responseText = message }, JsonRequestBehavior.AllowGet);
         }
     }
 }

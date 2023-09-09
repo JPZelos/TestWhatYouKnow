@@ -26,6 +26,8 @@ namespace TWYK.Web.Models
         public  TopicModel Topic { get; set; }
 
         public IList<QuestionModel> Questions { get; set; }
+
+        public int QuizId { get; set; }
     }
 
 

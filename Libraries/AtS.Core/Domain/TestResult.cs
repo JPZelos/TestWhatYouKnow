@@ -23,6 +23,11 @@ namespace TWYK.Core.Domain
         public int AnswerId { get; set; }
 
 
+        [Column("QuizId")]
+        [Display(Name = "Test Result QuizId")]
+        public int QuizId { get; set; }
+
+
         [Column("Score")]
         [Display(Name = "TestResult Score")]
         public int Score { get; set; }

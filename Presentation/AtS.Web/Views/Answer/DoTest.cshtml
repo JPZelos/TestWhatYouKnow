@@ -1,13 +1,13 @@
-﻿@model  List<QuestionModel>
+﻿@model  ChapterModel
 @{
     ViewBag.Title = "DoTest";
     Layout = "~/Views/Shared/_LayoutQuiz.cshtml";
 }
 
 @{
-    var barWidth = 100 / Model.Count;
+    var barWidth = 100 / Model.Questions.Count;
     var answers = new List<int>();
-    foreach (var ca in Model) {
+    foreach (var ca in Model.Questions) {
         answers.Add(ca.SuccessValue);
     }
     var allAnswers = string.Join(",", answers);
@@ -32,7 +32,7 @@
 <!-- step-number -->
 <div class="step-number">
     <div class="step-number-inner">
-        Ερώτηση <span id="activeStep">1</span>/@Model.Count
+        Ερώτηση <span id="activeStep">1</span>/@Model.Questions.Count
     </div>
 </div>
 
@@ -48,7 +48,7 @@
             <!-- bar -->
             <div class="step-bar">
                 @{ var idx = 1; }
-                @foreach (var q in Model) {
+                @foreach (var q in Model.Questions) {
                     var load = idx == 1 ? "w-100 fill" : "fill";
                     <div class="bar">
                         <div class="@load"></div>
@@ -61,10 +61,11 @@
         <div class="tab-100 col-md-7">
             <div class="show-section wrapper" id="quiz-wrapper">
                 @{ var idx1 = 1; }
-                @foreach (var q in Model) {
+                @foreach (var q in Model.Questions) {
                     <section class="steps">
                         <!-- form -->
                         <form id="step@(idx1)" method="post" novalidate>
+                            <input type="hidden" name="QuizId" value="@Model.QuizId" />
                             <!-- heading -->
                             <h2 class="q-heading">
                                 @q.Description
@@ -80,7 +81,7 @@
                                 }
                             </div>
                             <!-- next previous button -->
-                            @if (idx1 == Model.Count) {
+                            @if (idx1 == Model.Questions.Count) {
                                 <div class="next-prev">
                                     <button type="button" class="prev">
                                         <i class="fa-solid fa-arrow-left"></i>προηγούμενη
@@ -158,6 +159,6 @@
 @section scripts {
     <script src="~/Content/assets/js/custom-2.js"></script>
     <script>
-        var quiz = $("#quiz-wrapper").Quiz({stepLenth:@Model.Count, correctAnswers: [@allAnswers]});
+        var quiz = $("#quiz-wrapper").Quiz({stepLenth:@Model.Questions.Count, correctAnswers: [@allAnswers]});
     </script>
 }
