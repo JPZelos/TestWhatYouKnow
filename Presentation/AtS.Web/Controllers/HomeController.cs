@@ -15,33 +15,18 @@ namespace TWYK.Web.Controllers
     public class HomeController : Controller
     {
         private readonly IInstallationService _installationService;
-        private readonly ICategoryService _categoryService;
-        private readonly IProductService _productService;
 
         private readonly ITopicService _topicService;
         private readonly IChapterService _chapterService;
-        private readonly IQuestionService _questionService;
-        private readonly IAnswerService _answerService;
-        private readonly ITestResultService _testResultService;
 
         public HomeController(
             IInstallationService installationService,
-            ICategoryService categoryService,
-            IProductService productService,
             ITopicService topicService,
-            IChapterService chapterService,
-            IQuestionService questionService,
-            IAnswerService answerService,
-            ITestResultService testResultService
+            IChapterService chapterService
         ) {
             _installationService = installationService;
-            _categoryService = categoryService;
-            _productService = productService;
             _topicService = topicService;
             _chapterService = chapterService;
-            _questionService = questionService;
-            _answerService = answerService;
-            _testResultService = testResultService;
         }
 
         public ActionResult Index() {
@@ -50,9 +35,7 @@ namespace TWYK.Web.Controllers
                 return RedirectToAction("DatabaseInfo", "Common");
             }
 
-            //install some sample data in case of fresh install
             _installationService.InstallSampleData();
-
 
             var model = _topicService.GetAllTopics().ToModelList();
             foreach (var topic in model) {

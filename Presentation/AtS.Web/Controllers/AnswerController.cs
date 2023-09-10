@@ -1,16 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TWYK.Core;
 using TWYK.Core.Data;
 using TWYK.Core.Domain;
-using TWYK.Services.Answers;
 using TWYK.Services.Chapters;
 using TWYK.Services.Questions;
 using TWYK.Services.Quizzes;
 using TWYK.Services.Security;
-using TWYK.Services.TestResults;
 using TWYK.Services.Topics;
 using TWYK.Web.Infrastructure.Mapper;
 using TWYK.Web.Models;
@@ -22,29 +21,31 @@ namespace TWYK.Web.Controllers
         private readonly IPermissionService _permissionService;
         private readonly IChapterService _chapterService;
         private readonly IQuestionService _questionService;
-        private readonly IAnswerService _answerService;
         private readonly IQuizService _quizService;
         private readonly ITopicService _topicService;
 
         private readonly IRepository<Answer> _answerRepository;
-        private readonly IRepository<Chapter> _chapteRepository;
-
         private readonly IRepository<TestResult> _testResultRepository;
 
-        private readonly ITestResultService _testResultService;
         private readonly IWorkContext _workContext;
 
-        public AnswerController(IPermissionService permissionService, IChapterService chapterService, IQuestionService questionService, IAnswerService answerService, IQuizService quizService, ITopicService topicService, IRepository<Answer> answerRepository, IRepository<Chapter> chapteRepository, IRepository<TestResult> testResultRepository, ITestResultService testResultService, IWorkContext workContext) {
+        public AnswerController(
+            IPermissionService permissionService,
+            IChapterService chapterService,
+            IQuestionService questionService,
+            IQuizService quizService,
+            ITopicService topicService,
+            IRepository<Answer> answerRepository,
+            IRepository<TestResult> testResultRepository,
+            IWorkContext workContext
+        ) {
             _permissionService = permissionService;
             _chapterService = chapterService;
             _questionService = questionService;
-            _answerService = answerService;
             _quizService = quizService;
             _topicService = topicService;
             _answerRepository = answerRepository;
-            _chapteRepository = chapteRepository;
             _testResultRepository = testResultRepository;
-            _testResultService = testResultService;
             _workContext = workContext;
         }
 
@@ -52,52 +53,29 @@ namespace TWYK.Web.Controllers
             if (!_permissionService.Authorize("Answer.Results")) {
                 return RedirectToRoute("Login");
             }
+
             var model = new ResultModel();
             var user = _workContext.CurrentCustomer;
             var userQuizzes = _quizService.GetAllUserQuizs(user.Id);
             var topicIds = userQuizzes.Select(q => q.Chapter.TopicId).Distinct().ToList();
 
-            //List<Topic> userTopics = new List<Topic>();
-            //foreach (var topicId in topicIds) {
-            //    var topic = new Topic
-            //    userTopics.Add();
-            //}
-
-
-
-
             model.FullName = user.FirstName + " " + user.LastName;
-
-            
 
             var modelTopics = new List<TopicModel>();
 
             foreach (var topicId in topicIds) {
                 var topic = _topicService.GetTopicById(topicId).ToModel();
                 var chapterIds = userQuizzes.Select(q => q.ChapterId).Distinct().ToList();
-                foreach (var chapterId in chapterIds)
-                {
+                foreach (var chapterId in chapterIds) {
                     var chapterModel = _chapterService.GetChapterById(chapterId).ToModel();
                     chapterModel.Quizzes = userQuizzes.Where(q => q.ChapterId == chapterId).ToList();
                     topic.Chapters.Add(chapterModel);
                 }
 
                 modelTopics.Add(topic);
-
-                //var chapterIds = quizzes.Select(q => q.ChapterId).Distinct().ToList();
-                //foreach (var chapterId in chapterIds)
-                //{
-                //    var chapterModel = _chapterService.GetChapterById(chapterId).ToModel();
-                //    chapterModel.Quizzes = quizzes.Where(q => q.ChapterId == chapterId).ToList();
-                //    model.Chapters.Add(chapterModel);
-                //}
-
             }
+
             model.Topics = modelTopics;
-
-            
-
-
 
             return View(model);
         }
@@ -118,7 +96,8 @@ namespace TWYK.Web.Controllers
                 ChapterId = chapterId,
                 Score = 0,
                 Tries = tries,
-                Success = false
+                Success = false,
+                LastUpdated = DateTime.Now
             };
             _quizService.InsertQuiz(quiz);
 

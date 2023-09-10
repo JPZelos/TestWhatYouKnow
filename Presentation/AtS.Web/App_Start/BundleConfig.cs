@@ -58,6 +58,12 @@ namespace TWYK.Web
                 "~/Content/assets/css/animation.css",
                 "~/Content/assets/css/result_style.css"));
 
+            bundles.Add(new StyleBundle("~/Content/maincss").Include(
+                "~/Content/css/styles.css",
+                "~/Content/css/cart2.css",
+                "~/Content/css/shoping-cart.css",
+                "~/Content/css/site.css"));
+
         }
     }
 }

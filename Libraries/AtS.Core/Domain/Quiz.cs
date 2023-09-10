@@ -16,23 +16,28 @@ namespace TWYK.Core.Domain
 
 
         [Column("ChapterId")]
-        [Display(Name = "Quiz_ChapterId")]
+        [Display(Name = "Quiz ChapterId")]
         public int ChapterId { get; set; }
 
 
         [Column("Score")]
-        [Display(Name = "Quiz_Score")]
+        [Display(Name = "Quiz Score")]
         public int Score { get; set; }
 
 
         [Column("Tries")]
-        [Display(Name = "Quiz_Tries")]
+        [Display(Name = "Quiz Tries")]
         public int Tries { get; set; }
 
 
         [Column("Success")]
-        [Display(Name = "Quiz_Success")]
+        [Display(Name = "Quiz Success")]
         public bool Success { get; set; }
+
+
+        [Column("LastUpdated")]
+        [Display(Name = "Quiz Last Updated")]
+        public DateTime LastUpdated { get; set; }
 
         public virtual Chapter Chapter { get; set; }
         

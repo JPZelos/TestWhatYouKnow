@@ -385,7 +385,6 @@
     <Content Include="Views\Answer\DoTest.cshtml" />
     <Content Include="Views\Answer\TestResult.cshtml" />
     <Content Include="Views\Shared\_LayoutQuiz.cshtml" />
-    <Content Include="Views\Answer\DoTest - Copy.cshtml" />
     <Content Include="Views\Answer\Results.cshtml" />
   </ItemGroup>
   <ItemGroup />
@@ -432,7 +431,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51225</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44343/</IISUrl>
+          <IISUrl>https://localhost:44333/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
