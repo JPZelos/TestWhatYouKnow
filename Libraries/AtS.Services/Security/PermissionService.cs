@@ -28,7 +28,6 @@ namespace TWYK.Services.Security
                     "AdminPanel",
                     "Admin.TeacherUsers",
                     "Admin.TeacherTopics",
-                    "Admin.TeacherQuestions."
                 });
 
                 permitionRecords.Add(SystemCustomerRoleNames.Students, new List<string> {

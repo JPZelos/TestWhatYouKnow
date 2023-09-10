@@ -27,20 +27,17 @@
                        
                 </ul>
             </li>
-            <li>
-                <a href="#usersSubmenu" data-bs-toggle="collapse" role="button" class="dropdown-toggle">Users</a>
-                <ul class="collapse list-unstyled" id="usersSubmenu">
-                    <li>
-                        <a href="#">Users</a>
-                    </li>
-                    <li>
-                        <a href="#">Roles</a>
-                    </li>
-                    <li>
-                        <a href="#">Permitions</a>
-                    </li>
-                </ul>
-            </li>
+            @if (Model.Customer.IsInCustomerRole(SystemCustomerRoleNames.Teachers)) {
+                <li>
+                    <a href="#usersSubmenu" data-bs-toggle="collapse" role="button" class="dropdown-toggle">Courses</a>
+                    <ul class="collapse list-unstyled" id="usersSubmenu">
+                        <li>
+                            <a href="@Url.RouteUrl("TeacherTopics")">Topics</a>
+                        </li>
+                    </ul>
+                </li>
+            }
+            
 
         </ul>
 

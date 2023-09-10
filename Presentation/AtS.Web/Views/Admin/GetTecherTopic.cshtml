@@ -1,0 +1,62 @@
+﻿@model Topic
+@{
+    ViewBag.Title = "GetTecherTopic";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>GetTecherTopic</h2>
+<div class="row">
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "row" })) {
+        <div class="mb-3">
+            @Html.LabelFor(m => m.Name, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(m => m.Description, new { @class = "form-label" })
+            @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @cols = 80, @rows = 10 })
+            @Html.ValidationMessageFor(m => m.Description)
+        </div>
+
+       
+    }
+    <div class="mb-3">
+        <button class="btn btn-primary">Απόθήκευση</button>
+    </div>
+</div>
+
+<div class="row">
+    <h2>Κεφάλαια</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Κεφάλαιο</th>
+                <th scope="col">Ελάχιστο Score</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var chapter in Model.Chapters)
+            {
+                <tr>
+                        <th scope="row">@chapter.Id</th>
+                        <td style="width: 45%;">@chapter.Name</td>
+                        <td style="width: 45%;">@chapter.PasScore</td>
+                        <td style="text-align: center;">
+                            <a href="#"
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="top"
+                               title="Click to Edit">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                        </td>
+                    </tr>
+                
+            }
+        </tbody>
+    </table>
+</div>
+
+

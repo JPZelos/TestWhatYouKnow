@@ -133,5 +133,29 @@ namespace TWYK.Web.Controllers
 
             return View(model);
         }
+
+        public ActionResult GetTecherTopics() {
+            if (!_permissionService.Authorize("Admin.TeacherTopics")) {
+                return RedirectToRoute("ActionDenied");
+            }
+            var teacher = _workContext.CurrentCustomer;
+            var topics = _topicService.GetTopicByUserId(teacher.Id);
+
+
+            return View(topics);
+        }
+
+        public ActionResult GetTecherTopic(int topicId)
+        {
+            if (!_permissionService.Authorize("Admin.TeacherTopics"))
+            {
+                return RedirectToRoute("ActionDenied");
+            }
+            var teacher = _workContext.CurrentCustomer;
+            var topic = _topicService.GetTopicById(topicId);
+
+
+            return View(topic);
+        }
     }
 }

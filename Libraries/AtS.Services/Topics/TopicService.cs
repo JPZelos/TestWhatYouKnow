@@ -9,6 +9,7 @@ namespace TWYK.Services.Topics
     {
         IList<Topic> GetAllTopics();
         Topic GetTopicById(int topicId);
+        List<Topic> GetTopicByUserId(int userId);
     }
 
     public class TopicService : ITopicService
@@ -31,6 +32,13 @@ namespace TWYK.Services.Topics
             return _topicRepository.GetById(topicId);
         }
 
-       
+        public List<Topic> GetTopicByUserId(int userId) {
+            if (userId == 0) {
+                return null;
+            }
+
+            var topics = _topicRepository.Table.Where(tp => tp.CustomerId == userId).ToList();
+            return topics;
+        }
     }
 }

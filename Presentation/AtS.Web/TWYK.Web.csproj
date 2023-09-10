@@ -399,6 +399,8 @@
     <Content Include="Views\Admin\AdminNavLinks.cshtml" />
     <Content Include="Views\Admin\AdminTeacherUsers.cshtml" />
     <Content Include="Views\Admin\GetUserResults.cshtml" />
+    <Content Include="Views\Admin\GetTecherTopics.cshtml" />
+    <Content Include="Views\Admin\GetTecherTopic.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

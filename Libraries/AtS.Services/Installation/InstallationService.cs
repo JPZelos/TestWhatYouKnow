@@ -167,6 +167,7 @@ namespace TWYK.Services.Installation
                     //CustomerGuid = new Guid(),
                     Email = "teacher_b@uniwa.gr",
                     UserName = "teacher_b",
+                    Password = "123",
                     FirstName = "Teacher",
                     LastName = "B",
                     HasShoppingCartItems = false,
