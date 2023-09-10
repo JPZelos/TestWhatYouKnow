@@ -3,7 +3,8 @@
     $.fn.Quiz = function (options) {
         var defaults = {
             stepLenth: 1,
-            correctAnswers: null
+            correctAnswers: null,
+            pasScore : 50
         }
 
         options = $.extend(defaults, options)
@@ -170,7 +171,11 @@
 
                 console.log(steps)
 
+                let pass_check = "Δεν περάσατε";
+                let result_msg = "";
+
                 function countresult(resultnumber) {
+                    /*
                     $('#step' + resultnumber + ' .radio-field input').each(function () {
                         //Here we can use Ajax to check the correct answer
                         for (var i = 0; i <= correct_answers.length; i++) {
@@ -182,15 +187,15 @@
                             }
                         }
                     })
-
-                    var correctprcnt = (correct / steps) * 100
+                    */
+                    var correctprcnt = correct;// (correct / steps) * 100
 
                     $('.u_prcnt').html(correctprcnt + '%')
                     $('.u_result span').html(correctprcnt + ' Πόντοι')
 
-                    if (correctprcnt >= 80) {
-                        $('.pass_check').html('<i class="fa-solid fa-check"></i> Περάσατε!')
-                        $('.result_msg').html('Συγχαρητήρια! Περάσατε αυτό το τέστ!')
+                    if (correctprcnt >= options.pasScore) {
+                        $('.pass_check').html('<i class="fa-solid fa-check"></i> '+pass_check+'!')
+                        $('.result_msg').html('Συγχαρητήρια! '+result_msg+'!')
                     }
                 }
 
@@ -207,13 +212,18 @@
                         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                         data: valdata,
                         success: function (data, text) {
+                            correct += data.score;
+                            if (correct >= options.pasScore){
+                                pass_check = "Περάσατε";                               
+                            }else{
+                                pass_check = "Δεν περάσατε";
+                            }
+                            result_msg = data.responseText;
                             return true
                         },
                         error: function (request, status, error) {
                             $('#error').append(
-                                '<div class="reveal alert alert-danger">' +
-                                request.responseJSON.responseText +
-                                '</div>'
+                                '<div class="reveal alert alert-danger">' + request.responseJSON.responseText + '</div>'
                             )
                             successBoolToDb = false;
                             //window.location.href = window.location.href;

@@ -29,6 +29,33 @@ namespace TWYK.Web
                 new { controller = "answer", action = "DoTest" });
 
 
+            //twyn
+            routes.MapRoute(
+                name: "ActionDenied",
+                url: "catalog/ActionDenied",
+                new { controller = "Admin", action = "ActionDenied" });
+
+            //twyn
+            routes.MapRoute(
+                name: "AdminUsers",
+                url: "admin/Users/",
+                new { controller = "Admin", action = "AdminUsers" }
+            );
+            
+            //twyn
+            routes.MapRoute(
+                name: "AdminTeacherUsers",
+                url: "admin/TeacherUsers",
+                new { controller = "Admin", action = "AdminTeacherUsers" }
+            );
+
+
+
+
+
+
+
+
 
 
 

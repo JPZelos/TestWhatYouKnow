@@ -15,16 +15,17 @@
 </head>
 <body class="min-vh-100">
 
-<div class="wrapper d-flex align-items-stretch">
-    
-    <!--Side Bar-->
-    @Html.Partial("_AdminSideBar")
+    <div class="wrapper d-flex align-items-stretch">
 
-    <!-- Page Content  -->
-    <div id="content" class="p-4 p-md-5 pt-5">
-        @RenderBody()
+        <!--Side Bar-->
+        @*@Html.Partial("_AdminSideBar")*@
+        @Html.Action("AdminNavLinks", "Admin")
+
+        <!-- Page Content  -->
+        <div id="content" class="p-4 p-md-5 pt-5">
+            @RenderBody()
+        </div>
     </div>
-</div>
 
 
 @Scripts.Render("~/bundles/jquery")

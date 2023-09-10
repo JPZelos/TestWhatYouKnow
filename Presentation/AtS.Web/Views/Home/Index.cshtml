@@ -23,7 +23,7 @@
 
                         <!-- Product details-->
                         <div class="card-body p-4">
-                            <div class="text-center">
+                            <div>
                                 <!-- Product name-->
                                 <h5 class="fw-bolder">@chapter.Name</h5>
                                 <div class="small mb-1">@chapter.Topic.Customer.FirstName @chapter.Topic.Customer.LastName</div>
@@ -37,7 +37,7 @@
                         </div>
                         <!-- Add To Cart actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center">
+                            <div class="text-end">
                                 <a class="btn btn-outline-dark mt-auto" href="@Url.RouteUrl("Chapter", new { chapterId = @chapter.Id })">Λεπτομέρειες</a>
                             </div>
                         </div>

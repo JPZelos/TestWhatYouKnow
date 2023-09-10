@@ -1,0 +1,43 @@
+﻿@model List<TWYK.Core.Domain.Customer>
+@{
+    ViewBag.Title = "AdminUsers";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>AdminUsers</h2>
+
+<div class="row">
+    <h2>Categories</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Role Names</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var cat in Model) {
+            if (!cat.IsInCustomerRole(SystemCustomerRoleNames.Guests)) {
+                <tr>
+                    <th scope="row">@cat.Id</th>
+                    <td style="width: 18%;">@cat.FirstName</td>
+                    <td style="width: 18%;">@cat.LastName</td>
+                    <td style="width: 18%;">@cat.Email</td>
+                    <td style="width: 18%;">@cat.RoleNames.ToString()</td>
+                    <td style="text-align: center;">
+                        <a href="#"
+                           data-bs-toggle="tooltip"
+                           data-bs-placement="top"
+                           title="Click to Edit"><i class="bi bi-pencil-square"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+</div>

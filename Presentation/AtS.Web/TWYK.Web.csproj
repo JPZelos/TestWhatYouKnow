@@ -215,6 +215,7 @@
     <Compile Include="Models\ResultModel.cs" />
     <Compile Include="Models\ShoppingCartItemModel.cs" />
     <Compile Include="Models\ShoppingCartModel.cs" />
+    <Compile Include="Models\TeacherUsersModel.cs" />
     <Compile Include="Models\TestResultModel.cs" />
     <Compile Include="Models\TestResults.cs" />
     <Compile Include="Models\TopicModel.cs" />
@@ -230,7 +231,10 @@
     <Content Include="Content\assets\fonts\font.css" />
     <Content Include="Content\assets\images\bg.jpg" />
     <Content Include="Content\assets\images\bh-clip.png" />
+    <Content Include="Content\assets\images\header-bg.jpg" />
     <Content Include="Content\assets\images\loading.gif" />
+    <Content Include="Content\assets\images\logo-white.svg" />
+    <Content Include="Content\assets\images\logo.svg" />
     <Content Include="Content\assets\images\question-sign.png" />
     <Content Include="Content\assets\images\result.jpg" />
     <Content Include="Content\assets\images\resultinside.jpg" />
@@ -317,6 +321,10 @@
     <Content Include="Content\assets\fonts\MYRIADPRO-REGULAR.woff" />
     <Content Include="Content\assets\fonts\MYRIADPRO-SEMIBOLD.woff" />
     <Content Include="Content\assets\fonts\MYRIADPRO-SEMIBOLDIT.woff" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
     <None Include="Content\js\jquery-3.4.1.intellisense.js" />
     <Content Include="Content\js\jquery-3.4.1.js" />
     <Content Include="Content\js\jquery-3.4.1.min.js" />
@@ -386,6 +394,11 @@
     <Content Include="Views\Answer\TestResult.cshtml" />
     <Content Include="Views\Shared\_LayoutQuiz.cshtml" />
     <Content Include="Views\Answer\Results.cshtml" />
+    <Content Include="Views\Admin\ActionDenied.cshtml" />
+    <Content Include="Views\Admin\AdminUsers.cshtml" />
+    <Content Include="Views\Admin\AdminNavLinks.cshtml" />
+    <Content Include="Views\Admin\AdminTeacherUsers.cshtml" />
+    <Content Include="Views\Admin\GetUserResults.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

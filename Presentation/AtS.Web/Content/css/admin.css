@@ -55,19 +55,19 @@ a[data-bs-toggle=collapse] {
 }
 #sidebar h1 .logo {
   color: #fff;
-  background: url(../Images/ats-logo-small-w.svg) no-repeat;
+  background: url(/Content/assets/images/logo-white.svg) no-repeat;
   background-size: contain;
   display: block;
   position: relative;
-  width: 30px;
+  width: 40px;
   height: 73px;
 }
 #sidebar h1 .logo span {
   display: block;
   font-size: 1rem;
   position: relative;
-  top: -2px;
-  left: 40px;
+  top: 8px;
+  left: 45px;
   width: 100px;
 }
 #sidebar ul.components {

@@ -37,14 +37,6 @@ namespace TWYK.Services.Quizzes
 
         public List<Quiz> GetAllUserQuizs(int userId) {
             var userQuizzes = _quizRepository.Table.Where(q => q.CustomerId == userId).ToList();
-            
-            //IEnumerable<IGrouping<int, Quiz>> groups = from quiz in userQuizzes
-            //    group quiz by quiz.Chapter.TopicId;
-            
-            //List<Quiz> groupedQuizzes = new List<Quiz>();
-            //IEnumerable<Quiz> quizzes = groups.SelectMany(g => g);
-            //groupedQuizzes = quizzes.ToList();
-
             return userQuizzes;
         }
 
@@ -58,6 +50,7 @@ namespace TWYK.Services.Quizzes
             return userChapterQuizzes.Any() ? userChapterQuizzes.Max(q => q.Tries) + 1 : 1;
         }
 
+       
         /// <summary>
         /// Insert a quiz
         /// </summary>

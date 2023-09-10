@@ -1,0 +1,54 @@
+﻿@model ResultModel
+@{
+    ViewBag.Title = "GetUserResults";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>GetUserResults</h2>
+
+
+<div class="row">
+    <div class="col">
+        <h2><span>@Model.FullName</span> <span>Αποτελέσματα Ερωτηματολογίων</span>  </h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        @foreach (var topic in Model.Topics)
+        {
+            <h3><span>Μάθημα:</span> @topic.Name</h3>
+            <p>Διδάσκων: @topic.Customer.FirstName  @topic.Customer.LastName</p>
+            foreach (var chapter in topic.Chapters)
+            {
+                if (chapter.Quizzes.Count > 0)
+                {
+                    <h4><span>Κεφάλαιο:</span> @chapter.Name</h4>
+                    <p>Μια προσπάθεια θεωρείται επιτυχής εάν έχει συγκεντρώσει @chapter.PasScore ή περισσότερους πόντους</p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Αποτέλεσμα</th>
+                                <th>Πόντοι</th>
+                                <th>Προσπάθεια</th>
+                                <th>Ημ/νία</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var quiz in chapter.Quizzes)
+                            {
+                                var succesClass = quiz.Success ? "table-success" : "table-light";
+                                <tr class="@succesClass">
+                                    <td>@(quiz.Success ? "Επιτυχές":"Μη επιτυχές")</td>
+                                    <td>@quiz.Score/100 </td>
+                                    <td>@quiz.Tries</td>
+                                    <td>@quiz.LastUpdated.ToString("g")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            }
+        }
+    </div>
+</div>

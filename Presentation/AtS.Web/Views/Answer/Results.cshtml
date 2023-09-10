@@ -26,15 +26,17 @@
                             <th>Αποτέλεσμα</th>
                             <th>Πόντοι</th>
                             <th>Προσπάθεια</th>
+                            <th>Ημ/νία</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach (var quiz in chapter.Quizzes) {
-                            var succesClass = quiz.Success ? "table-success" : "table-secondary";
+                            var succesClass = quiz.Success ? "table-success" : "table-light";
                             <tr class="@succesClass">
                                 <td>@(quiz.Success ? "Επιτυχές":"Μη επιτυχές")</td>
                                 <td>@quiz.Score/100 </td>
                                 <td>@quiz.Tries</td>
+                                <td>@quiz.LastUpdated.ToString("g")</td>
                             </tr>
                         }
                         </tbody>

@@ -16,17 +16,19 @@ namespace TWYK.Services.Security
                 });
 
                 permitionRecords.Add(SystemCustomerRoleNames.Guests, new List<string> {
-                    "Catalog.List"
+                    "Catalog.List",
                 });
 
                 permitionRecords.Add(SystemCustomerRoleNames.Administrators, new List<string> {
                     "AdminPanel",
-                    "Catalog.List",
-                    "Catalog.AddProduct"
+                    "Admin.AdminUsers"
                 });
 
                 permitionRecords.Add(SystemCustomerRoleNames.Teachers, new List<string> {
-                    "AdminPanel"
+                    "AdminPanel",
+                    "Admin.TeacherUsers",
+                    "Admin.TeacherTopics",
+                    "Admin.TeacherQuestions."
                 });
 
                 permitionRecords.Add(SystemCustomerRoleNames.Students, new List<string> {
@@ -38,7 +40,7 @@ namespace TWYK.Services.Security
 
                 return permitionRecords;
             }
-        } // = new Dictionary<string, List<string>>();
+        }
 
 
         public PermissionService(IWorkContext workContext) {

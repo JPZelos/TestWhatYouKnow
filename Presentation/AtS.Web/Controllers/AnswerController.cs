@@ -119,6 +119,7 @@ namespace TWYK.Web.Controllers
 
             bool success = true;
             string message = "Success";
+            var score = 0;
 
             var quizId = queryPairs[0].Split('=')[1];
             var quiz = _quizService.GetQuizById(int.Parse(quizId));
@@ -136,11 +137,14 @@ namespace TWYK.Web.Controllers
                     var answers = _answerRepository.Table.Where(x => x.Question.Id == questionId);
                     var answered = answers.FirstOrDefault(x => x.Value == answeredValue);
                     var chapter = _chapterService.GetChapterById(question.ChapterId);
+                    
 
                     if (answered != null) {
+                        message = question.SuccessValue == answered.Value ? question.SuccessMsg : question.FaultMsg;
+                        score = question.SuccessValue == answered.Value ? question.Score : 0;
                         // Declare view model
                         var testResult = new TestResult {
-                            Score = question.SuccessValue == answered.Value ? question.Score : 0,
+                            Score = score,
                             AnswerId = answered.Id,
                             CustomerId = _workContext.CurrentCustomer.Id,
                             Success = question.SuccessValue == answered.Value,
@@ -162,7 +166,7 @@ namespace TWYK.Web.Controllers
                 }
             }
 
-            return Json(new { success, responseText = message }, JsonRequestBehavior.AllowGet);
+            return Json(new { success, responseText = message, score = score }, JsonRequestBehavior.AllowGet);
         }
     }
 }

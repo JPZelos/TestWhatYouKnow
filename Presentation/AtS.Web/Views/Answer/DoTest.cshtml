@@ -11,6 +11,7 @@
         answers.Add(ca.SuccessValue);
     }
     var allAnswers = string.Join(",", answers);
+    
 }
 <style>
     .step-bar .bar{
@@ -135,9 +136,9 @@
             <div class="p_result">
                 <div class="p_score">Ελάχιστο όριο: </div>
                 <div class="p_prcnt">
-                    80%
+                    @(Model.PasScore)%
                 </div>
-                <span>80 Πόντοι</span>
+                <span>@Model.PasScore Πόντοι</span>
             </div>
             <div class="line"></div>
             <div class="result_show">
@@ -159,6 +160,6 @@
 @section scripts {
     <script src="~/Content/assets/js/custom-2.js"></script>
     <script>
-        var quiz = $("#quiz-wrapper").Quiz({stepLenth:@Model.Questions.Count, correctAnswers: [@allAnswers]});
+        var quiz = $("#quiz-wrapper").Quiz({stepLenth:@Model.Questions.Count, correctAnswers: [@allAnswers], pasScore : @Model.PasScore});
     </script>
 }

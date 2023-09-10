@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.UI.WebControls.WebParts;
 using TWYK.Core;
 using TWYK.Core.Data;
 using TWYK.Core.Domain;
@@ -11,13 +12,16 @@ namespace TWYK.Services.Customers
     {
         #region Fields
         private readonly IRepository<Customer> _customerRepository;
+        private readonly IRepository<Quiz> _quizRepository;
+        private readonly IRepository<Chapter> _chapteRepository;
+        private readonly IRepository<Topic> _topicRepository;
 
-        public CustomerService(
-            IRepository<Customer> customerRepository
-        ) {
+        public CustomerService(IRepository<Customer> customerRepository, IRepository<Quiz> quizRepository, IRepository<Chapter> chapteRepository, IRepository<Topic> topicRepository) {
             _customerRepository = customerRepository;
+            _quizRepository = quizRepository;
+            _chapteRepository = chapteRepository;
+            _topicRepository = topicRepository; 
         }
-
 
         public bool UniqueUserName(string username) {
             if (username.IsNullOrEmpty())
@@ -25,6 +29,12 @@ namespace TWYK.Services.Customers
 
             var exists = !_customerRepository.Table.Any(c => c.UserName == username);
             return exists;
+        }
+
+        public Customer GetCustomerById(int id) {
+            if(id == 0)
+                return null;
+            return _customerRepository.GetById(id);
         }
 
         /// <summary>
@@ -66,6 +76,39 @@ namespace TWYK.Services.Customers
         public virtual IList<Customer> GetAll() {
             var query = _customerRepository.Table;
             return query.ToList();
+        }
+
+        public virtual IList<Customer> GetAllByTeacher(int teacherId)
+        {
+            /*
+            select distinct c.* from Customer c
+            inner join Quiz qz On qz.CustomerId = c.id
+            inner join Chapter cp On cp.Id = qz.ChapterId
+            inner join Topic tp On cp.TopicId = tp.Id
+            where tp.CustomerId = 2
+
+            var query = from package in context.Packages
+            join container in context.Containers on package.ContainerID equals container.ID
+            join userHasPackage in context.UserHasPackages on package.ID equals userHasPackage.PackageID
+            where userHasPackage.UserID == "SomeUser"
+            select new
+            {
+                package.ID,
+                container.Name,
+                package.Code,
+                package.Code2
+            };
+             */
+            var query = from cust in _customerRepository.Table
+                join qz in _quizRepository.Table on cust.Id equals qz.CustomerId
+                join cp in _chapteRepository.Table on qz.ChapterId equals cp.Id
+                join tp in _topicRepository.Table on cp.TopicId equals tp.Id
+                        where tp.CustomerId == teacherId
+                        select cust;
+
+            var teacherUsers = query.Distinct().ToList();
+
+            return teacherUsers;
         }
 
         /// <summary>
