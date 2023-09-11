@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TWYK.Core.Data;
 using TWYK.Core.Domain;
@@ -9,6 +10,24 @@ namespace TWYK.Services.Answers
     {
         IList<Answer> GetAllAnswers();
         Answer GetAnswerById(int answerId);
+
+        /// <summary>
+        /// Insert a answer
+        /// </summary>
+        /// <param name="answer">Answer</param>
+        void InsertAnswer(Answer answer);
+
+        /// <summary>
+        /// Updates the answer
+        /// </summary>
+        /// <param name="answer">Answer</param>
+        void UpdateAnswer(Answer answer);
+
+        /// <summary>
+        /// Deletes a answer
+        /// </summary>
+        /// <param name="answer">Answer</param>
+        void DeleteAnswer(Answer answer);
     }
 
     public class AnswerService : IAnswerService
@@ -34,5 +53,51 @@ namespace TWYK.Services.Answers
 
             return _answerRepository.GetById(answerId);
         }
+
+        #region GRUD
+
+        /// <summary>
+        /// Insert a answer
+        /// </summary>
+        /// <param name="answer">Answer</param>
+        public virtual void InsertAnswer(Answer answer)
+        {
+            if (answer == null)
+            {
+                throw new ArgumentNullException(nameof(answer));
+            }
+
+            _answerRepository.Insert(answer);
+        }
+
+        /// <summary>
+        /// Updates the answer
+        /// </summary>
+        /// <param name="answer">Answer</param>
+        public virtual void UpdateAnswer(Answer answer)
+        {
+            if (answer == null)
+            {
+                throw new ArgumentNullException(nameof(answer));
+            }
+
+            _answerRepository.Update(answer);
+        }
+
+        /// <summary>
+        /// Deletes a answer
+        /// </summary>
+        /// <param name="answer">Answer</param>
+        public virtual void DeleteAnswer(Answer answer)
+        {
+            if (answer == null)
+            {
+                throw new ArgumentNullException(nameof(answer));
+            }
+
+            _answerRepository.Delete(answer);
+        }
+
+        #endregion
     }
 }

@@ -17,12 +17,13 @@ namespace TWYK.Core.Domain
 
 
         [Column("Description")]
-        [Display(Name = "Question Description")]
+        [Display(Name = "Ερώτηση")]
+        [Required(ErrorMessage = "Η Ερώτηση είναι απαραίτητη")]
         public string Description { get; set; }
 
 
         [Column("Score")]
-        [Display(Name = "Question Score")]
+        [Display(Name = "Score")]
         public int Score { get; set; }
 
         
@@ -42,7 +43,8 @@ namespace TWYK.Core.Domain
 
 
         [Column("SuccessValue")]
-        [Display(Name = "Question Success Value")]
+        [Display(Name = "Επιτυχημένη Απάντηση")]
+        [Required(ErrorMessage = "Η Επιτυχημένη Απάντηση είναι απαραίτητη")]
         public int SuccessValue { get; set; }
 
         public virtual Chapter Chapter { get; set; }

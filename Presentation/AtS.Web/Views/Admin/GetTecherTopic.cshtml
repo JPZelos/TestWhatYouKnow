@@ -88,7 +88,7 @@
                                             <td style="width: 45%;">@chapter.Name</td>
                                             <td style="width: 45%;">@chapter.PasScore</td>
                                             <td style="text-align: center;">
-                                                <a href="#"
+                                                <a href="@Url.Action("TeacherChapter", "Admin", new { chapterId = chapter.Id })"
                                                    data-bs-toggle="tooltip"
                                                    data-bs-placement="top"
                                                    title="Click to Edit">

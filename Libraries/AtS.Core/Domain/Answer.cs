@@ -19,12 +19,14 @@ namespace TWYK.Core.Domain
 
 
         [Column("Label")]
-        [Display(Name = "Answer Label")]
+        [Display(Name = "Απάντηση")]
+        [Required(ErrorMessage = "Η Απάντηση είναι απαραίτητη")]
         public string Label { get; set; }
 
 
         [Column("Value")]
-        [Display(Name = "Answer Value")]
+        [Display(Name = "Ταυτότητα Επιτυχίας")]
+        [Required(ErrorMessage = "Η Ταυτότητα Επιτυχίας είναι απαραίτητη")]
         public int Value { get; set; }
 
         public virtual Question Question { get; set; }

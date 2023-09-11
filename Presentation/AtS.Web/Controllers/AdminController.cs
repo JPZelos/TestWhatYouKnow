@@ -221,5 +221,60 @@ namespace TWYK.Web.Controllers
         }
 
         #endregion
+
+
+        #region Chpaters
+
+        public ActionResult Questions(int chapterId)
+        {
+            if (!_permissionService.Authorize("Admin.TeacherTopics"))
+            {
+                return RedirectToRoute("ActionDenied");
+            }
+
+            var teacher = _workContext.CurrentCustomer;
+            var questions = _questionService.GetQuestionsByChapterId(chapterId);
+
+            return View(questions);
+        }
+
+        public ActionResult EditQuestion(int questionId)
+        {
+            if (!_permissionService.Authorize("Admin.TeacherTopics"))
+            {
+                return RedirectToRoute("ActionDenied");
+            }
+            var question = _questionService.GetQuestionById(questionId);
+
+            return View(question);
+        }
+
+        [HttpPost]
+        public ActionResult EditQuestion(Question model)
+        {
+            if (!_permissionService.Authorize("Admin.TeacherTopics"))
+            {
+                return RedirectToRoute("ActionDenied");
+            }
+
+            var question = _questionService.GetQuestionById(model.Id);
+
+            if (ModelState.IsValid)
+            {
+                question.Score = model.Score;
+                question.Description = model.Description;
+                question.SuccessValue = model.SuccessValue;
+
+                question.SuccessMsg = model.SuccessMsg;
+                question.FaultMsg = model.FaultMsg;
+                
+
+                _questionService.UpdateQuestion(question);
+            }
+
+            return View(question);
+        }
+
+        #endregion
     }
 }

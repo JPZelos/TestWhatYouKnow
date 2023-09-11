@@ -64,7 +64,12 @@ namespace TWYK.Web
             );
 
 
-
+            //twyn
+            routes.MapRoute(
+                name: "Questions",
+                url: "admin/Questions/{chapterId}",
+                new { controller = "Admin", action = "Questions" }
+            );
 
 
 

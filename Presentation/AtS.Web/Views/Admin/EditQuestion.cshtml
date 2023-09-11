@@ -1,6 +1,6 @@
-﻿@model Chapter
+﻿@model Question
 @{
-    ViewBag.Title = "Μάθημα";
+    ViewBag.Title = "Ερώτηση";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -9,8 +9,8 @@
     <div class="col-md-10">
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <button class="nav-link active" id="nav-topic-tab" data-bs-toggle="tab" data-bs-target="#nav-topic" type="button" role="tab" aria-controls="nav-topic" aria-selected="true">Μάθημα</button>
-                <button class="nav-link" id="nav-questions-tab" data-bs-toggle="tab" data-bs-target="#nav-questions" type="button" role="tab" aria-controls="nav-questions" aria-selected="false">Ερωτήσεις</button>
+                <button class="nav-link active" id="nav-topic-tab" data-bs-toggle="tab" data-bs-target="#nav-topic" type="button" role="tab" aria-controls="nav-topic" aria-selected="true">Ερώτηση</button>
+                <button class="nav-link" id="nav-chapters-tab" data-bs-toggle="tab" data-bs-target="#nav-chapters" type="button" role="tab" aria-controls="nav-chapters" aria-selected="false">Απαντήσεις</button>
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -22,7 +22,7 @@
                         <div class="card">
 
                             <div class="card-header">
-                                <h3 class="card-title">Μάθημα: @Model.Name</h3>
+                                <h3 class="card-title">Ερώτηση: @Model.Description</h3>
                                 <div class="card-options">
                                     <button type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέα Ερώτηση">
                                         <i class="bi bi-plus-square"></i>
@@ -35,26 +35,36 @@
                                 {
                                     @Html.AntiForgeryToken()
                                     @Html.HiddenFor(m => m.Id)
-
-                                    <div class="col-md-6">
-                                        @Html.LabelFor(m => m.Name, new { @class = "form-label" })
-                                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.Name)
-                                    </div>
-                                    <div class="col-md-6">
-                                        @Html.LabelFor(m => m.PasScore, new { @class = "form-label" })
-                                        @Html.TextBoxFor(m => m.PasScore, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.PasScore)
-                                    </div>
-
-
                                     <div class="col-md-12">
                                         @Html.LabelFor(m => m.Description, new { @class = "form-label" })
-                                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", cols = 80, rows = 10 })
+                                        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
                                         @Html.ValidationMessageFor(m => m.Description)
                                     </div>
 
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(m => m.SuccessValue, new { @class = "form-label" })
+                                        @Html.TextBoxFor(m => m.SuccessValue, new { @class = "form-control", cols = 80, rows = 10 })
+                                        @Html.ValidationMessageFor(m => m.SuccessValue)
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(m => m.Score, new { @class = "form-label" })
+                                        @Html.TextBoxFor(m => m.Score, new { @class = "form-control", cols = 80, rows = 10 })
+                                        @Html.ValidationMessageFor(m => m.Score)
+                                    </div>
+
                                     <div class="col-md-12">
+                                        @Html.LabelFor(m => m.SuccessMsg, new { @class = "form-label" })
+                                        @Html.TextBoxFor(m => m.SuccessMsg, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.SuccessMsg)
+                                    </div>
+                                    <div class="col-md-12">
+                                        @Html.LabelFor(m => m.FaultMsg, new { @class = "form-label" })
+                                        @Html.TextBoxFor(m => m.FaultMsg, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.FaultMsg)
+                                    </div>
+
+                                    <div class="col-md-6">
                                         <button class="btn btn-primary">Απόθήκευση</button>
                                     </div>
                                 }
@@ -65,15 +75,15 @@
                 </div>
 
             </div>
-            <div class="tab-pane fade" id="nav-questions" role="tabpanel" aria-labelledby="nav-questions-tab">
+            <div class="tab-pane fade" id="nav-chapters" role="tabpanel" aria-labelledby="nav-chapters-tab">
                 <div class="row justify-content-center">
 
                     <div class="col">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Ερωτήσεις</h3>
+                                <h3 class="card-title">Απαντήσεις</h3>
                                 <div class="card-options">
-                                    <button type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέα Ερώτηση">
+                                    <button type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέο Μάθημα">
                                         <i class="bi bi-plus-square"></i>
                                     </button>
                                 </div>
@@ -84,22 +94,20 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Ερώτηση</th>
-                                            <th scope="col">Score</th>
-                                            <th scope="col">Πόντοι επιτυχίας</th>
+                                            <th scope="col">Απάντηση</th>
+                                            <th scope="col">Ταυτότητα Επιτυχίας</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (var question in Model.Questions)
+                                        @foreach (var answer in Model.Answers)
                                         {
                                             <tr>
-                                                <th scope="row">@question.Id</th>
-                                                <td style="width: 33%;">@question.Description</td>
-                                                <td style="width: 33%;">@question.Score</td>
-                                                <td style="width: 33%;">@question.SuccessValue</td>
+                                                <th scope="row">@answer.Id</th>
+                                                <td style="width: 45%;">@answer.Label</td>
+                                                <td style="width: 45%;">@answer.Value</td>
                                                 <td style="text-align: center;">
-                                                    <a href="@Url.Action("EditQuestion", "Admin", new { questionId = question.Id })"
+                                                    <a href="#"
                                                        data-bs-toggle="tooltip"
                                                        data-bs-placement="top"
                                                        title="Click to Edit">
@@ -121,8 +129,6 @@
 
 
 @section scripts {
-    <script src="~/scripts/tinymce/tinymce.js"></script>
-    <script src="~/scripts/tinymce/tinymce-init.js"></script>
     <script>
 
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))

@@ -1,6 +1,6 @@
-﻿@model List<Topic>
+﻿@model List<Question>
 @{
-    ViewBag.Title = "GetTecherTopics";
+    ViewBag.Title = "Ερωτήσεις";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -8,9 +8,9 @@
     <div class="col">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Μαθήματα</h3>
+                <h3 class="card-title">Ερωτήσεις</h3>
                 <div class="card-options">
-                    <button type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέο Μάθημα">
+                    <button type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέα Ερώτηση">
                         <i class="bi bi-plus-square"></i>
                     </button>
                 </div>
@@ -20,19 +20,19 @@
                 <table class="table table-striped">
                     <thead>
                     <tr>
+                        <th>Ερώτηση</th>
                         <th>Μάθημα</th>
-                        <th>Καθηγητής</th>
                         <th>Ενέργεις</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach (var tp in Model)
+                    @foreach (var question in Model)
                     {
                         <tr>
-                            <td>@tp.Name</td>
-                            <td>@tp.Customer.FirstName @tp.Customer.LastName</td>
+                            <td>@question.Name</td>
+                            <td>@question.</td>
                             <td style="text-align: center;">
-                                <a href="@Url.Action("GetTecherTopic","Admin", new {topicId = tp.Id})"
+                                <a href="@Url.Action("GetTecherTopic","Admin", new {topicId = question.Id})"
                                    data-bs-toggle="tooltip"
                                    data-bs-placement="top"
                                    title="Click to Edit">
