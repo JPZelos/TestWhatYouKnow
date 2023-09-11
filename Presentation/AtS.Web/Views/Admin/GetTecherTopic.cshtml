@@ -26,60 +26,7 @@
         border: 1px solid gray;
         cursor: pointer;
     }
-
-
-
-
-
-    figure.image {
-        display: inline-block;
-        border: 1px solid gray;
-        margin: 0 2px 0 1px;
-        background: #f5f2f0;
-    }
-
-    figure.align-left {
-        float: left;
-    }
-
-    figure.align-right {
-        float: right;
-    }
-
-    figure.image img {
-        margin: 8px 8px 0 8px;
-    }
-
-    figure.image figcaption {
-        margin: 6px 8px 6px 8px;
-        text-align: center;
-    }
-
-    /*
- Alignment using classes rather than inline styles
- check out the "formats" option
-*/
-
-    img.align-left {
-        float: left;
-    }
-
-    img.align-right {
-        float: right;
-    }
-
-    /* Basic styles for Table of Contents plugin (tableofcontents) */
-    .mce-toc {
-        border: 1px solid gray;
-    }
-
-        .mce-toc h2 {
-            margin: 4px;
-        }
-
-        .mce-toc li {
-            list-style-type: none;
-        }
+    
 </style>
 
 
@@ -109,8 +56,7 @@
                             </div>
 
                             <div class="card-body">
-                                @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "row" }))
-                                {
+                                @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "row" })) {
                                     @Html.HiddenFor(m => m.Id)
                                     <div class="mb-3">
                                         @Html.LabelFor(m => m.Name, new { @class = "form-label" })
@@ -152,30 +98,29 @@
                             <div class="card-body">
                                 <table class="table table-striped">
                                     <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Κεφάλαιο</th>
-                                            <th scope="col">Ελάχιστο Score</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Κεφάλαιο</th>
+                                        <th scope="col">Ελάχιστο Score</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (var chapter in Model.Chapters)
-                                        {
-                                            <tr>
-                                                <th scope="row">@chapter.Id</th>
-                                                <td style="width: 45%;">@chapter.Name</td>
-                                                <td style="width: 45%;">@chapter.PasScore</td>
-                                                <td style="text-align: center;">
-                                                    <a href="#"
-                                                       data-bs-toggle="tooltip"
-                                                       data-bs-placement="top"
-                                                       title="Click to Edit">
-                                                        <i class="bi bi-pencil-square"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        }
+                                    @foreach (var chapter in Model.Chapters) {
+                                        <tr>
+                                            <th scope="row">@chapter.Id</th>
+                                            <td style="width: 45%;">@chapter.Name</td>
+                                            <td style="width: 45%;">@chapter.PasScore</td>
+                                            <td style="text-align: center;">
+                                                <a href="#"
+                                                   data-bs-toggle="tooltip"
+                                                   data-bs-placement="top"
+                                                   title="Click to Edit">
+                                                    <i class="bi bi-pencil-square"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
                                     </tbody>
                                 </table>
                             </div>
@@ -188,25 +133,15 @@
 </div>
 
 
-
-
-
-
-
 @section scripts {
     <script src="~/scripts/tinymce/tinymce.js"></script>
     <script src="~/scripts/tinymce/tinymce-init.js"></script>
     <script>
 
-        
-
-       
-
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl)
-        })
-    
+        })   
     
     </script>
 }
