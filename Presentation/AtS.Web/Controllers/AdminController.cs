@@ -157,5 +157,24 @@ namespace TWYK.Web.Controllers
 
             return View(topic);
         }
+
+        [HttpPost]
+        public ActionResult GetTecherTopic(Topic model)
+        {
+            if (!_permissionService.Authorize("Admin.TeacherTopics")) {
+                return RedirectToRoute("ActionDenied");
+            }
+            var teacher = _workContext.CurrentCustomer;
+            var topic = _topicService.GetTopicById(model.Id);
+
+            topic.Name = model.Name;
+            topic.Description = model.Description;
+            _topicService.UpdateTopic(topic);
+
+
+            return View(topic);
+        }
+
+
     }
 }

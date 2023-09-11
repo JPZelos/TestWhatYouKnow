@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TWYK.Core.Data;
 using TWYK.Core.Domain;
@@ -10,6 +11,24 @@ namespace TWYK.Services.Topics
         IList<Topic> GetAllTopics();
         Topic GetTopicById(int topicId);
         List<Topic> GetTopicByUserId(int userId);
+
+        /// <summary>
+        /// Insert a topic
+        /// </summary>
+        /// <param name="topic">Topic</param>
+        void InsertTopic(Topic topic);
+
+        /// <summary>
+        /// Updates the topic
+        /// </summary>
+        /// <param name="topic">Topic</param>
+        void UpdateTopic(Topic topic);
+
+        /// <summary>
+        /// Deletes a topic
+        /// </summary>
+        /// <param name="topic">Topic</param>
+        void DeleteTopic(Topic topic);
     }
 
     public class TopicService : ITopicService
@@ -39,6 +58,48 @@ namespace TWYK.Services.Topics
 
             var topics = _topicRepository.Table.Where(tp => tp.CustomerId == userId).ToList();
             return topics;
+        }
+
+        /// <summary>
+        /// Insert a topic
+        /// </summary>
+        /// <param name="topic">Topic</param>
+        public virtual void InsertTopic(Topic topic)
+        {
+            if (topic == null)
+            {
+                throw new ArgumentNullException(nameof(topic));
+            }
+
+            _topicRepository.Insert(topic);
+        }
+
+        /// <summary>
+        /// Updates the topic
+        /// </summary>
+        /// <param name="topic">Topic</param>
+        public virtual void UpdateTopic(Topic topic)
+        {
+            if (topic == null)
+            {
+                throw new ArgumentNullException(nameof(topic));
+            }
+
+            _topicRepository.Update(topic);
+        }
+
+        /// <summary>
+        /// Deletes a topic
+        /// </summary>
+        /// <param name="topic">Topic</param>
+        public virtual void DeleteTopic(Topic topic)
+        {
+            if (topic == null)
+            {
+                throw new ArgumentNullException(nameof(topic));
+            }
+
+            _topicRepository.Delete(topic);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace TWYK.Core.Domain
 {
@@ -21,12 +22,13 @@ namespace TWYK.Core.Domain
         public int CustomerId { get; set; }
         
         [Column("Name")]
-        [Display(Name = "Topic Name")]
+        [Display(Name = "Τίτλος")]
         public string Name { get; set; }
 
 
         [Column("Description")]
-        [Display(Name = "Topic Description")]
+        [Display(Name = "Περιγραφή")]
+        [AllowHtml]
         public string Description { get; set; }
 
         public virtual Customer Customer { get; set; }
