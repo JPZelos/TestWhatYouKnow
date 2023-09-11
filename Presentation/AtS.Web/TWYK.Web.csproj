@@ -559,6 +559,8 @@
     <Content Include="Views\Admin\GetTecherTopics.cshtml" />
     <Content Include="Views\Admin\GetTecherTopic.cshtml" />
     <Content Include="scripts\tinymce\langs\README.md" />
+    <Content Include="Views\Admin\TeacherChapters.cshtml" />
+    <Content Include="Views\Admin\TeacherChapter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="scripts\tinymce\tinymce.d.ts" />

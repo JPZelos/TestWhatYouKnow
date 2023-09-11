@@ -56,6 +56,13 @@ namespace TWYK.Web
                 new { controller = "Admin", action = "GetTecherTopics" }
             );
 
+            //twyn
+            routes.MapRoute(
+                name: "TeacherChapters",
+                url: "admin/TeacherChapters",
+                new { controller = "Admin", action = "TeacherChapters" }
+            );
+
 
 
 

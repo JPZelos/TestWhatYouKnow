@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<div class="row">
+@*<div class="row">
     <div class="col">
         <h2>Μαθήματα</h2>
         <table class="table">
@@ -30,6 +30,52 @@
             }
             </tbody>
         </table>
+    </div>
+
+</div>*@
+
+
+<div class="row justify-content-center">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Μαθήματα</h3>
+                <div class="card-options">
+                    <button type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέο Μάθημα">
+                        <i class="bi bi-plus-square"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Μάθημα</th>
+                        <th>Καθηγητής</th>
+                        <th>Ενέργεις</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var tp in Model)
+                    {
+                        <tr>
+                            <td>@tp.Name</td>
+                            <td>@tp.Customer.FirstName @tp.Customer.LastName</td>
+                            <td style="text-align: center;">
+                                <a href="@Url.Action("GetTecherTopic","Admin", new {topicId = tp.Id})"
+                                   data-bs-toggle="tooltip"
+                                   data-bs-placement="top"
+                                   title="Click to Edit">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
 </div>

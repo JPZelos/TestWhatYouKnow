@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace TWYK.Core.Domain
 {
@@ -23,15 +24,20 @@ namespace TWYK.Core.Domain
 
 
         [Column("Name")]
-        [Display(Name = "Chapter Name")]
+        [Display(Name = "Τίτλος")]
+        [Required(ErrorMessage = "Ο Τίτλος είναι απαραίτητος")]
         public string Name { get; set; }
 
 
         [Column("Description")]
         [Display(Name = "Chapter Description")]
+        [AllowHtml]
         public string Description { get; set; }
 
 
+        [Column("PasScore")]
+        [Display(Name = "Βάση Επιτυχίας")]
+        [Required(ErrorMessage = "Η Βάση Επιτυχίας είναι απαραίτητη")]
         public int PasScore { get; set; } = 50;
 
 

@@ -1,6 +1,6 @@
-﻿@model Topic
+﻿@model Chapter
 @{
-    ViewBag.Title = "Κεφάλαιο";
+    ViewBag.Title = "Μάθημα";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -10,7 +10,7 @@
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <button class="nav-link active" id="nav-topic-tab" data-bs-toggle="tab" data-bs-target="#nav-topic" type="button" role="tab" aria-controls="nav-topic" aria-selected="true">Μάθημα</button>
-                <button class="nav-link" id="nav-chapters-tab" data-bs-toggle="tab" data-bs-target="#nav-chapters" type="button" role="tab" aria-controls="nav-chapters" aria-selected="false">Κεφάλαια</button>
+                <button class="nav-link" id="nav-questions-tab" data-bs-toggle="tab" data-bs-target="#nav-questions" type="button" role="tab" aria-controls="nav-questions" aria-selected="false">Ερωτήσεις</button>
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -24,29 +24,37 @@
                             <div class="card-header">
                                 <h3 class="card-title">Μάθημα: @Model.Name</h3>
                                 <div class="card-options">
-                                    <button type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέο Μάθημα">
+                                    <button type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέα Ερώτηση">
                                         <i class="bi bi-plus-square"></i>
                                     </button>
                                 </div>
                             </div>
 
                             <div class="card-body">
-                                @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "row" })) {
+                                @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "row g-3" }))
+                                {
                                     @Html.AntiForgeryToken()
                                     @Html.HiddenFor(m => m.Id)
-                                    <div class="mb-3">
+
+                                    <div class="col-md-6">
                                         @Html.LabelFor(m => m.Name, new { @class = "form-label" })
                                         @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
                                         @Html.ValidationMessageFor(m => m.Name)
                                     </div>
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(m => m.PasScore, new { @class = "form-label" })
+                                        @Html.TextBoxFor(m => m.PasScore, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.PasScore)
+                                    </div>
 
-                                    <div class="mb-3">
+
+                                    <div class="col-md-12">
                                         @Html.LabelFor(m => m.Description, new { @class = "form-label" })
                                         @Html.TextAreaFor(m => m.Description, new { @class = "form-control", cols = 80, rows = 10 })
                                         @Html.ValidationMessageFor(m => m.Description)
                                     </div>
 
-                                    <div class="mb-3">
+                                    <div class="col-md-12">
                                         <button class="btn btn-primary">Απόθήκευση</button>
                                     </div>
                                 }
@@ -57,15 +65,15 @@
                 </div>
 
             </div>
-            <div class="tab-pane fade" id="nav-chapters" role="tabpanel" aria-labelledby="nav-chapters-tab">
+            <div class="tab-pane fade" id="nav-questions" role="tabpanel" aria-labelledby="nav-questions-tab">
                 <div class="row justify-content-center">
 
                     <div class="col">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Κεφάλαια</h3>
+                                <h3 class="card-title">Ερωτήσεις</h3>
                                 <div class="card-options">
-                                    <button type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέο Μάθημα">
+                                    <button type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέα Ερώτηση">
                                         <i class="bi bi-plus-square"></i>
                                     </button>
                                 </div>
@@ -74,29 +82,32 @@
                             <div class="card-body">
                                 <table class="table table-striped">
                                     <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Κεφάλαιο</th>
-                                        <th scope="col">Ελάχιστο Score</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Ερώτηση</th>
+                                            <th scope="col">Score</th>
+                                            <th scope="col">Πόντοι επιτυχίας</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach (var chapter in Model.Chapters) {
-                                        <tr>
-                                            <th scope="row">@chapter.Id</th>
-                                            <td style="width: 45%;">@chapter.Name</td>
-                                            <td style="width: 45%;">@chapter.PasScore</td>
-                                            <td style="text-align: center;">
-                                                <a href="#"
-                                                   data-bs-toggle="tooltip"
-                                                   data-bs-placement="top"
-                                                   title="Click to Edit">
-                                                    <i class="bi bi-pencil-square"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    }
+                                        @foreach (var question in Model.Questions)
+                                        {
+                                            <tr>
+                                                <th scope="row">@question.Id</th>
+                                                <td style="width: 33%;">@question.Description</td>
+                                                <td style="width: 33%;">@question.Score</td>
+                                                <td style="width: 33%;">@question.SuccessValue</td>
+                                                <td style="text-align: center;">
+                                                    <a href="#"
+                                                       data-bs-toggle="tooltip"
+                                                       data-bs-placement="top"
+                                                       title="Click to Edit">
+                                                        <i class="bi bi-pencil-square"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
                                     </tbody>
                                 </table>
                             </div>
@@ -117,7 +128,7 @@
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl)
-        })   
-    
+        })
+
     </script>
 }

@@ -90,7 +90,6 @@ namespace TWYK.Web.Controllers
 
             var model = new TeacherUsersModel();
             model.Teacher = customer;
-            
 
             var students = _customerService.GetAllByTeacher(customer.Id);
             model.Students = students.ToList();
@@ -118,7 +117,6 @@ namespace TWYK.Web.Controllers
                 var chapterIds = userQuizzes.Select(q => q.ChapterId).Distinct().ToList();
 
                 if (topic.CustomerId == teacherId) {
-
                     foreach (var chapterId in chapterIds) {
                         var chapterModel = _chapterService.GetChapterById(chapterId).ToModel();
                         chapterModel.Quizzes = userQuizzes.Where(q => q.ChapterId == chapterId).ToList();
@@ -134,36 +132,36 @@ namespace TWYK.Web.Controllers
             return View(model);
         }
 
+        #region Topics
+
         public ActionResult GetTecherTopics() {
             if (!_permissionService.Authorize("Admin.TeacherTopics")) {
                 return RedirectToRoute("ActionDenied");
             }
+
             var teacher = _workContext.CurrentCustomer;
             var topics = _topicService.GetTopicByUserId(teacher.Id);
-
 
             return View(topics);
         }
 
-        public ActionResult GetTecherTopic(int topicId)
-        {
-            if (!_permissionService.Authorize("Admin.TeacherTopics"))
-            {
+        public ActionResult GetTecherTopic(int topicId) {
+            if (!_permissionService.Authorize("Admin.TeacherTopics")) {
                 return RedirectToRoute("ActionDenied");
             }
+
             var teacher = _workContext.CurrentCustomer;
             var topic = _topicService.GetTopicById(topicId);
-
 
             return View(topic);
         }
 
         [HttpPost]
-        public ActionResult GetTecherTopic(Topic model)
-        {
+        public ActionResult GetTecherTopic(Topic model) {
             if (!_permissionService.Authorize("Admin.TeacherTopics")) {
                 return RedirectToRoute("ActionDenied");
             }
+
             var topic = _topicService.GetTopicById(model.Id);
             var teacher = _workContext.CurrentCustomer;
 
@@ -176,6 +174,52 @@ namespace TWYK.Web.Controllers
             return View(topic);
         }
 
+        #endregion
 
+        #region Chpaters
+
+        public ActionResult TeacherChapters() {
+            if (!_permissionService.Authorize("Admin.TeacherTopics")) {
+                return RedirectToRoute("ActionDenied");
+            }
+
+            var teacher = _workContext.CurrentCustomer;
+            var chapters = _chapterService.GetChaptersByUserId(teacher.Id);
+
+            return View(chapters);
+        }
+
+        public ActionResult TeacherChapter(int chapterId)
+        {
+            if (!_permissionService.Authorize("Admin.TeacherTopics"))
+            {
+                return RedirectToRoute("ActionDenied");
+            }
+
+            var teacher = _workContext.CurrentCustomer;
+            var chapter = _chapterService.GetChapterById(chapterId);
+
+            return View(chapter);
+        }
+
+        [HttpPost]
+        public ActionResult TeacherChapter(Chapter model) {
+            if (!_permissionService.Authorize("Admin.TeacherTopics")) {
+                return RedirectToRoute("ActionDenied");
+            }
+
+            var chapter = _chapterService.GetChapterById(model.Id);
+
+            if (ModelState.IsValid) {
+                chapter.Name = model.Name;
+                chapter.Description = model.Description;
+                chapter.PasScore = model.PasScore;
+                _chapterService.UpdateChapter(chapter);
+            }
+
+            return View(chapter);
+        }
+
+        #endregion
     }
 }
