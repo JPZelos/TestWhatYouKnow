@@ -505,6 +505,7 @@
     <Content Include="scripts\tinymce\skins\ui\tinymce-5\skin.shadowdom.min.css" />
     <Content Include="scripts\tinymce\themes\silver\theme.js" />
     <Content Include="scripts\tinymce\themes\silver\theme.min.js" />
+    <Content Include="scripts\tinymce\tinymce-init.js" />
     <Content Include="scripts\tinymce\tinymce.js" />
     <Content Include="scripts\tinymce\tinymce.min.js" />
     <Content Include="Web.config" />
