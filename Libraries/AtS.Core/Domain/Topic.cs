@@ -23,6 +23,7 @@ namespace TWYK.Core.Domain
         
         [Column("Name")]
         [Display(Name = "Τίτλος")]
+        [Required(ErrorMessage = "Ο Τίτλος είναι απαραίτητος")]
         public string Name { get; set; }
 
 
