@@ -35,6 +35,7 @@
                                 {
                                     @Html.AntiForgeryToken()
                                     @Html.HiddenFor(m => m.Id)
+                                    @Html.HiddenFor(m => m.TopicId)
 
                                     <div class="col-md-6">
                                         @Html.LabelFor(m => m.Name, new { @class = "form-label" })

@@ -23,6 +23,7 @@
                     <thead>
                         <tr>
                             <th>Κεφάλαιο</th>
+                            <th>Μάθημα</th>
                             <th>Καθηγητής</th>
                             <th>Ενέργεις</th>
                         </tr>
@@ -32,6 +33,7 @@
                         {
                             <tr>
                                 <td>@cp.Name</td>
+                                <td>@cp.Topic.Name</td>
                                 <td>@cp.Topic.Customer.FirstName @cp.Topic.Customer.LastName</td>
                                 <td style="text-align: center;">
                                     <a href="@Url.Action("TeacherChapter", "Admin", new { chapterId = cp.Id })"

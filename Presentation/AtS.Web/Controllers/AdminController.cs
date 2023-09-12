@@ -45,6 +45,9 @@ namespace TWYK.Web.Controllers
         }
 
         // GET: Admin
+
+        #region Common
+
         public ActionResult Index() {
             return View();
         }
@@ -71,6 +74,8 @@ namespace TWYK.Web.Controllers
         public ActionResult ActionDenied() {
             return View();
         }
+
+        #endregion
 
         public ActionResult AdminUsers() {
             if (!_permissionService.Authorize("Admin.AdminUsers")) {
@@ -150,8 +155,16 @@ namespace TWYK.Web.Controllers
                 return RedirectToRoute("ActionDenied");
             }
 
+            Topic topic;
+
             var teacher = _workContext.CurrentCustomer;
-            var topic = _topicService.GetTopicById(topicId);
+            
+            if (topicId == 0) {
+                topic = new Topic();
+            }
+            else {
+                topic = _topicService.GetTopicById(topicId);
+            }
 
             return View(topic);
         }
@@ -161,14 +174,27 @@ namespace TWYK.Web.Controllers
             if (!_permissionService.Authorize("Admin.TeacherTopics")) {
                 return RedirectToRoute("ActionDenied");
             }
-
-            var topic = _topicService.GetTopicById(model.Id);
             var teacher = _workContext.CurrentCustomer;
+
+            Topic topic;
+            if (model.Id != 0) {
+                topic = _topicService.GetTopicById(model.Id);
+            }
+            else {
+                topic = model;
+            }
 
             if (ModelState.IsValid) {
                 topic.Name = model.Name;
                 topic.Description = model.Description;
-                _topicService.UpdateTopic(topic);
+                if (model.Id != 0) {
+                    _topicService.UpdateTopic(topic);
+                }
+                else {
+                    topic.CustomerId = teacher.Id;
+                    _topicService.InsertTopic(topic);
+                }
+                
             }
 
             return View(topic);
@@ -189,15 +215,21 @@ namespace TWYK.Web.Controllers
             return View(chapters);
         }
 
-        public ActionResult TeacherChapter(int chapterId)
+        public ActionResult TeacherChapter(int chapterId, int topicId=0)
         {
             if (!_permissionService.Authorize("Admin.TeacherTopics"))
             {
                 return RedirectToRoute("ActionDenied");
             }
 
-            var teacher = _workContext.CurrentCustomer;
-            var chapter = _chapterService.GetChapterById(chapterId);
+            Chapter chapter;
+            if(chapterId != 0)
+                chapter = _chapterService.GetChapterById(chapterId);
+            else {
+                chapter = new Chapter {
+                    TopicId = topicId
+                };
+            }
 
             return View(chapter);
         }
@@ -208,22 +240,32 @@ namespace TWYK.Web.Controllers
                 return RedirectToRoute("ActionDenied");
             }
 
-            var chapter = _chapterService.GetChapterById(model.Id);
+            Chapter chapter;
+            if (model.Id != 0)
+                chapter = _chapterService.GetChapterById(model.Id);
+            else {
+                chapter = new Chapter {
+                    TopicId = model.TopicId
+                };
+            }
 
             if (ModelState.IsValid) {
                 chapter.Name = model.Name;
                 chapter.Description = model.Description;
                 chapter.PasScore = model.PasScore;
-                _chapterService.UpdateChapter(chapter);
+                if (model.Id != 0)
+                    _chapterService.UpdateChapter(chapter);
+                else {
+                    _chapterService.InsertChapter(chapter);
+                }
             }
 
             return View(chapter);
         }
 
         #endregion
-
-
-        #region Chpaters
+        
+        #region Questions
 
         public ActionResult Questions(int chapterId)
         {
