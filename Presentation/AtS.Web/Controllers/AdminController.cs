@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Web.Mvc;
 using TWYK.Core;
@@ -273,6 +274,7 @@ namespace TWYK.Web.Controllers
             {
                 return RedirectToRoute("ActionDenied");
             }
+            
 
             var teacher = _workContext.CurrentCustomer;
             var questions = _questionService.GetQuestionsByChapterId(chapterId);
@@ -280,13 +282,22 @@ namespace TWYK.Web.Controllers
             return View(questions);
         }
 
-        public ActionResult EditQuestion(int questionId)
+        public ActionResult EditQuestion(int questionId, int chapterId = 0)
         {
             if (!_permissionService.Authorize("Admin.TeacherTopics"))
             {
                 return RedirectToRoute("ActionDenied");
             }
-            var question = _questionService.GetQuestionById(questionId);
+
+            Question question;
+            if (questionId != 0) {
+                question = _questionService.GetQuestionById(questionId);
+            }
+            else {
+                question = new Question {
+                    ChapterId = chapterId
+                };
+            }
 
             return View(question);
         }
@@ -299,7 +310,21 @@ namespace TWYK.Web.Controllers
                 return RedirectToRoute("ActionDenied");
             }
 
-            var question = _questionService.GetQuestionById(model.Id);
+            Question question;
+            
+            if (model.Id != 0) 
+                question = _questionService.GetQuestionById(model.Id);
+            else {
+                question = new Question {
+                    ChapterId = model.ChapterId,
+                    Description = model.Description,
+                    Score = model.Score,
+                    SuccessValue = model.SuccessValue,
+                    FaultMsg = model.FaultMsg,
+                    SuccessMsg = model.SuccessMsg,
+                };
+                _questionService.InsertQuestion(question);
+            }
 
             if (ModelState.IsValid)
             {
