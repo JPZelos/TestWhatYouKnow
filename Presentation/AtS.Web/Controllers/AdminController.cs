@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Web.Mvc;
 using TWYK.Core;
 using TWYK.Core.Domain;
+using TWYK.Services.Answers;
 using TWYK.Services.Chapters;
 using TWYK.Services.Customers;
 using TWYK.Services.Questions;
@@ -25,6 +25,7 @@ namespace TWYK.Web.Controllers
         private readonly ITopicService _topicService;
         private readonly IChapterService _chapterService;
         private readonly IQuestionService _questionService;
+        private readonly IAnswerService _answerService;
         private readonly IQuizService _quizService;
 
         public AdminController(
@@ -34,6 +35,7 @@ namespace TWYK.Web.Controllers
             ITopicService topicService,
             IChapterService chapterService,
             IQuestionService questionService,
+            IAnswerService answerService,
             IQuizService quizService
         ) {
             _workContext = workContext;
@@ -42,6 +44,7 @@ namespace TWYK.Web.Controllers
             _topicService = topicService;
             _chapterService = chapterService;
             _questionService = questionService;
+            _answerService = answerService;
             _quizService = quizService;
         }
 
@@ -159,7 +162,7 @@ namespace TWYK.Web.Controllers
             Topic topic;
 
             var teacher = _workContext.CurrentCustomer;
-            
+
             if (topicId == 0) {
                 topic = new Topic();
             }
@@ -175,6 +178,7 @@ namespace TWYK.Web.Controllers
             if (!_permissionService.Authorize("Admin.TeacherTopics")) {
                 return RedirectToRoute("ActionDenied");
             }
+
             var teacher = _workContext.CurrentCustomer;
 
             Topic topic;
@@ -195,7 +199,6 @@ namespace TWYK.Web.Controllers
                     topic.CustomerId = teacher.Id;
                     _topicService.InsertTopic(topic);
                 }
-                
             }
 
             return View(topic);
@@ -216,16 +219,15 @@ namespace TWYK.Web.Controllers
             return View(chapters);
         }
 
-        public ActionResult TeacherChapter(int chapterId, int topicId=0)
-        {
-            if (!_permissionService.Authorize("Admin.TeacherTopics"))
-            {
+        public ActionResult TeacherChapter(int chapterId, int topicId = 0) {
+            if (!_permissionService.Authorize("Admin.TeacherTopics")) {
                 return RedirectToRoute("ActionDenied");
             }
 
             Chapter chapter;
-            if(chapterId != 0)
+            if (chapterId != 0) {
                 chapter = _chapterService.GetChapterById(chapterId);
+            }
             else {
                 chapter = new Chapter {
                     TopicId = topicId
@@ -242,8 +244,9 @@ namespace TWYK.Web.Controllers
             }
 
             Chapter chapter;
-            if (model.Id != 0)
+            if (model.Id != 0) {
                 chapter = _chapterService.GetChapterById(model.Id);
+            }
             else {
                 chapter = new Chapter {
                     TopicId = model.TopicId
@@ -254,8 +257,9 @@ namespace TWYK.Web.Controllers
                 chapter.Name = model.Name;
                 chapter.Description = model.Description;
                 chapter.PasScore = model.PasScore;
-                if (model.Id != 0)
+                if (model.Id != 0) {
                     _chapterService.UpdateChapter(chapter);
+                }
                 else {
                     _chapterService.InsertChapter(chapter);
                 }
@@ -265,16 +269,13 @@ namespace TWYK.Web.Controllers
         }
 
         #endregion
-        
+
         #region Questions
 
-        public ActionResult Questions(int chapterId)
-        {
-            if (!_permissionService.Authorize("Admin.TeacherTopics"))
-            {
+        public ActionResult Questions(int chapterId) {
+            if (!_permissionService.Authorize("Admin.TeacherTopics")) {
                 return RedirectToRoute("ActionDenied");
             }
-            
 
             var teacher = _workContext.CurrentCustomer;
             var questions = _questionService.GetQuestionsByChapterId(chapterId);
@@ -282,10 +283,8 @@ namespace TWYK.Web.Controllers
             return View(questions);
         }
 
-        public ActionResult EditQuestion(int questionId, int chapterId = 0)
-        {
-            if (!_permissionService.Authorize("Admin.TeacherTopics"))
-            {
+        public ActionResult EditQuestion(int questionId, int chapterId = 0) {
+            if (!_permissionService.Authorize("Admin.TeacherTopics")) {
                 return RedirectToRoute("ActionDenied");
             }
 
@@ -303,17 +302,16 @@ namespace TWYK.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditQuestion(Question model)
-        {
-            if (!_permissionService.Authorize("Admin.TeacherTopics"))
-            {
+        public ActionResult EditQuestion(Question model) {
+            if (!_permissionService.Authorize("Admin.TeacherTopics")) {
                 return RedirectToRoute("ActionDenied");
             }
 
             Question question;
-            
-            if (model.Id != 0) 
+
+            if (model.Id != 0) {
                 question = _questionService.GetQuestionById(model.Id);
+            }
             else {
                 question = new Question {
                     ChapterId = model.ChapterId,
@@ -326,20 +324,87 @@ namespace TWYK.Web.Controllers
                 _questionService.InsertQuestion(question);
             }
 
-            if (ModelState.IsValid)
-            {
-                question.Score = model.Score;
-                question.Description = model.Description;
-                question.SuccessValue = model.SuccessValue;
+            if (ModelState.IsValid) {
+                if (model.Id != 0) {
+                    question.Score = model.Score;
+                    question.Description = model.Description;
+                    question.SuccessValue = model.SuccessValue;
+                    question.SuccessMsg = model.SuccessMsg;
+                    question.FaultMsg = model.FaultMsg;
 
-                question.SuccessMsg = model.SuccessMsg;
-                question.FaultMsg = model.FaultMsg;
+                    _questionService.UpdateQuestion(question);
+                }
                 
-
-                _questionService.UpdateQuestion(question);
             }
 
             return View(question);
+        }
+
+        #endregion
+
+        #region Answers
+
+        public ActionResult Answers(int qustionId) {
+            if (!_permissionService.Authorize("Admin.TeacherTopics")) {
+                return RedirectToRoute("ActionDenied");
+            }
+
+            var teacher = _workContext.CurrentCustomer;
+            var answers = _answerService.GetByQuestion(qustionId);
+
+            return View(answers);
+        }
+
+        public ActionResult EditAnswer(int answerId, int qustionId = 0) {
+            if (!_permissionService.Authorize("Admin.TeacherTopics")) {
+                return RedirectToRoute("ActionDenied");
+            }
+
+            Answer answer;
+            if (answerId != 0) {
+                answer = _answerService.GetAnswerById(answerId);
+            }
+            else {
+                Question question = _questionService.GetQuestionById(qustionId);
+                answer = new Answer {
+                    QuestionId = qustionId,
+                    Question = question
+                };
+            }
+
+            return View(answer);
+        }
+
+        [HttpPost]
+        public ActionResult EditAnswer(Answer model) {
+            if (!_permissionService.Authorize("Admin.TeacherTopics")) {
+                return RedirectToRoute("ActionDenied");
+            }
+
+            Answer answer;
+
+            if (model.Id != 0) {
+                answer = _answerService.GetAnswerById(model.Id);
+            }
+            else {
+                answer = new Answer {
+                    QuestionId = model.QuestionId,
+                    Label = model.Label,
+                    Value = model.Value
+                };
+                _answerService.InsertAnswer(answer);
+            }
+
+            if (ModelState.IsValid) {
+                if (model.Id != 0) {
+                    answer.QuestionId = model.QuestionId;
+                    answer.Label = model.Label;
+                    answer.Value = model.Value;
+                    _answerService.UpdateAnswer(answer);
+                }
+            }
+
+            return RedirectToAction("EditQuestion", new { questionId = answer.QuestionId });
         }
 
         #endregion

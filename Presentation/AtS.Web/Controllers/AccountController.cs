@@ -60,7 +60,11 @@ namespace TWYK.Web.Controllers
                         _authenticationService.SignIn(customer, true);
 
                         //sign in admin
-                        if (customer.RoleNames.Contains(SystemCustomerRoleNames.Administrators)) {
+                        if (
+                            customer.RoleNames.Contains(SystemCustomerRoleNames.Administrators) ||
+                            customer.RoleNames.Contains(SystemCustomerRoleNames.Teachers)
+                        )
+                        {
                             return RedirectToRoute("AdminHomePage");
                         }
 
@@ -88,7 +92,7 @@ namespace TWYK.Web.Controllers
                         break;
                 }
             }
-
+            
             return View(model);
         }
 
@@ -220,7 +224,7 @@ namespace TWYK.Web.Controllers
                 customer.LastLoginDateUtc = DateTime.UtcNow;
                 customer.HasShoppingCartItems = _workContext.CurrentCustomer.HasShoppingCartItems;
                 customer.IsAdmin = false;
-                customer.RoleNames = "Registered";
+                customer.RoleNames = "Registered,Students";
                 customer.Zip = model.Zip;
                 customer.State = model.State;
                 customer.City = model.City;

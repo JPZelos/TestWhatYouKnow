@@ -80,9 +80,9 @@
                             <div class="card-header">
                                 <h3 class="card-title">Απαντήσεις</h3>
                                 <div class="card-options">
-                                    <button type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέο Μάθημα">
+                                    <a href="@Url.Action("EditAnswer","Admin", new{answerId=0,qustionId=Model.Id})" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέα Απάντηση">
                                         <i class="bi bi-plus-square"></i>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
 
@@ -104,7 +104,7 @@
                                                 <td style="width: 45%;">@answer.Label</td>
                                                 <td style="width: 45%;">@answer.Value</td>
                                                 <td style="text-align: center;">
-                                                    <a href="#"
+                                                    <a href="@Url.Action("EditAnswer","Admin", new{answerId=answer.Id})"
                                                        data-bs-toggle="tooltip"
                                                        data-bs-placement="top"
                                                        title="Click to Edit">

@@ -28,6 +28,8 @@ namespace TWYK.Services.Answers
         /// </summary>
         /// <param name="answer">Answer</param>
         void DeleteAnswer(Answer answer);
+
+        List<Answer> GetByQuestion(int questionId);
     }
 
     public class AnswerService : IAnswerService
@@ -52,6 +54,15 @@ namespace TWYK.Services.Answers
             }
 
             return _answerRepository.GetById(answerId);
+        }
+
+        public List<Answer> GetByQuestion(int questionId) {
+            if (questionId == 0)
+            {
+                return null;
+            }
+
+            return _answerRepository.Table.Where(a=>a.QuestionId==questionId).ToList();
         }
 
         #region GRUD

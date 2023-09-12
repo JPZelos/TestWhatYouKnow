@@ -563,6 +563,8 @@
     <Content Include="Views\Admin\TeacherChapter.cshtml" />
     <Content Include="Views\Admin\Questions.cshtml" />
     <Content Include="Views\Admin\EditQuestion.cshtml" />
+    <Content Include="Views\Admin\EditAnswer.cshtml" />
+    <Content Include="Views\Admin\Answers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="scripts\tinymce\tinymce.d.ts" />
