@@ -66,10 +66,14 @@ namespace TWYK.Web.Controllers
             foreach (var topicId in topicIds) {
                 var topic = _topicService.GetTopicById(topicId).ToModel();
                 var chapterIds = userQuizzes.Select(q => q.ChapterId).Distinct().ToList();
+                
                 foreach (var chapterId in chapterIds) {
                     var chapterModel = _chapterService.GetChapterById(chapterId).ToModel();
-                    chapterModel.Quizzes = userQuizzes.Where(q => q.ChapterId == chapterId).ToList();
-                    topic.Chapters.Add(chapterModel);
+                    if (chapterModel.TopicId == topic.Id) {
+                        chapterModel.Quizzes = userQuizzes.Where(q => q.ChapterId == chapterId).ToList();
+                        topic.Chapters.Add(chapterModel);
+                    }
+                    
                 }
 
                 modelTopics.Add(topic);

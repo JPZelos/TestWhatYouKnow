@@ -10,13 +10,13 @@ namespace TWYK.Web.Models
     {
         public ResultModel() {
             Topics = new List<TopicModel>();
-            Chapters = new List<ChapterModel>();
+            //Chapters = new List<ChapterModel>();
         }
         public string FullName { get; set; }
 
         public List<TopicModel> Topics { get; set; }
 
-        public List<ChapterModel> Chapters { get; set; }
+        //public List<ChapterModel> Chapters { get; set; }
 
     }
 }

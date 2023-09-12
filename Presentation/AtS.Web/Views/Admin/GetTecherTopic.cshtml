@@ -23,11 +23,12 @@
 
                             <div class="card-header">
                                 <h3 class="card-title">Μάθημα: @Model.Name</h3>
-                                @*<div class="card-options">
-                                    <a href="@Url.Action("GetTecherTopic","Admin", new {topicId = 0})" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέο Μάθημα">
-                                        <i class="bi bi-plus-square"></i>
+                                <div class="card-options">
+
+                                    <a href="@Url.Action("GetTecherTopics", "Admin")" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Επίστροφή">
+                                        <i class="bi bi-arrow-left-square"></i> Επιστροφή
                                     </a>
-                                </div>*@
+                                </div>
                             </div>
 
                             <div class="card-body">
@@ -65,8 +66,12 @@
                             <div class="card-header">
                                 <h3 class="card-title">Κεφάλαια</h3>
                                 <div class="card-options">
-                                    <a href="@Url.Action("TeacherChapter","Admin", new {chapterId=0, topicId = Model.Id})" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέο Κεφάλαιο">
-                                        <i class="bi bi-plus-square"></i>
+
+                                    <a href="@Url.Action("GetTecherTopics", "Admin")" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Επίστροφή">
+                                        <i class="bi bi-arrow-left-square"></i> Επιστροφή
+                                    </a>
+                                    <a href="@Url.Action("TeacherChapter", "Admin", new { chapterId = 0, topicId = Model.Id })" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέο Κεφάλαιο">
+                                        <i class="bi bi-plus-square"></i> Νέο Κεφάλαιο
                                     </a>
                                 </div>
                             </div>

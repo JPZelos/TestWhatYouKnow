@@ -128,8 +128,10 @@ namespace TWYK.Web.Controllers
                 if (topic.CustomerId == teacherId) {
                     foreach (var chapterId in chapterIds) {
                         var chapterModel = _chapterService.GetChapterById(chapterId).ToModel();
-                        chapterModel.Quizzes = userQuizzes.Where(q => q.ChapterId == chapterId).ToList();
-                        topic.Chapters.Add(chapterModel);
+                        if (chapterModel.TopicId == topic.Id) {
+                            chapterModel.Quizzes = userQuizzes.Where(q => q.ChapterId == chapterId).ToList();
+                            topic.Chapters.Add(chapterModel);
+                        }
                     }
                 }
 
