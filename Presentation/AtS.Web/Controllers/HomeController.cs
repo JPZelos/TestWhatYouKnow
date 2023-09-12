@@ -1,12 +1,6 @@
-﻿using System.Linq;
-using System.Web.Mvc;
-using TWYK.Services.Answers;
-using TWYK.Services.Categories;
+﻿using System.Web.Mvc;
 using TWYK.Services.Chapters;
 using TWYK.Services.Installation;
-using TWYK.Services.Products;
-using TWYK.Services.Questions;
-using TWYK.Services.TestResults;
 using TWYK.Services.Topics;
 using TWYK.Web.Infrastructure.Mapper;
 

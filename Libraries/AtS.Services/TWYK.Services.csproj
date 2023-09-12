@@ -100,16 +100,10 @@
     <Compile Include="Answers\AnswerService.cs" />
     <Compile Include="Authentication\FormsAuthenticationService.cs" />
     <Compile Include="Authentication\IAuthenticationService.cs" />
-    <Compile Include="Categories\CategoryService.cs" />
     <Compile Include="Chapters\ChapterService.cs" />
     <Compile Include="Customers\CustomerService.cs" />
     <Compile Include="Customers\ICustomerService.cs" />
-    <Compile Include="Installation\FakeProductFactory.cs" />
     <Compile Include="Installation\InstallationService.cs" />
-    <Compile Include="Orders\ShoppingCartExtensions.cs" />
-    <Compile Include="Orders\ShoppingCartService.cs" />
-    <Compile Include="Products\FakeProductFactory.cs" />
-    <Compile Include="Products\ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Questions\QuestionService.cs" />
     <Compile Include="Quizzes\IQuizService.cs" />

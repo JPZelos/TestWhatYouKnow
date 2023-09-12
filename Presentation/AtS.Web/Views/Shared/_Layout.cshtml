@@ -39,7 +39,6 @@
     @RenderSection("scripts", false)
 
     <script type="text/javascript">
-        AjaxCart.init(false, '.navbar .cart-qty', '.navbar .wishlist-qty', '#flyout-cart');
         (function () {
             $(document).on("mouseup touchstart", function (e) {
                 var target = $("#flyout-cart");
@@ -48,9 +47,6 @@
                 }
             });
 
-            $("#cart").on("mouseover", function () {
-                $(".shopping-cart").show("slow");
-            });
         })();
     </script>
 
