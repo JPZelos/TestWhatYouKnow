@@ -101,7 +101,7 @@ namespace TWYK.Web.Controllers
                 Score = 0,
                 Tries = tries,
                 Success = false,
-                LastUpdated = DateTime.Now
+                //LastUpdated = DateTime.Now
             };
             _quizService.InsertQuiz(quiz);
 

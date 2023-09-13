@@ -35,9 +35,9 @@ namespace TWYK.Core.Domain
         public bool Success { get; set; }
 
 
-        [Column("LastUpdated")]
-        [Display(Name = "Quiz Last Updated")]
-        public DateTime LastUpdated { get; set; }
+        //[Column("LastUpdated")]
+        //[Display(Name = "Quiz Last Updated")]
+        //public DateTime LastUpdated { get; set; }
 
         public virtual Chapter Chapter { get; set; }
         

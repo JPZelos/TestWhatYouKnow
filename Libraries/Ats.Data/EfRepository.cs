@@ -92,6 +92,7 @@ namespace TWYK.Data
                 if (entity == null)
                     throw new ArgumentNullException("entity");
 
+                entity.LastUpdate = DateTime.Now;
                 Entities.Add(entity);
 
                 _context.SaveChanges();
@@ -113,8 +114,11 @@ namespace TWYK.Data
                 if (entities == null)
                     throw new ArgumentNullException("entities");
 
-                foreach (var entity in entities)
+                foreach (var entity in entities) {
+                    entity.LastUpdate = DateTime.Now;
                     Entities.Add(entity);
+                }
+                    
 
                 _context.SaveChanges();
             }
@@ -135,6 +139,7 @@ namespace TWYK.Data
                 if (entity == null)
                     throw new ArgumentNullException("entity");
 
+                entity.LastUpdate = DateTime.Now;
                 _context.SaveChanges();
             }
             catch (DbEntityValidationException dbEx)
@@ -153,6 +158,10 @@ namespace TWYK.Data
             {
                 if (entities == null)
                     throw new ArgumentNullException("entities");
+                
+                foreach (var entity in entities) {
+                    entity.LastUpdate = DateTime.Now;
+                }
 
                 _context.SaveChanges();
             }
