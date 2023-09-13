@@ -1,12 +1,17 @@
 tinymce.init({
     selector: "textarea",
     entity_encoding: "raw",
-    plugins: 'lists image link table code codesample',
+    language: 'el',
+    plugins: 'lists image link table code codesample visualblocks quickbars',
+
     menubar: 'edit view insert format tools table help',
-    toolbar: "undo redo removeformat | bold italic underline strikethrough | align numlist bullist | lineheight outdent indent | link image table | code codesample",
+    toolbar: "undo redo removeformat | blocks | bold italic underline strikethrough | align numlist bullist | lineheight outdent indent | link image table | code codesample visualblocks",
+    default_link_target: '_blank',
+    relative_urls: false,
     link_list: [
-        { title: 'Το σπουδαίο pdf', value: '/content/images/323472711.pdf' },
-        { title: 'My page 2', value: 'http://www.moxiecode.com' },
+        { title: tinyMceFiles[0], value: '../content/files/geoponia.pdf' },
+        { title: tinyMceFiles[1], value: '../content/files/kalliergia-ampelou.pdf' },
+        { title: tinyMceFiles[2], value: '../content/files/epitrapezies-poikilies-ampelou.pdf' }
 
     ],
     image_list: [
@@ -15,5 +20,7 @@ tinymce.init({
         { title: 'My pdf 1', value: 'http://www.moxiecode.com/kati.pdf' },
         { title: 'My pdf 2', value: 'http://www.moxiecode.com/katiallo.pdf' }
     ],
-
+    quickbars_insert_toolbar: false,
+    quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote'
+    
 });
