@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -66,14 +65,13 @@ namespace TWYK.Web.Controllers
             foreach (var topicId in topicIds) {
                 var topic = _topicService.GetTopicById(topicId).ToModel();
                 var chapterIds = userQuizzes.Select(q => q.ChapterId).Distinct().ToList();
-                
+
                 foreach (var chapterId in chapterIds) {
                     var chapterModel = _chapterService.GetChapterById(chapterId).ToModel();
                     if (chapterModel.TopicId == topic.Id) {
                         chapterModel.Quizzes = userQuizzes.Where(q => q.ChapterId == chapterId).ToList();
                         topic.Chapters.Add(chapterModel);
                     }
-                    
                 }
 
                 modelTopics.Add(topic);
@@ -101,7 +99,6 @@ namespace TWYK.Web.Controllers
                 Score = 0,
                 Tries = tries,
                 Success = false,
-                //LastUpdated = DateTime.Now
             };
             _quizService.InsertQuiz(quiz);
 
@@ -141,10 +138,9 @@ namespace TWYK.Web.Controllers
                     var answers = _answerRepository.Table.Where(x => x.Question.Id == questionId);
                     var answered = answers.FirstOrDefault(x => x.Value == answeredValue);
                     var chapter = _chapterService.GetChapterById(question.ChapterId);
-                    
 
                     if (answered != null) {
-                        message = question.SuccessValue == answered.Value ? question.SuccessMsg : question.FaultMsg;
+                        message = "ΟΚ";
                         score = question.SuccessValue == answered.Value ? question.Score : 0;
                         // Declare view model
                         var testResult = new TestResult {
@@ -170,7 +166,29 @@ namespace TWYK.Web.Controllers
                 }
             }
 
-            return Json(new { success, responseText = message, score = score }, JsonRequestBehavior.AllowGet);
+            return Json(new { success, responseText = message, score }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult GetQuizResult(int quizId) {
+            var quiz = _quizService.GetQuizById(quizId);
+            var chapter = _chapterService.GetChapterById(quiz.ChapterId);
+
+            var success = quiz.Score >= chapter.PasScore;
+
+            var response = new { success, responseText = chapter.FaultMsg, score = quiz.Score };
+
+            if (quiz.Score == 100) {
+                response = new { success, responseText = chapter.SuccessMsg, score = quiz.Score };
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+
+            if (success && quiz.Score < 100) {
+                response = new { success, responseText = chapter.PassMsg, score = quiz.Score };
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
     }
 }

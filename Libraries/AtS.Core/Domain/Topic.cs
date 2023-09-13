@@ -12,9 +12,9 @@ namespace TWYK.Core.Domain
     {
         private ICollection<Chapter> _chapter;
 
-        [Column("Id")]
-        [Display(Name = "Topic Id")]
-        public int Id { get; set; }
+        //[Column("Id")]
+        //[Display(Name = "Topic Id")]
+        //public int Id { get; set; }
 
 
         [Column("CustomerId")]

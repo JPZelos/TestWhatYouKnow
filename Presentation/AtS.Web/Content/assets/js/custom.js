@@ -4,42 +4,29 @@ var now = 0; // currently shown div
 divs.hide().first().show(); // hide all divs except first
 
 //show active step
-function showActiveStep()
-{
-    if ($('#step1').is(':visible'))
-    {
+function showActiveStep() {
+    if ($('#step1').is(':visible')) {
         $(".step-bar .bar .fill").eq(now).addClass('w-100');
         $("#activeStep").html('1');
-    }
-    else if ($('#step2').is(':visible'))
-    {
+    } else if ($('#step2').is(':visible')) {
         $(".step-bar .bar .fill").eq(now).addClass('w-100');
         $("#activeStep").html('2');
-    }
-    else if ($('#step3').is(':visible'))
-    {
+    } else if ($('#step3').is(':visible')) {
         $(".step-bar .bar .fill").eq(now).addClass('w-100');
         $("#activeStep").html('3');
-    }
-    else if ($('#step4').is(':visible'))
-    {
+    } else if ($('#step4').is(':visible')) {
         $(".step-bar .bar .fill").eq(now).addClass('w-100');
         $("#activeStep").html('4');
-    }
-    else if ($('#step5').is(':visible'))
-    {
+    } else if ($('#step5').is(':visible')) {
         $(".step-bar .bar .fill").eq(now).addClass('w-100');
         $("#activeStep").html('5');
-    }
-    else
-    {
-    console.log("error");
+    } else {
+        console.log("error");
     }
 }
 
 
-function next()
-{
+function next() {
     divs.eq(now).hide();
     now = (now + 1 < divs.length) ? now + 1 : 0;
     divs.eq(now).show(); // show next
@@ -47,8 +34,7 @@ function next()
 
     showActiveStep();
 }
-$(".prev").on('click', function()
-{
+$(".prev").on('click', function () {
 
     $('.radio-field').addClass('bounce-left');
     $('.radio-field').removeClass('bounce-right');
@@ -66,18 +52,13 @@ $(".prev").on('click', function()
 // quiz validation
 var checkedradio = false;
 
-function radiovalidate(stepnumber)
-{
-    var checkradio = $("#step"+stepnumber+" input").map(function()
-    {
-    if($(this).is(':checked'))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+function radiovalidate(stepnumber) {
+    var checkradio = $("#step" + stepnumber + " input").map(function () {
+        if ($(this).is(':checked')) {
+            return true;
+        } else {
+            return false;
+        }
     }).get();
 
     checkedradio = checkradio.some(Boolean);
@@ -87,33 +68,26 @@ function radiovalidate(stepnumber)
 
 
 // form validation
-$(document).ready(function()
-{
+$(document).ready(function () {
 
     // check step1
-    $("#step1btn").on('click', function()
-    {
+    $("#step1btn").on('click', function () {
         radiovalidate(1);
 
-        if(checkedradio == false)
-        {
-            
-        (function (el) {
-            setTimeout(function () {
-                el.children().remove('.reveal');
-            }, 3000);
+        if (checkedradio == false) {
+
+            (function (el) {
+                setTimeout(function () {
+                    el.children().remove('.reveal');
+                }, 3000);
             }($('#error').append('<div class="reveal alert alert-danger">Choose an option!</div>')));
-            
+
             radiovalidate(1);
 
-        }
-        
-        else
-        {
+        } else {
             $('#step1 .radio-field').removeClass('bounce-left');
             $('#step1 .radio-field').addClass('bounce-right');
-            setTimeout(function()
-            {
+            setTimeout(function () {
                 next();
             }, 900)
 
@@ -125,29 +99,23 @@ $(document).ready(function()
     })
 
     // check step2
-    $("#step2btn").on('click', function()
-    {
+    $("#step2btn").on('click', function () {
         radiovalidate(2);
 
-        if(checkedradio == false)
-        {
-            
-        (function (el) {
-            setTimeout(function () {
-                el.children().remove('.reveal');
-            }, 3000);
+        if (checkedradio == false) {
+
+            (function (el) {
+                setTimeout(function () {
+                    el.children().remove('.reveal');
+                }, 3000);
             }($('#error').append('<div class="reveal alert alert-danger">Choose an option!</div>')));
-            
+
             radiovalidate(2);
 
-        }
-
-        else
-        {
+        } else {
             $('#step2 .radio-field').removeClass('bounce-left');
             $('#step2 .radio-field').addClass('bounce-right');
-            setTimeout(function()
-            {
+            setTimeout(function () {
                 next();
             }, 900)
 
@@ -157,29 +125,23 @@ $(document).ready(function()
     })
 
     // check step3
-    $("#step3btn").on('click', function()
-    {
+    $("#step3btn").on('click', function () {
         radiovalidate(3);
 
-        if(checkedradio == false)
-        {
-            
-        (function (el) {
-            setTimeout(function () {
-                el.children().remove('.reveal');
-            }, 3000);
+        if (checkedradio == false) {
+
+            (function (el) {
+                setTimeout(function () {
+                    el.children().remove('.reveal');
+                }, 3000);
             }($('#error').append('<div class="reveal alert alert-danger">Choose an option!</div>')));
-            
+
             radiovalidate(3);
 
-        }
-
-        else
-        {
+        } else {
             $('#step3 .radio-field').removeClass('bounce-left');
             $('#step3 .radio-field').addClass('bounce-right');
-            setTimeout(function()
-            {
+            setTimeout(function () {
                 next();
             }, 900)
 
@@ -189,29 +151,23 @@ $(document).ready(function()
     })
 
     // check step4
-    $("#step4btn").on('click', function()
-    {
+    $("#step4btn").on('click', function () {
         radiovalidate(4);
 
-        if(checkedradio == false)
-        {
-            
-        (function (el) {
-            setTimeout(function () {
-                el.children().remove('.reveal');
-            }, 3000);
+        if (checkedradio == false) {
+
+            (function (el) {
+                setTimeout(function () {
+                    el.children().remove('.reveal');
+                }, 3000);
             }($('#error').append('<div class="reveal alert alert-danger">Choose an option!</div>')));
-            
+
             radiovalidate(4);
 
-        }
-
-        else
-        {
+        } else {
             $('#step4 .radio-field').removeClass('bounce-left');
             $('#step4 .radio-field').addClass('bounce-right');
-            setTimeout(function()
-            {
+            setTimeout(function () {
                 next();
             }, 900)
 
@@ -221,25 +177,20 @@ $(document).ready(function()
     })
 
     // check last step
-    $("#sub").on('click', function()
-    {
+    $("#sub").on('click', function () {
         radiovalidate(5);
 
-        if(checkedradio == false)
-        {
-            
-        (function (el) {
-            setTimeout(function () {
-                el.children().remove('.reveal');
-            }, 3000);
+        if (checkedradio == false) {
+
+            (function (el) {
+                setTimeout(function () {
+                    el.children().remove('.reveal');
+                }, 3000);
             }($('#error').append('<div class="reveal alert alert-danger">Choose an option!</div>')));
-            
+
             radiovalidate(5);
 
-        }
-
-        else
-        {
+        } else {
             countresult(5);
             showresult();
             $("#sub").html('done');

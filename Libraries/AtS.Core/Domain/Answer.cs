@@ -8,9 +8,9 @@ namespace TWYK.Core.Domain
     //[Validator(typeof(AnswerValidator))]
     public class Answer : BaseEntity
     {
-        [Column("Id")]
-        [Display(Name = "Answer_Id")]
-        public int Id { get; set; }
+        //[Column("Id")]
+        //[Display(Name = "Answer_Id")]
+        //public int Id { get; set; }
 
 
         [Column("QuestionId")]

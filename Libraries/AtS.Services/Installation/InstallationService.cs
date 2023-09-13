@@ -160,32 +160,47 @@ namespace TWYK.Services.Installation
                     TopicId = 1,
                     Name = "Πότισμα",
                     Description = "Περιγραφή για το πότισμα των φυτών",
-                    PasScore = 50
+                    PasScore = 50,
+                    SuccessMsg = "Συγχαρητήρια γοα την επιδοσή σας!!",
+                    PassMsg = "Περάσατε, αλλά θα μπορούσατε να πάτε καλύτερη με λίγη προσπάθει ακόμα.",
+                    FaultMsg = "Δυστυχώς πρέπει να μελετήσετε περισσότερο το υλικό. Προσπαθήστε ξανά!!",
                 },
                 new Chapter {
                     TopicId = 1,
                     Name = "Λίπανση",
                     Description = "Περιγραφή για την λίπανση των φυτών",
-                    PasScore = 50
+                    PasScore = 50,
+                    SuccessMsg = "Συγχαρητήρια γοα την επιδοσή σας!!",
+                    PassMsg = "Περάσατε, αλλά θα μπορούσατε να πάτε καλύτερη με λίγη προσπάθει ακόμα.",
+                    FaultMsg = "Δυστυχώς πρέπει να μελετήσετε περισσότερο το υλικό. Προσπαθήστε ξανά!!",
                 },
                 new Chapter {
                     TopicId = 1,
                     Name = "Κλάδεμα",
                     Description = "Περιγραφή για το κλάδεμα των φυτών",
-                    PasScore = 50
+                    PasScore = 50,
+                    SuccessMsg = "Συγχαρητήρια γοα την επιδοσή σας!!",
+                    PassMsg = "Περάσατε, αλλά θα μπορούσατε να πάτε καλύτερη με λίγη προσπάθει ακόμα.",
+                    FaultMsg = "Δυστυχώς πρέπει να μελετήσετε περισσότερο το υλικό. Προσπαθήστε ξανά!!",
                 },
 
                 new Chapter {
                     TopicId = 2,
                     Name = "Ωκεανογραφία",
                     Description = "Περιγραφή για την Ωκεανογραφία",
-                    PasScore = 50
+                    PasScore = 50,
+                    SuccessMsg = "Συγχαρητήρια γοα την επιδοσή σας!!",
+                    PassMsg = "Περάσατε, αλλά θα μπορούσατε να πάτε καλύτερη με λίγη προσπάθει ακόμα.",
+                    FaultMsg = "Δυστυχώς πρέπει να μελετήσετε περισσότερο το υλικό. Προσπαθήστε ξανά!!",
                 },
                 new Chapter {
                     TopicId = 2,
                     Name = "Αλιεία",
                     Description = "Περιγραφή για την Αλιεία των ψαριών",
-                    PasScore = 50
+                    PasScore = 50,
+                    SuccessMsg = "Συγχαρητήρια γοα την επιδοσή σας!!",
+                    PassMsg = "Περάσατε, αλλά θα μπορούσατε να πάτε καλύτερη με λίγη προσπάθει ακόμα.",
+                    FaultMsg = "Δυστυχώς πρέπει να μελετήσετε περισσότερο το υλικό. Προσπαθήστε ξανά!!",
                 }
             };
             _chapterRepository.Insert(chapters);
@@ -197,16 +212,13 @@ namespace TWYK.Services.Installation
                     ChapterId = 1,
                     Description = "Κάθε πότε ποτίζουμε τα φυτά",
                     Score = 60,
-                    SuccessMsg = "Σωστό, κάθε φυτό έχει διαφορετική συχνότητα ποτίσματος",
-                    FaultMsg = "Λάθος, κάθε φυτό έχει διαφορετική συχνότητα ποτίσματος",
+                   
                     SuccessValue = 3
                 },
                 new Question {
                     ChapterId = 1,
                     Description = "Πόση ποσότητα νερού απαιτείται κατά το πότισμα των φυτών",
                     Score = 40,
-                    SuccessMsg = "Σωστό, κάθε φυτό έχει διαφορετικές απαιτήσεις σε νερό",
-                    FaultMsg = "Λάθος, κάθε φυτό έχει διαφορετικές απαιτήσεις σε νερό",
                     SuccessValue = 2
                 },
 
@@ -214,8 +226,6 @@ namespace TWYK.Services.Installation
                     ChapterId = 2,
                     Description = "Τι λίπασμα χρησιμοποιούμε",
                     Score = 50,
-                    SuccessMsg = "Σωστό, κάθε φυτό έχει άλλες ανάγκες λίπανσης",
-                    FaultMsg = "Λάθος, κάθε φυτό έχει άλλες ανάγκες λίπανσης",
                     SuccessValue = 1
                 },
 
@@ -224,8 +234,6 @@ namespace TWYK.Services.Installation
                     ChapterId = 2,
                     Description = "Κάθε πότε λιπαίνουμε",
                     Score = 50,
-                    SuccessMsg = "Σωστό, κάθε φυτό έχει διαφορετική συχνότητα λίπανσης",
-                    FaultMsg = "Λάθος, κάθε φυτό έχει διαφορετική συχνότητα λίπανσης",
                     SuccessValue = 4
                 },
 
@@ -234,8 +242,6 @@ namespace TWYK.Services.Installation
                     ChapterId = 3,
                     Description = "Πότε κλαδεύουμε",
                     Score = 70,
-                    SuccessMsg = "Σωστό, κάθε φυτό έχει άλλες ανάγκες κλαδέματος",
-                    FaultMsg = "Λάθος, κάθε φυτό έχει άλλες ανάγκες κλαδέματος",
                     SuccessValue = 2
                 },
 
@@ -244,8 +250,6 @@ namespace TWYK.Services.Installation
                     ChapterId = 3,
                     Description = "Είναι το ψαροκόκαλο το καλύτερο σχήμα κλάδευσης",
                     Score = 30,
-                    SuccessMsg = "Σωστό, κάθε φυτό επιδέχεται κάποια από τα σχήματα κλάδευσης",
-                    FaultMsg = "Λάθος, κάθε φυτό επιδέχεται κάποια από τα σχήματα κλάδευσης",
                     SuccessValue = 3
                 },
             };

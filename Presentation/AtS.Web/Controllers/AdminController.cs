@@ -319,9 +319,7 @@ namespace TWYK.Web.Controllers
                     ChapterId = model.ChapterId,
                     Description = model.Description,
                     Score = model.Score,
-                    SuccessValue = model.SuccessValue,
-                    FaultMsg = model.FaultMsg,
-                    SuccessMsg = model.SuccessMsg,
+                    SuccessValue = model.SuccessValue
                 };
                 _questionService.InsertQuestion(question);
             }
@@ -331,8 +329,6 @@ namespace TWYK.Web.Controllers
                     question.Score = model.Score;
                     question.Description = model.Description;
                     question.SuccessValue = model.SuccessValue;
-                    question.SuccessMsg = model.SuccessMsg;
-                    question.FaultMsg = model.FaultMsg;
 
                     _questionService.UpdateQuestion(question);
                 }

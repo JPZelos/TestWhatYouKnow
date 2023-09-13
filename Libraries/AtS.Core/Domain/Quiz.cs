@@ -34,11 +34,6 @@ namespace TWYK.Core.Domain
         [Display(Name = "Quiz Success")]
         public bool Success { get; set; }
 
-
-        //[Column("LastUpdated")]
-        //[Display(Name = "Quiz Last Updated")]
-        //public DateTime LastUpdated { get; set; }
-
         public virtual Chapter Chapter { get; set; }
         
         public virtual Customer Customer { get; set; }

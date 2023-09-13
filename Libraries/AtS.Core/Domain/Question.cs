@@ -25,17 +25,7 @@ namespace TWYK.Core.Domain
         [Column("Score")]
         [Display(Name = "Score")]
         public int Score { get; set; }
-
         
-        [Column("SuccessMsg")]
-        [Display(Name = "Question Success Msg")]
-        public string SuccessMsg { get; set; }
-
-
-        [Column("FaultMsg")]
-        [Display(Name = "Question Fault Msg")]
-        public string FaultMsg { get; set; }
-
 
         [Column("ChapterId")]
         [Display(Name = "Question ChapterId")]

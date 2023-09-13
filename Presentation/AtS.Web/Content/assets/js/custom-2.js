@@ -175,35 +175,49 @@
                 let result_msg = "";
 
                 function countresult(resultnumber) {
-                    /*
-                    $('#step' + resultnumber + ' .radio-field input').each(function () {
-                        //Here we can use Ajax to check the correct answer
-                        for (var i = 0; i <= correct_answers.length; i++) {
-                            if ($(this).is(':checked')) {
-                                if ($(this).val() == correct_answers[i]) {
-                                    correct++
-                                    break
-                                }
-                            }
-                        }
-                    })
-                    */
-                    var correctprcnt = correct;// (correct / steps) * 100
+                    
+                    var correctprcnt = correct;
 
                     $('.u_prcnt').html(correctprcnt + '%')
                     $('.u_result span').html(correctprcnt + ' Πόντοι')
 
                     if (correctprcnt >= options.pasScore) {
+                        
                         $('.pass_check').html('<i class="fa-solid fa-check"></i> '+pass_check+'!')
-                        $('.result_msg').html('Συγχαρητήρια! '+result_msg+'!')
+                        //$('.result_msg').html('Συγχαρητήρια! '+result_msg+'!')
                     }
+                    if (now + 1 == stepsLenth){
+                        GetResultMsg();
+                        $('.result_msg').html(result_msg)
+                    }                    
+                }
+
+                function GetResultMsg(){
+                    var quizId = $("#QuizId").val();
+                    $.ajax({
+                        url: '/Answer/GetQuizResult',
+                        type: 'POST',
+                        dataType: 'json',
+                        async: false,
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        data: {quizId:quizId},
+                        success: function (data, text) {
+                            result_msg = data.responseText;
+                            return true
+                        },
+                        error: function (request, status, error) {
+                            $('#error').append(
+                                '<div class="reveal alert alert-danger">Συνέβει κάποιο σφάλμα! Παρακλούμε επικοινωνήστε με τον Administrator</div>'
+                            )
+                            //successBoolToDb = false;
+                        }
+                    })
                 }
 
                 function toBackEnd(stepNum) {
                     var steId = '#step' + stepNum
                     var valdata = $(steId).serialize()
-                    
-                    //alert(valdata);
+
                     $.ajax({
                         url: '/Answer/TestResult',
                         type: 'POST',
@@ -226,11 +240,9 @@
                                 '<div class="reveal alert alert-danger">' + request.responseJSON.responseText + '</div>'
                             )
                             successBoolToDb = false;
-                            //window.location.href = window.location.href;
                         }
                     })
 
-                    //return successBool;
                 }
             })
         })
