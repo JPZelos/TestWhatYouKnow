@@ -10,7 +10,7 @@
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <button class="nav-link active" id="nav-topic-tab" data-bs-toggle="tab" data-bs-target="#nav-topic" type="button" role="tab" aria-controls="nav-topic" aria-selected="true">Ερώτηση</button>
-                <button class="nav-link" id="nav-chapters-tab" data-bs-toggle="tab" data-bs-target="#nav-chapters" type="button" role="tab" aria-controls="nav-chapters" aria-selected="false">Απαντήσεις</button>
+                <button class="nav-link" id="nav-questions-tab" data-bs-toggle="tab" data-bs-target="#nav-questions" type="button" role="tab" aria-controls="nav-questions" aria-selected="false">Απαντήσεις</button>
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -23,6 +23,12 @@
 
                             <div class="card-header">
                                 <h3 class="card-title">Ερώτηση: @Model.Description</h3>
+                                <div class="card-options">
+
+                                    <a href="@Url.Action("TeacherChapter", "Admin", new{chapterId = Model.ChapterId})#nav-questions" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Επίστροφή">
+                                        <i class="bi bi-arrow-left-square"></i> Επιστροφή
+                                    </a>
+                                </div>
                             </div>
 
                             <div class="card-body">
@@ -50,16 +56,7 @@
                                         @Html.ValidationMessageFor(m => m.Score)
                                     </div>
 
-                                    <div class="col-md-12">
-                                        @Html.LabelFor(m => m.SuccessMsg, new { @class = "form-label" })
-                                        @Html.TextBoxFor(m => m.SuccessMsg, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.SuccessMsg)
-                                    </div>
-                                    <div class="col-md-12">
-                                        @Html.LabelFor(m => m.FaultMsg, new { @class = "form-label" })
-                                        @Html.TextBoxFor(m => m.FaultMsg, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.FaultMsg)
-                                    </div>
+
 
                                     <div class="col-md-6">
                                         <button class="btn btn-primary">Απόθήκευση</button>
@@ -72,7 +69,7 @@
                 </div>
 
             </div>
-            <div class="tab-pane fade" id="nav-chapters" role="tabpanel" aria-labelledby="nav-chapters-tab">
+            <div class="tab-pane fade" id="nav-questions" role="tabpanel" aria-labelledby="nav-questions-tab">
                 <div class="row justify-content-center">
 
                     <div class="col">
@@ -80,8 +77,11 @@
                             <div class="card-header">
                                 <h3 class="card-title">Απαντήσεις</h3>
                                 <div class="card-options">
-                                    <a href="@Url.Action("EditAnswer","Admin", new{answerId=0,qustionId=Model.Id})" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέα Απάντηση">
-                                        <i class="bi bi-plus-square"></i>
+                                    <a href="@Url.Action("TeacherChapter", "Admin", new{chapterId = Model.ChapterId})#nav-questions" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Επίστροφή">
+                                        <i class="bi bi-arrow-left-square"></i> Επιστροφή
+                                    </a>
+                                    <a href="@Url.Action("EditAnswer", "Admin", new { answerId = 0, qustionId = Model.Id })" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέα Απάντηση">
+                                        <i class="bi bi-plus-square"></i> Νέα Απάντηση
                                     </a>
                                 </div>
                             </div>
@@ -128,10 +128,44 @@
 @section scripts {
     <script>
 
+        const pillsTab = document.querySelector('#nav-tab');
+        const pills = pillsTab.querySelectorAll('button[data-bs-toggle="tab"]');
+
+        pills.forEach(pill => {
+            pill.addEventListener('shown.bs.tab', (event) => {
+                const { target } = event;
+                const { id: targetId } = target;
+
+                savePillId(targetId);
+            });
+        });
+
+        const savePillId = (selector) => {
+            localStorage.setItem('activePillId', selector);
+        };
+
+        const getPillId = () => {
+            const activePillId = localStorage.getItem('activePillId');
+
+            // if local storage item is null, show default tab
+            if (!activePillId) return;
+
+            // call 'show' function
+            const someTabTriggerEl = document.querySelector(`#${activePillId}`)
+            const tab = new bootstrap.Tab(someTabTriggerEl);
+
+            tab.show();
+        };
+
+        // get pill id on load
+        getPillId();
+
+
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl)
         })
 
+    
     </script>
 }

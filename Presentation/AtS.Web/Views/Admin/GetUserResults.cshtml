@@ -10,6 +10,11 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title"><span>@Model.FullName</span> <span>Αποτελέσματα Ερωτηματολογίων</span></h3>
+                <div class="card-options">
+                    <a href="@Url.Action("AdminTeacherUsers", "Admin")" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Επίστροφή">
+                        <i class="bi bi-arrow-left-square"></i> Επιστροφή
+                    </a>
+                </div>
             </div>
             <div class="card-body">
                 @foreach (var topic in Model.Topics)
@@ -39,7 +44,7 @@
                                         <td>@(quiz.Success ? "Επιτυχές":"Μη επιτυχές")</td>
                                         <td>@quiz.Score/100 </td>
                                         <td>@quiz.Tries</td>
-                                        <td>@quiz.LastUpdated.ToString("g")</td>
+                                        <td>@quiz.LastUpdate.ToString("g")</td>
                                     </tr>
                                 }
                                 </tbody>

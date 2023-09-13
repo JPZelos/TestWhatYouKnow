@@ -22,6 +22,12 @@
 
                             <div class="card-header">
                                 <h3 class="card-title">Ερώτηση: @Model.Question.Description, Απάντηση: @Model.Label</h3>
+                                <div class="card-options">
+
+                                    <a href="@Url.Action("EditQuestion", "Admin", new{questionId = Model.QuestionId})#nav-questions" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Επίστροφή">
+                                        <i class="bi bi-arrow-left-square"></i> Επιστροφή
+                                    </a>
+                                </div>
                             </div>
 
                             <div class="card-body">

@@ -23,11 +23,11 @@
 
                             <div class="card-header">
                                 <h3 class="card-title">Μάθημα: @Model.Name</h3>
-                                @*<div class="card-options">
-                                    <button type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέο Μάθημα">
-                                        <i class="bi bi-plus-square"></i>
-                                    </button>
-                                </div>*@
+                                <div class="card-options">
+                                    <a href="@Url.Action("GetTecherTopic", "Admin", new{topicId = Model.TopicId})#nav-chapters" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Επίστροφή">
+                                        <i class="bi bi-arrow-left-square"></i> Επιστροφή
+                                    </a>
+                                </div>
                             </div>
 
                             <div class="card-body">
@@ -56,6 +56,24 @@
                                     </div>
 
                                     <div class="col-md-12">
+                                        @Html.LabelFor(m => m.SuccessMsg, new { @class = "form-label" })
+                                        @Html.TextBoxFor(m => m.SuccessMsg, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.SuccessMsg)
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        @Html.LabelFor(m => m.PassMsg, new { @class = "form-label" })
+                                        @Html.TextBoxFor(m => m.PassMsg, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.PassMsg)
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        @Html.LabelFor(m => m.FaultMsg, new { @class = "form-label" })
+                                        @Html.TextBoxFor(m => m.FaultMsg, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.FaultMsg)
+                                    </div>
+
+                                    <div class="col-md-12">
                                         <button class="btn btn-primary">Απόθήκευση</button>
                                     </div>
                                 }
@@ -74,8 +92,11 @@
                             <div class="card-header">
                                 <h3 class="card-title">Ερωτήσεις</h3>
                                 <div class="card-options">
-                                    <a href="@Url.Action("EditQuestion","Admin", new {questionId=0, chapterId = Model.Id})" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέα Ερώτηση">
-                                        <i class="bi bi-plus-square"></i>
+                                    <a href="@Url.Action("GetTecherTopic", "Admin", new{topicId = Model.TopicId})#nav-chapters" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Επίστροφή">
+                                        <i class="bi bi-arrow-left-square"></i> Επιστροφή
+                                    </a>
+                                    <a href="@Url.Action("EditQuestion", "Admin", new { questionId = 0, chapterId = Model.Id })" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέα Ερώτηση">
+                                        <i class="bi bi-plus-square"></i> Νέα Ερώτηση
                                     </a>
                                 </div>
                             </div>
@@ -126,10 +147,46 @@
     <script src="~/scripts/tinymce/tinymce.js"></script>
     <script src="~/scripts/tinymce/tinymce-init.js" charset="UTF-8"></script>
     <script>
+
+
+        const pillsTab = document.querySelector('#nav-tab');
+        const pills = pillsTab.querySelectorAll('button[data-bs-toggle="tab"]');
+
+        pills.forEach(pill => {
+            pill.addEventListener('shown.bs.tab', (event) => {
+                const { target } = event;
+                const { id: targetId } = target;
+
+                savePillId(targetId);
+            });
+        });
+
+        const savePillId = (selector) => {
+            localStorage.setItem('activePillId', selector);
+        };
+
+        const getPillId = () => {
+            const activePillId = localStorage.getItem('activePillId');
+
+            // if local storage item is null, show default tab
+            if (!activePillId) return;
+
+            // call 'show' function
+            const someTabTriggerEl = document.querySelector(`#${activePillId}`)
+            const tab = new bootstrap.Tab(someTabTriggerEl);
+
+            tab.show();
+        };
+
+        // get pill id on load
+        getPillId();
+
+
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl)
         })
 
+    
     </script>
 }

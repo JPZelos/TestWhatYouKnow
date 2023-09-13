@@ -10,6 +10,9 @@
     <div class="p-4 pt-5">
         <h1><a href="/" class="logo"><span>TWYK</span></a></h1>
         <h5>@Model.CustomerName</h5>
+        
+      
+
         <ul class="list-unstyled components mb-5">
             <li>
                 <a href="#homeSubmenu" data-bs-toggle="collapse" role="button" class="dropdown-toggle">Users</a>
@@ -43,6 +46,11 @@
             
 
         </ul>
+        
+        <a href="@Url.Action("SignOut", "Account")" class="btn btn-outline-light text-light flex-shrink-0 mb-5" type="button">
+            <i class="bi bi-box-arrow-right"></i>
+            Logout
+        </a>
 
         <div class="footer">
             <p>Copyright &copy; @DateTime.Now.Year Test What You Know  All rights reserved </p>
