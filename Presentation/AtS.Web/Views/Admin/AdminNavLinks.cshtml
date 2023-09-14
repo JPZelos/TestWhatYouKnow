@@ -24,7 +24,7 @@
                     }
                     @if (Model.Customer.IsInCustomerRole(SystemCustomerRoleNames.Teachers)) {
                         <li>
-                            <a href="@Url.RouteUrl("AdminTeacherUsers")">Users</a>
+                            <a href="@Url.RouteUrl("TeacherUsers")">Users</a>
                         </li>
                     }
                        
@@ -38,7 +38,7 @@
                             <a href="@Url.RouteUrl("TeacherTopics")">Μαθήματα</a>
                         </li>
                         <li>
-                            <a href="@Url.RouteUrl("TeacherChapters")">Κεφάλαια</a>
+                            <a href="@Url.RouteUrl("Chapters")">Κεφάλαια</a>
                         </li>
                     </ul>
                 </li>

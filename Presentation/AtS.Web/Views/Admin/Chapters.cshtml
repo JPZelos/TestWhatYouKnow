@@ -1,6 +1,6 @@
 ﻿@model List<Chapter>
 @{
-    ViewBag.Title = "TeacherChapters";
+    ViewBag.Title = "Chapters";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -36,7 +36,7 @@
                                 <td>@cp.Topic.Name</td>
                                 <td>@cp.Topic.Customer.FirstName @cp.Topic.Customer.LastName</td>
                                 <td style="text-align: center;">
-                                    <a href="@Url.Action("TeacherChapter", "Admin", new { chapterId = cp.Id })"
+                                    <a href="@Url.Action("EdiChapter", "Admin", new { chapterId = cp.Id })"
                                        data-bs-toggle="tooltip"
                                        data-bs-placement="top"
                                        title="Click to Edit">

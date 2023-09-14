@@ -90,7 +90,7 @@ namespace TWYK.Web.Controllers
             return View(model);
         }
 
-        public ActionResult AdminTeacherUsers() {
+        public ActionResult TeacherUsers() {
             if (!_permissionService.Authorize("Admin.TeacherUsers")) {
                 return RedirectToRoute("ActionDenied");
             }
@@ -106,7 +106,7 @@ namespace TWYK.Web.Controllers
             return View(model);
         }
 
-        public ActionResult GetUserResults(int stundentId, int teacherId) {
+        public ActionResult UserResults(int stundentId, int teacherId) {
             if (!_permissionService.Authorize("Admin.TeacherUsers")) {
                 return RedirectToRoute("ActionDenied");
             }
@@ -145,7 +145,7 @@ namespace TWYK.Web.Controllers
 
         #region Topics
 
-        public ActionResult GetTecherTopics() {
+        public ActionResult Topics() {
             if (!_permissionService.Authorize("Admin.TeacherTopics")) {
                 return RedirectToRoute("ActionDenied");
             }
@@ -156,7 +156,7 @@ namespace TWYK.Web.Controllers
             return View(topics);
         }
 
-        public ActionResult GetTecherTopic(int topicId) {
+        public ActionResult EditTopic(int topicId) {
             if (!_permissionService.Authorize("Admin.TeacherTopics")) {
                 return RedirectToRoute("ActionDenied");
             }
@@ -176,7 +176,7 @@ namespace TWYK.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetTecherTopic(Topic model) {
+        public ActionResult EditTopic(Topic model) {
             if (!_permissionService.Authorize("Admin.TeacherTopics")) {
                 return RedirectToRoute("ActionDenied");
             }
@@ -210,7 +210,7 @@ namespace TWYK.Web.Controllers
 
         #region Chpaters
 
-        public ActionResult TeacherChapters() {
+        public ActionResult Chapters() {
             if (!_permissionService.Authorize("Admin.TeacherTopics")) {
                 return RedirectToRoute("ActionDenied");
             }
@@ -221,7 +221,7 @@ namespace TWYK.Web.Controllers
             return View(chapters);
         }
 
-        public ActionResult TeacherChapter(int chapterId, int topicId = 0) {
+        public ActionResult EdiChapter(int chapterId, int topicId = 0) {
             if (!_permissionService.Authorize("Admin.TeacherTopics")) {
                 return RedirectToRoute("ActionDenied");
             }
@@ -240,7 +240,7 @@ namespace TWYK.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult TeacherChapter(Chapter model) {
+        public ActionResult EdiChapter(Chapter model) {
             if (!_permissionService.Authorize("Admin.TeacherTopics")) {
                 return RedirectToRoute("ActionDenied");
             }

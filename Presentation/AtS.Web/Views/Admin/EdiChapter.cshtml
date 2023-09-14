@@ -24,7 +24,7 @@
                             <div class="card-header">
                                 <h3 class="card-title">Μάθημα: @Model.Name</h3>
                                 <div class="card-options">
-                                    <a href="@Url.Action("GetTecherTopic", "Admin", new{topicId = Model.TopicId})#nav-chapters" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Επίστροφή">
+                                    <a href="@Url.Action("EditTopic", "Admin", new{topicId = Model.TopicId})#nav-chapters" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Επίστροφή">
                                         <i class="bi bi-arrow-left-square"></i> Επιστροφή
                                     </a>
                                 </div>
@@ -92,7 +92,7 @@
                             <div class="card-header">
                                 <h3 class="card-title">Ερωτήσεις</h3>
                                 <div class="card-options">
-                                    <a href="@Url.Action("GetTecherTopic", "Admin", new{topicId = Model.TopicId})#nav-chapters" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Επίστροφή">
+                                    <a href="@Url.Action("EditTopic", "Admin", new{topicId = Model.TopicId})#nav-chapters" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Επίστροφή">
                                         <i class="bi bi-arrow-left-square"></i> Επιστροφή
                                     </a>
                                     <a href="@Url.Action("EditQuestion", "Admin", new { questionId = 0, chapterId = Model.Id })" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέα Ερώτηση">

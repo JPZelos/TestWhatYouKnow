@@ -42,23 +42,23 @@ namespace TWYK.Web
             
             //twyn
             routes.MapRoute(
-                name: "AdminTeacherUsers",
+                name: "TeacherUsers",
                 url: "admin/TeacherUsers",
-                new { controller = "Admin", action = "AdminTeacherUsers" }
+                new { controller = "Admin", action = "TeacherUsers" }
             );
 
             //twyn
             routes.MapRoute(
                 name: "TeacherTopics",
                 url: "admin/TeacherTopics",
-                new { controller = "Admin", action = "GetTecherTopics" }
+                new { controller = "Admin", action = "Topics" }
             );
 
             //twyn
             routes.MapRoute(
-                name: "TeacherChapters",
-                url: "admin/TeacherChapters",
-                new { controller = "Admin", action = "TeacherChapters" }
+                name: "Chapters",
+                url: "admin/Chapters",
+                new { controller = "Admin", action = "Chapters" }
             );
 
 

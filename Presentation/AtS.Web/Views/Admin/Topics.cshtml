@@ -1,6 +1,6 @@
 ﻿@model List<Topic>
 @{
-    ViewBag.Title = "GetTecherTopics";
+    ViewBag.Title = "Topics";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -10,7 +10,7 @@
             <div class="card-header">
                 <h3 class="card-title">Μαθήματα</h3>
                 <div class="card-options">
-                    <a type="button" href="@Url.Action("GetTecherTopic","Admin", new {topicId = 0})" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέο Μάθημα">
+                    <a type="button" href="@Url.Action("EditTopic","Admin", new {topicId = 0})" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέο Μάθημα">
                         <i class="bi bi-plus-square"></i> Νέο Μάθημα
                     </a>
                 </div>
@@ -32,7 +32,7 @@
                             <td>@tp.Name</td>
                             <td>@tp.Customer.FirstName @tp.Customer.LastName</td>
                             <td style="text-align: center;">
-                                <a href="@Url.Action("GetTecherTopic","Admin", new {topicId = tp.Id})"
+                                <a href="@Url.Action("EditTopic","Admin", new {topicId = tp.Id})"
                                    data-bs-toggle="tooltip"
                                    data-bs-placement="top"
                                    title="Click to Edit">

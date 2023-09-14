@@ -25,7 +25,7 @@
                                 <h3 class="card-title">Μάθημα: @Model.Name</h3>
                                 <div class="card-options">
 
-                                    <a href="@Url.Action("GetTecherTopics", "Admin")" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Επίστροφή">
+                                    <a href="@Url.Action("Topics", "Admin")" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Επίστροφή">
                                         <i class="bi bi-arrow-left-square"></i> Επιστροφή
                                     </a>
                                 </div>
@@ -67,10 +67,10 @@
                                 <h3 class="card-title">Κεφάλαια</h3>
                                 <div class="card-options">
 
-                                    <a href="@Url.Action("GetTecherTopics", "Admin")" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Επίστροφή">
+                                    <a href="@Url.Action("Topics", "Admin")" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Επίστροφή">
                                         <i class="bi bi-arrow-left-square"></i> Επιστροφή
                                     </a>
-                                    <a href="@Url.Action("TeacherChapter", "Admin", new { chapterId = 0, topicId = Model.Id })" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέο Κεφάλαιο">
+                                    <a href="@Url.Action("EdiChapter", "Admin", new { chapterId = 0, topicId = Model.Id })" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέο Κεφάλαιο">
                                         <i class="bi bi-plus-square"></i> Νέο Κεφάλαιο
                                     </a>
                                 </div>
@@ -93,7 +93,7 @@
                                             <td style="width: 45%;">@chapter.Name</td>
                                             <td style="width: 45%;">@chapter.PasScore</td>
                                             <td style="text-align: center;">
-                                                <a href="@Url.Action("TeacherChapter", "Admin", new { chapterId = chapter.Id })"
+                                                <a href="@Url.Action("EdiChapter", "Admin", new { chapterId = chapter.Id })"
                                                    data-bs-toggle="tooltip"
                                                    data-bs-placement="top"
                                                    title="Click to Edit">

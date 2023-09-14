@@ -1,6 +1,6 @@
 ﻿@model TWYK.Web.Models.TeacherUsersModel
 @{
-    ViewBag.Title = "AdminTeacherUsers";
+    ViewBag.Title = "TeacherUsers";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -34,7 +34,7 @@
                             <td style="width: 18%;">@user.Email</td>
                             <td style="width: 18%;">@user.RoleNames.ToString()</td>
                             <td style="text-align: center;">
-                                <a href="@Url.Action("GetUserResults","Admin", new {stundentId=user.Id, teacherId = Model.Teacher.Id})"
+                                <a href="@Url.Action("UserResults","Admin", new {stundentId=user.Id, teacherId = Model.Teacher.Id})"
                                    data-bs-toggle="tooltip"
                                    data-bs-placement="top"
                                    title="Click to Edit">

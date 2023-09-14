@@ -18,11 +18,7 @@ namespace TWYK.Web.Controllers
 
         public CatalogController(
             IPermissionService permissionService,
-            ITopicService topicService,
-            IChapterService chapterService,
-            IQuestionService questionService,
-            IAnswerService answerService,
-            ITestResultService testResultService
+            IChapterService chapterService
         ) {
             _permissionService = permissionService;
             _chapterService = chapterService;
@@ -34,10 +30,7 @@ namespace TWYK.Web.Controllers
                 return RedirectToAction("ChaptertSummary", new { chapterId = chapterId });
 
             var chapter = _chapterService.GetChapterById(chapterId);
-
-            //TODO: need to move this in factory class
             var model = chapter.ToModel();
-
 
             return View(model);
         }
@@ -45,10 +38,7 @@ namespace TWYK.Web.Controllers
         public ActionResult ChaptertSummary(int chapterId) {
 
             var chapter = _chapterService.GetChapterById(chapterId);
-
-            //TODO: need to move this in factory class
             var model = chapter.ToModel();
-
 
             return View(model);
         }
