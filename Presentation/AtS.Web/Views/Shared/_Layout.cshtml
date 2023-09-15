@@ -48,6 +48,20 @@
         .rounded-1r {
             border-radius: 1rem !important;
         }
+        .colapse-icon {
+            font-weight: 400;
+            font-size: 1rem;
+            text-decoration: none;
+            color: black;
+        }
+
+        a.colapse-icon[aria-expanded=true] .bi.bi-chevron-down {
+            display: none;
+        }
+
+        a.colapse-icon[aria-expanded=false] .bi.bi-chevron-up {
+            display: none;
+        }
     </style>
 </head>
 
