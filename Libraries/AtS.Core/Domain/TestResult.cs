@@ -4,14 +4,8 @@ using System.ComponentModel.DataAnnotations;
 namespace TWYK.Core.Domain
 {
     [Table("TestResult")]
-    // Remove this line if you no have an entity validator
-    //[Validator(typeof(TestResaultValidator))]
     public class TestResult : BaseEntity
     {
-        //[Column("Id")]
-        //[Display(Name = "Test Result Id")]
-        //public int Id { get; set; }
-
 
         [Column("CustomerId")]
         [Display(Name = "Test Result_CustomerId")]

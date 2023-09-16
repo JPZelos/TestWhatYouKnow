@@ -2,11 +2,16 @@ tinymce.init({
     selector: "textarea",
     entity_encoding: "raw",
     language: 'el',
-    plugins: 'lists image link table code codesample visualblocks quickbars',
+    plugins: 'lists image link table code codesample visualblocks quickbars powerpaste',
 
     menubar: 'edit view insert format tools table help',
     toolbar: "undo redo removeformat | blocks | bold italic underline strikethrough | align numlist bullist | lineheight outdent indent | link image table | code codesample visualblocks",
     default_link_target: '_blank',
+
+    powerpaste_allow_local_images: false,
+    powerpaste_word_import: 'prompt',
+    powerpaste_html_import: 'prompt',
+
     relative_urls: false,
     link_list: [
         { title: tinyMceFiles[0], value: '../content/files/geoponia.pdf' },

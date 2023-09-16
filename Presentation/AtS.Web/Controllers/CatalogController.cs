@@ -27,7 +27,8 @@ namespace TWYK.Web.Controllers
 
         public ActionResult ChaptertDetails(int chapterId) {
             if (!_permissionService.Authorize("Catalog.ChaptertDetails"))
-                return RedirectToAction("ChaptertSummary", new { chapterId = chapterId });
+                return RedirectToRoute("Login");
+                //return RedirectToAction("ChaptertSummary", new { chapterId = chapterId });
 
             var chapter = _chapterService.GetChapterById(chapterId);
             var model = chapter.ToModel();

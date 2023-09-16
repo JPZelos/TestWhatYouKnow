@@ -5,9 +5,12 @@
 }
 
 <div class="row g-3">
+    <div class="col-md-12">
+        <p>Για να συμμετάσχετε στα τεστ των Κεφαλαίων πρέπει να έχετε πρώτα εγγραφεί ως Χρήστες / Μαθητές.</p>
+        <p>Αν είστε ήδη ενγεγραμμένος κάντε Login με τους κωδικούς σας, αλλιώς Συμπληρώστε την φόρμα Νέου Μαθητή.</p>
+    </div>
     <div class="col-lg-6 p-3">
-        @using (Html.BeginForm(null,null, FormMethod.Post, new { @class = "row g-3" }))
-        {
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "row g-3" })) {
             <h3>Login</h3>
             @Html.ValidationSummary()
             <div class="row g-1 m-0">
@@ -29,12 +32,11 @@
                 </div>
                 <div class="col-md-12 text-end"><button type="submit" class="btn btn-primary">Είσοδος</button></div>
             </div>
-            
+
         }
     </div>
     <div class="col-lg-6 p-3">
-        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "row g-3" }))
-        {
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "row g-3" })) {
             <h3>Εγγραφή Νέου Μαθητή</h3>
             @Html.ValidationSummary()
             <div class="row g-1 m-0">

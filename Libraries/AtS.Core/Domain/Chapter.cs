@@ -6,17 +6,11 @@ using System.Web.Mvc;
 namespace TWYK.Core.Domain
 {
     [Table("Chapter")]
-    // Remove this line if you no have an entity validator
-    //[Validator(typeof(ChapterValidator))]
     public class Chapter : BaseEntity
 
     {
         private ICollection<Question> _questions;
 
-        //[Column("Id")]
-        //[Display(Name = "Chapter Id")]
-        //public int Id { get; set; }
-        
         [Column("TopicId")]
         [Display(Name = "Chapter TopicId")]
         public int TopicId { get; set; }
@@ -32,15 +26,18 @@ namespace TWYK.Core.Domain
         public string Description { get; set; }
 
         [Column("SuccessMsg")]
-        [Display(Name = "Question Success Msg")]
+        [Display(Name = "Μήνυμα απόλυτης επιτυχίας")]
+        [Required(ErrorMessage = "Το Μήνυμα είναι απαραίτητο")]
         public string SuccessMsg { get; set; }
 
         [Column("PassMsg")]
-        [Display(Name = "Question Pass Msg")]
+        [Display(Name = "Μύνυμα επιτυχίας")]
+        [Required(ErrorMessage = "Το Μήνυμα είναι απαραίτητο")]
         public string PassMsg { get; set; }
 
         [Column("FaultMsg")]
-        [Display(Name = "Question Fault Msg")]
+        [Display(Name = "Μύνημα αποτυχίας")]
+        [Required(ErrorMessage = "Το Μήνυμα είναι απαραίτητο")]
         public string FaultMsg { get; set; }
 
 

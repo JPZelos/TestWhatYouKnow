@@ -74,3 +74,64 @@
 .form-group {
 	display: flex;
 }
+
+/*******************FIXIES*****************/
+body {
+	font-size: 14px;
+	background-color: #f9f9f9;
+}
+
+h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
+	margin-top: 2rem;
+	margin-bottom: 0.5rem;
+	font-weight: 700;
+	line-height: 1.2;
+	color: #b31f24;
+}
+
+h1, h2 {
+	margin-top: 0;
+}
+
+.btn {
+	font-weight: 700;
+}
+
+.btn-primary {
+	background-color: #b31f24;
+	border-color: #b31f24;
+}
+
+.form-label {
+	font-weight: 700;
+}
+
+.card-title {
+	margin-top: 0;
+	margin-bottom: 0.5rem;
+}
+
+.rounded-1r {
+	border-radius: 1rem !important;
+}
+
+.colapse-icon {
+	font-weight: 400;
+	font-size: 1rem;
+	text-decoration: none;
+	color: black;
+}
+
+a.colapse-icon[aria-expanded=true] .bi.bi-chevron-down {
+	display: none;
+}
+
+a.colapse-icon[aria-expanded=false] .bi.bi-chevron-up {
+	display: none;
+}
+
+.navbar-light .navbar-nav .nav-link {
+	color: black;
+	font-weight: 700;
+	font-size: 1.06rem;
+}

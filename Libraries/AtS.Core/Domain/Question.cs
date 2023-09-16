@@ -5,16 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace TWYK.Core.Domain
 {
     [Table("Question")]
-    // Remove this line if you no have an entity validator
-    //[Validator(typeof(QuestionValidator))]
     public class Question : BaseEntity
     {
         private ICollection<Answer> _answer;
-
-        [Column("Id")]
-        [Display(Name = "Question Id")]
-        public int Id { get; set; }
-
 
         [Column("Description")]
         [Display(Name = "Ερώτηση")]

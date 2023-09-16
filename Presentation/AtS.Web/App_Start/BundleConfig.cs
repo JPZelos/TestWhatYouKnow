@@ -60,7 +60,8 @@ namespace TWYK.Web
                 "~/Content/assets/css/style.css",
                 "~/Content/assets/css/responsive.css",
                 "~/Content/assets/css/animation.css",
-                "~/Content/assets/css/result_style.css"));
+                "~/Content/assets/css/result_style.css",
+                "~/Content/css/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/maincss").Include(
                 "~/Content/css/styles.css",

@@ -31,12 +31,25 @@ namespace TWYK.Web.Models
 
         public  TopicModel Topic { get; set; }
 
-        public int SuccessProgres() {
-            var count = Quizzes.Count(q => q.Success);
-                return count;
+
+        public bool IsQuizReady() {
+
+            foreach (var question in Questions) {
+                if (question.Answers.Count == 0) {
+                    return false;
+                }
+            }
+
+            return Questions.Count > 0;
 
         }
-       
+        public int SuccessProgres()
+        {
+            var count = Quizzes.Count(q => q.Success);
+            return count;
+
+        }
+
         public IList<QuestionModel> Questions { get; set; }
 
         public IList<Quiz> Quizzes { get; set; }
