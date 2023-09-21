@@ -29,12 +29,12 @@ Open the **TWYK.Web** project's **web.config** file and change the existing conn
 	<li>Password: <strong>123</strong></li>
 	<li>To login as Teacher choose Login from Header menu and in Login page use the following credentials:</li>
 	<li>Username: <strong>teacher_a</strong></li>
-	<li>Password: <strong>123</strong> or</li>
+	<li>Password: <strong>123</strong></li>
 	<li>Username: <strong>teacher_b</strong></li>
 	<li>Password: <strong>123</strong></li>
 	<li>To login as Student choose Login from Header menu and in Login page use the following credentials:</li>
 	<li>Username: <strong>std_a</strong></li>
-	<li>Password: <strong>123</strong> or</li>
+	<li>Password: <strong>123</strong></li>
 	<li>Username: <strong>std_b</strong></li>
 	<li>Password: <strong>123</strong></li>
 </ul>
