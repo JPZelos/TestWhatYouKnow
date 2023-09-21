@@ -31,12 +31,12 @@ namespace TWYK.Core.Domain
         public string SuccessMsg { get; set; }
 
         [Column("PassMsg")]
-        [Display(Name = "Μύνυμα επιτυχίας")]
+        [Display(Name = "Μήνυμα επιτυχίας")]
         [Required(ErrorMessage = "Το Μήνυμα είναι απαραίτητο")]
         public string PassMsg { get; set; }
 
         [Column("FaultMsg")]
-        [Display(Name = "Μύνημα αποτυχίας")]
+        [Display(Name = "Μήνυμα αποτυχίας")]
         [Required(ErrorMessage = "Το Μήνυμα είναι απαραίτητο")]
         public string FaultMsg { get; set; }
 
