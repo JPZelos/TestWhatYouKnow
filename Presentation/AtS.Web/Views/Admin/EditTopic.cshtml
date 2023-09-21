@@ -80,7 +80,6 @@
                                 <table class="table table-striped">
                                     <thead>
                                     <tr>
-                                        <th scope="col">#</th>
                                         <th scope="col">Κεφάλαιο</th>
                                         <th scope="col">Ελάχιστο Score</th>
                                         <th scope="col">Action</th>
@@ -89,7 +88,6 @@
                                     <tbody>
                                     @foreach (var chapter in Model.Chapters) {
                                         <tr>
-                                            <th scope="row">@chapter.Id</th>
                                             <td style="width: 45%;">@chapter.Name</td>
                                             <td style="width: 45%;">@chapter.PasScore</td>
                                             <td style="text-align: center;">

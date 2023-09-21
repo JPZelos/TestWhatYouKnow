@@ -26,8 +26,8 @@ namespace TWYK.Core.Domain
 
 
         [Column("SuccessValue")]
-        [Display(Name = "Επιτυχημένη Απάντηση")]
-        [Required(ErrorMessage = "Η Επιτυχημένη Απάντηση είναι απαραίτητη")]
+        [Display(Name = "Σωστή απάντηση")]
+        [Required(ErrorMessage = "Η Σωστή απάντηση είναι απαραίτητη")]
         public int SuccessValue { get; set; }
 
         public virtual Chapter Chapter { get; set; }

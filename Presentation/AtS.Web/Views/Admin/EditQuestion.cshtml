@@ -90,9 +90,8 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th scope="col">#</th>
                                             <th scope="col">Απάντηση</th>
-                                            <th scope="col">Ταυτότητα Επιτυχίας</th>
+                                            <th scope="col">Αριθμός απάντησης</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
@@ -100,7 +99,6 @@
                                         @foreach (var answer in Model.Answers)
                                         {
                                             <tr>
-                                                <th scope="row">@answer.Id</th>
                                                 <td style="width: 45%;">@answer.Label</td>
                                                 <td style="width: 45%;">@answer.Value</td>
                                                 <td style="text-align: center;">

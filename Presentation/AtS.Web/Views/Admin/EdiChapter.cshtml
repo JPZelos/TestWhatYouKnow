@@ -105,10 +105,9 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th scope="col">#</th>
                                             <th scope="col">Ερώτηση</th>
                                             <th scope="col">Score</th>
-                                            <th scope="col">Πόντοι επιτυχίας</th>
+                                            <th scope="col">Σωστή απάντηση</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
@@ -116,7 +115,6 @@
                                         @foreach (var question in Model.Questions)
                                         {
                                             <tr>
-                                                <th scope="row">@question.Id</th>
                                                 <td style="width: 33%;">@question.Description</td>
                                                 <td style="width: 33%;">@question.Score</td>
                                                 <td style="width: 33%;">@question.SuccessValue</td>

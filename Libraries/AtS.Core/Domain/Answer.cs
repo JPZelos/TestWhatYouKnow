@@ -25,8 +25,8 @@ namespace TWYK.Core.Domain
 
 
         [Column("Value")]
-        [Display(Name = "Ταυτότητα Επιτυχίας")]
-        [Required(ErrorMessage = "Η Ταυτότητα Επιτυχίας είναι απαραίτητη")]
+        [Display(Name = "Αριθμός απάντησης")]
+        [Required(ErrorMessage = "Ο Αριθμός απάντησης είναι απαραίτητος")]
         public int Value { get; set; }
 
         public virtual Question Question { get; set; }
