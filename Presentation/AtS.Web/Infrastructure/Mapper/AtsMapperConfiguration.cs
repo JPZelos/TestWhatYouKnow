@@ -16,21 +16,8 @@ namespace TWYK.Web.Infrastructure.Mapper
         public Action<IMapperConfigurationExpression> GetConfiguration() {
             Action<IMapperConfigurationExpression> action = cfg => {
 
-                cfg.CreateMap<Category, CategoryModel>();
-                    //.ForMember(dest => dest.FullDescription, mo => mo.MapFrom(string), mo => mo.Ignore());
-                    // Instead we use auto generated default value
-                   // .ForMember(dest => dest.FullDescription, opt => opt.MapFrom(src => src.Code + "-" + src.Name));
-                cfg.CreateMap<CategoryModel, Category>();
-
-                cfg.CreateMap<Product, ProductModel>();
-                cfg.CreateMap<ProductModel, Product>();
-
                 cfg.CreateMap<Customer, CustomerModel>();
                 cfg.CreateMap<CustomerModel, Customer>();
-
-                cfg.CreateMap<ShoppingCartItem, ShoppingCartItemModel>();
-                cfg.CreateMap<ShoppingCartItemModel, ShoppingCartItem>();
-
 
                 cfg.CreateMap<Topic, TopicModel>();
                 cfg.CreateMap<TopicModel, Topic>();

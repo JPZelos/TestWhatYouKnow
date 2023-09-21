@@ -1,0 +1,190 @@
+﻿@model Chapter
+@{
+    ViewBag.Title = "Μάθημα";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-topic-tab" data-bs-toggle="tab" data-bs-target="#nav-topic" type="button" role="tab" aria-controls="nav-topic" aria-selected="true">Μάθημα</button>
+                <button class="nav-link" id="nav-questions-tab" data-bs-toggle="tab" data-bs-target="#nav-questions" type="button" role="tab" aria-controls="nav-questions" aria-selected="false">Ερωτήσεις</button>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-topic" role="tabpanel" aria-labelledby="nav-topic-tab">
+                <div class="row justify-content-center mb-5">
+
+
+                    <div class="col">
+                        <div class="card">
+
+                            <div class="card-header">
+                                <h3 class="card-title">Μάθημα: @Model.Name</h3>
+                                <div class="card-options">
+                                    <a href="@Url.Action("EditTopic", "Admin", new{topicId = Model.TopicId})#nav-chapters" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Επίστροφή">
+                                        <i class="bi bi-arrow-left-square"></i> Επιστροφή
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "row g-3" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(m => m.Id)
+                                    @Html.HiddenFor(m => m.TopicId)
+
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(m => m.Name, new { @class = "form-label" })
+                                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.Name)
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(m => m.PasScore, new { @class = "form-label" })
+                                        @Html.TextBoxFor(m => m.PasScore, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.PasScore)
+                                    </div>
+
+
+                                    <div class="col-md-12">
+                                        @Html.LabelFor(m => m.Description, new { @class = "form-label" })
+                                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", cols = 80, rows = 10 })
+                                        @Html.ValidationMessageFor(m => m.Description)
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        @Html.LabelFor(m => m.SuccessMsg, new { @class = "form-label" })
+                                        @Html.TextBoxFor(m => m.SuccessMsg, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.SuccessMsg)
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        @Html.LabelFor(m => m.PassMsg, new { @class = "form-label" })
+                                        @Html.TextBoxFor(m => m.PassMsg, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.PassMsg)
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        @Html.LabelFor(m => m.FaultMsg, new { @class = "form-label" })
+                                        @Html.TextBoxFor(m => m.FaultMsg, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.FaultMsg)
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <button class="btn btn-primary">Απόθήκευση</button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="tab-pane fade" id="nav-questions" role="tabpanel" aria-labelledby="nav-questions-tab">
+                <div class="row justify-content-center">
+
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Ερωτήσεις</h3>
+                                <div class="card-options">
+                                    <a href="@Url.Action("EditTopic", "Admin", new{topicId = Model.TopicId})#nav-chapters" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Επίστροφή">
+                                        <i class="bi bi-arrow-left-square"></i> Επιστροφή
+                                    </a>
+                                    <a href="@Url.Action("EditQuestion", "Admin", new { questionId = 0, chapterId = Model.Id })" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέα Ερώτηση">
+                                        <i class="bi bi-plus-square"></i> Νέα Ερώτηση
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Ερώτηση</th>
+                                            <th scope="col">Score</th>
+                                            <th scope="col">Σωστή απάντηση</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var question in Model.Questions)
+                                        {
+                                            <tr>
+                                                <td style="width: 33%;">@question.Description</td>
+                                                <td style="width: 33%;">@question.Score</td>
+                                                <td style="width: 33%;">@question.SuccessValue</td>
+                                                <td style="text-align: center;">
+                                                    <a href="@Url.Action("EditQuestion", "Admin", new { questionId = question.Id })"
+                                                       data-bs-toggle="tooltip"
+                                                       data-bs-placement="top"
+                                                       title="Click to Edit">
+                                                        <i class="bi bi-pencil-square"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+
+    <script src="~/scripts/tinymce/tinymce.js"></script>
+    <script src="~/scripts/tinymce/tinymce-init.js" charset="UTF-8"></script>
+    <script>
+
+
+        const pillsTab = document.querySelector('#nav-tab');
+        const pills = pillsTab.querySelectorAll('button[data-bs-toggle="tab"]');
+
+        pills.forEach(pill => {
+            pill.addEventListener('shown.bs.tab', (event) => {
+                const { target } = event;
+                const { id: targetId } = target;
+
+                savePillId(targetId);
+            });
+        });
+
+        const savePillId = (selector) => {
+            localStorage.setItem('activePillId', selector);
+        };
+
+        const getPillId = () => {
+            const activePillId = localStorage.getItem('activePillId');
+
+            // if local storage item is null, show default tab
+            if (!activePillId) return;
+
+            // call 'show' function
+            const someTabTriggerEl = document.querySelector(`#${activePillId}`)
+            const tab = new bootstrap.Tab(someTabTriggerEl);
+
+            tab.show();
+        };
+
+        // get pill id on load
+        getPillId();
+
+
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+
+    
+    </script>
+}

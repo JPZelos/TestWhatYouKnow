@@ -10,126 +10,97 @@ namespace TWYK.Web
 
             //define this routes to use in UI views (in case if you want to customize some of them later)
             routes.MapRoute(
-                name: "Product",
-                url: "catalog/product/{productId}",
+                "Product",
+                "catalog/product/{productId}",
                 new { controller = "catalog", action = "ProductDetails" });
 
-            
-            
             //twyn
             routes.MapRoute(
-                name: "Chapter",
-                url: "catalog/chapter/{chapterId}",
+                "Chapter",
+                "catalog/chapter/{chapterId}",
                 new { controller = "catalog", action = "ChaptertDetails" });
 
             //twyn
             routes.MapRoute(
-                name: "DoTest",
-                url: "catalog/DoTest/{chapterId}",
+                "DoTest",
+                "catalog/DoTest/{chapterId}",
                 new { controller = "answer", action = "DoTest" });
 
-
-
-
-
-            //shopping cart
+            //twyn
             routes.MapRoute(
-                name: "ShoppingCart",
-                url: "cart/",
-                new { controller = "ShoppingCart", action = "Cart" });
+                "ActionDenied",
+                "catalog/ActionDenied",
+                new { controller = "Admin", action = "ActionDenied" });
+
+            //twyn
+            routes.MapRoute(
+                "AdminUsers",
+                "admin/Users/",
+                new { controller = "Admin", action = "AdminUsers" }
+            );
+
+            //twyn
+            routes.MapRoute(
+                "TeacherUsers",
+                "admin/TeacherUsers",
+                new { controller = "Admin", action = "TeacherUsers" }
+            );
+
+            //twyn
+            routes.MapRoute(
+                "TeacherTopics",
+                "admin/TeacherTopics",
+                new { controller = "Admin", action = "Topics" }
+            );
+
+            //twyn
+            routes.MapRoute(
+                "Chapters",
+                "admin/Chapters",
+                new { controller = "Admin", action = "Chapters" }
+            );
+
+            //twyn
+            routes.MapRoute(
+                "Questions",
+                "admin/Questions/{chapterId}",
+                new { controller = "Admin", action = "Questions" }
+            );
 
             //admin home page
             routes.MapRoute(
-                name: "AdminHomePage",
-                url: "admin/",
+                "AdminHomePage",
+                "admin/",
                 new { controller = "Admin", action = "Index" }
             );
 
             routes.MapRoute(
-                name: "AdminCategories",
-                url: "admin/categories/",
-                new { controller = "Admin", action = "Categories" }
-            );
-            routes.MapRoute(
-                name: "AdminProducts",
-                url: "admin/products/",
-                new { controller = "Admin", action = "Products" }
-            );
-
-            //add product to cart (without any attributes and options). used on catalog pages.
-            routes.MapRoute(
-                name: "AddProductToCart-Catalog",
-                url: "addproducttocart/{productId}/{quantity}",
-                new {controller = "ShoppingCart", action = "AddProductToCart_Catalog"},
-                new {productId = @"\d+", quantity = @"\d+"});
-
-            //login page for checkout as guest
-            routes.MapRoute(
-                name: "Checkout",
-                url: "Checkout/",
-                new { controller = "ShoppingCart", action = "Checkout" });
-
-            //login page for checkout as guest
-            routes.MapRoute(
-                name: "LoginCheckoutAsGuest",
-                url: "login/checkoutasguest",
-                new { controller = "Account", action = "Login", checkoutAsGuest = true });
-
-            routes.MapRoute(
-                name: "Login",
-                url: "login/",
+                "Login",
+                "login/",
                 new { controller = "Account", action = "Login" });
-
-            //register result page
-
-            routes.MapRoute(
-                name: "Category",
-                url: "category/{categoryId}",
-                new { controller = "Catalog", action = "Category" },
-                new { categoryId = @"\d+" });
-
-            routes.MapRoute(
-                name: "AllProducts",
-                url: "products/",
-                new { controller = "Catalog", action = "List" });
 
             //page not found
             routes.MapRoute(
-                name: "PageNotFound",
-                url: "page-not-found",
+                "PageNotFound",
+                "page-not-found",
                 new { controller = "Common", action = "PageNotFound" });
 
-
             routes.MapRoute(
-                name: "DatabaseInfo",
-                url: "page-not-found",
+                "DatabaseInfo",
+                "page-not-found",
                 new { controller = "Common", action = "DatabaseInfo" });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             //home page
             routes.MapRoute(
-                name: "HomePage",
-                url: "",
-                new {controller = "Home", action = "Index"}
+                "HomePage",
+                "",
+                new { controller = "Home", action = "Index" }
             );
-
 
             routes.MapRoute(
                 "Default",
                 "{controller}/{action}/{id}",
-                new {controller = "Home", action = "Index", id = UrlParameter.Optional}
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

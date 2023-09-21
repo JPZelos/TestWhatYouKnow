@@ -4,7 +4,6 @@ using TWYK.Core;
 using TWYK.Core.Domain;
 using TWYK.Services.Authentication;
 using TWYK.Services.Customers;
-using TWYK.Services.Orders;
 using TWYK.Web.Framework.Controllers;
 using TWYK.Web.Models;
 
@@ -16,18 +15,15 @@ namespace TWYK.Web.Controllers
 
         private readonly IAuthenticationService _authenticationService;
         private readonly ICustomerService _customerService;
-        private readonly IShoppingCartService _shoppingCartService;
         private readonly IWorkContext _workContext;
 
         public AccountController(
             IAuthenticationService authenticationService,
             ICustomerService customerService,
-            IShoppingCartService shoppingCartService,
             IWorkContext workContext
         ) {
             _authenticationService = authenticationService;
             _customerService = customerService;
-            _shoppingCartService = shoppingCartService;
             _workContext = workContext;
         }
 
@@ -53,14 +49,15 @@ namespace TWYK.Web.Controllers
                     case CustomerLoginResults.Successful: {
                         var customer = _customerService.GetCustomerByUsername(model.UserName);
 
-                        //migrate shopping cart
-                        _shoppingCartService.MigrateShoppingCart(_workContext.CurrentCustomer, customer, true);
-
                         //sign in new customer
                         _authenticationService.SignIn(customer, true);
 
                         //sign in admin
-                        if (customer.RoleNames.Contains(SystemCustomerRoleNames.Administrators)) {
+                        if (
+                            customer.RoleNames.Contains(SystemCustomerRoleNames.Administrators) ||
+                            customer.RoleNames.Contains(SystemCustomerRoleNames.Teachers)
+                        )
+                        {
                             return RedirectToRoute("AdminHomePage");
                         }
 
@@ -88,7 +85,7 @@ namespace TWYK.Web.Controllers
                         break;
                 }
             }
-
+            
             return View(model);
         }
 
@@ -109,7 +106,6 @@ namespace TWYK.Web.Controllers
                 Zip = "12243",
                 RoleNames = "Registered,Administrators",
                 IsAdmin = true,
-                HasShoppingCartItems = false,
                 LastLoginDateUtc = DateTime.UtcNow
             };
 
@@ -158,7 +154,6 @@ namespace TWYK.Web.Controllers
                 Zip = "12243",
                 RoleNames = "Registered,Administrators",
                 IsAdmin = true,
-                HasShoppingCartItems = false,
                 LastLoginDateUtc = DateTime.UtcNow
             };
 
@@ -218,9 +213,8 @@ namespace TWYK.Web.Controllers
             if (ModelState.IsValid) {
 
                 customer.LastLoginDateUtc = DateTime.UtcNow;
-                customer.HasShoppingCartItems = _workContext.CurrentCustomer.HasShoppingCartItems;
                 customer.IsAdmin = false;
-                customer.RoleNames = "Registered";
+                customer.RoleNames = "Registered,Students";
                 customer.Zip = model.Zip;
                 customer.State = model.State;
                 customer.City = model.City;
@@ -230,9 +224,6 @@ namespace TWYK.Web.Controllers
                 customer.UserName = model.UserName;
                 customer.LastName = model.LastName;
                 customer.FirstName = model.FirstName;
-
-                //migrate shopping cart
-                _shoppingCartService.MigrateShoppingCart(_workContext.CurrentCustomer, customer, true);
 
                 //sign in new customer
                 _authenticationService.SignIn(customer, true);

@@ -1,0 +1,54 @@
+﻿@model List<Chapter>
+@{
+    ViewBag.Title = "Chapters";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row justify-content-center">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Κεφάλαια</h3>
+                <div class="card-options">
+                    <button type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέο Κεφάλαιο">
+                        <i class="bi bi-plus-square"></i>
+                    </button>
+                </div>
+            </div>
+
+
+            
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Κεφάλαιο</th>
+                            <th>Μάθημα</th>
+                            <th>Καθηγητής</th>
+                            <th>Ενέργεις</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var cp in Model)
+                        {
+                            <tr>
+                                <td>@cp.Name</td>
+                                <td>@cp.Topic.Name</td>
+                                <td>@cp.Topic.Customer.FirstName @cp.Topic.Customer.LastName</td>
+                                <td style="text-align: center;">
+                                    <a href="@Url.Action("EdiChapter", "Admin", new { chapterId = cp.Id })"
+                                       data-bs-toggle="tooltip"
+                                       data-bs-placement="top"
+                                       title="Click to Edit">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

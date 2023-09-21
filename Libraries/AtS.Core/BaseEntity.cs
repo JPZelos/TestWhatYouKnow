@@ -12,6 +12,8 @@ namespace TWYK.Core
         /// </summary>
         public int Id { get; set; }
 
+        public DateTime LastUpdate { get; set; }
+
         public override bool Equals(object obj) {
             return Equals(obj as BaseEntity);
         }

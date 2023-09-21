@@ -127,15 +127,13 @@
     <Compile Include="CommonHelper.cs" />
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Domain\Answer.cs" />
-    <Compile Include="Domain\Category.cs" />
     <Compile Include="Domain\Chapter.cs" />
     <Compile Include="Domain\Customer.cs" />
     <Compile Include="Domain\CustomerExtensions.cs" />
     <Compile Include="Domain\CustomerLoginResults.cs" />
-    <Compile Include="Domain\Product.cs" />
     <Compile Include="Domain\Question.cs" />
+    <Compile Include="Domain\Quiz.cs" />
     <Compile Include="Domain\RoundingHelper.cs" />
-    <Compile Include="Domain\ShoppingCartItem.cs" />
     <Compile Include="Domain\SystemCustomerRoleNames.cs" />
     <Compile Include="Domain\TestResult.cs" />
     <Compile Include="Domain\Topic.cs" />

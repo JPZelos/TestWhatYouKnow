@@ -1,0 +1,58 @@
+﻿@model ResultModel
+@{
+    ViewBag.Title = "GetUserResults";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="row justify-content-center">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title"><span>@Model.FullName</span> <span>Αποτελέσματα Ερωτηματολογίων</span></h3>
+                <div class="card-options">
+                    <a href="@Url.Action("TeacherUsers", "Admin")" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Επίστροφή">
+                        <i class="bi bi-arrow-left-square"></i> Επιστροφή
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                @foreach (var topic in Model.Topics)
+                {
+                    <h3><span>Μάθημα:</span> @topic.Name</h3>
+                    <p>Διδάσκων: @topic.Customer.FirstName  @topic.Customer.LastName</p>
+                    foreach (var chapter in topic.Chapters)
+                    {
+                        if (chapter.Quizzes.Count > 0)
+                        {
+                            <h4><span>Κεφάλαιο:</span> @chapter.Name</h4>
+                            <p>Μια προσπάθεια θεωρείται επιτυχής εάν έχει συγκεντρώσει @chapter.PasScore ή περισσότερους πόντους</p>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Αποτέλεσμα</th>
+                                    <th>Πόντοι</th>
+                                    <th>Προσπάθεια</th>
+                                    <th>Ημ/νία</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach (var quiz in chapter.Quizzes)
+                                {
+                                    var succesClass = quiz.Success ? "table-success" : "table-light";
+                                    <tr class="@succesClass">
+                                        <td>@(quiz.Success ? "Επιτυχές":"Μη επιτυχές")</td>
+                                        <td>@quiz.Score/100 </td>
+                                        <td>@quiz.Tries</td>
+                                        <td>@quiz.LastUpdate.ToString("g")</td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                        }
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

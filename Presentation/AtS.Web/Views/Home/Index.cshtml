@@ -1,20 +1,73 @@
-﻿@model List<TWYK.Web.Models.TopicModel>
+﻿@using TWYK.Core
+@model List<TopicModel>
 @{
     ViewBag.Title = "Home Page";
 }
 
-@foreach (var topic in Model) {
-    <div class="row justify-content-center">
-        <div class="row">
-            <h2>Μάθημα: <strong>@topic.Name</strong></h2>
-        </div>
-        
-        <h3>Κεφάλαια</h3>
-        <ul>
-            @foreach (var chapter in topic.Chapters) {
-                <li><a href="@Url.RouteUrl("Chapter", new{chapterId=@chapter.Id})"> @chapter.Name</a></li>
-            }
-        </ul>
-        
+
+<div class="row">
+    <div class="col">
+        @foreach (var topic in Model) {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card  text-dark border-white mb-5 rounded-1r">
+                        <div class="card-body">
+                            <div class="card-text">
+                                <h5 class="card-title"><span style="color:gray;">Μάθημα:</span> @topic.Name</h5>
+                                <p class="card-text">Διδάσκων: @topic.Customer.FirstName @topic.Customer.LastName</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                @foreach (var chapter in topic.Chapters) {
+                    var relativePath = "~/Content/assets/images/svgs/chapter-" + chapter.Id + ".svg";
+                    var tempPath = "/Content/assets/images/svgs/chapter-" + chapter.Id + ".svg";
+                    var absolutePath = CommonHelper.MapPath(relativePath);
+                    var image = "/Content/assets/images/svgs/chapter-gen.svg";
+                    if (File.Exists(absolutePath)) {
+                        image = tempPath;
+                    }
+
+                    <div class="col">
+                        <div class="card  text-dark border-white mb-5 rounded-1r">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-2">
+                                                @*<img class="img-fluid rounded-start" src="~/Content/assets/images/svgs/chapter-@(chapter.Id).svg" />*@
+                                                <img class="img-fluid rounded-start" src="@image" />
+                                            </div>
+                                            <div class="col-md-10">
+                                                <h5 class="card-title">@chapter.Name</h5>
+                                                <p class="card-text">
+                                                    @Html.Raw(chapter.Description.StripTags().TruncateHtml(240, "..."))
+                                                </p>
+                                                <p class="card-text">
+                                                    <strong>@chapter.Questions.Count</strong> Ερωτήσεις
+                                                </p>
+                                                <div class="text-end">
+                                                    @if (chapter.IsQuizReady())
+                                                    {
+                                                        <a class="btn btn-primary btn-sm mt-auto" href="@Url.RouteUrl("Chapter", new { chapterId = chapter.Id })">Λεπτομέρειες</a>
+                                                    }
+                                                    else {
+                                                        <button class="btn btn-sm btn-secontary">Αναμένεται σύντομα</button>
+                                                    }
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
     </div>
-}
+</div>
+

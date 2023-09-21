@@ -1,0 +1,60 @@
+﻿@model TWYK.Web.Models.AdminNavLinksModel
+
+<nav id="sidebar">
+    <div class="custom-menu">
+        <button type="button" id="sidebarCollapse" class="btn btn-primary">
+            <i class="fa fa-bars"></i>
+            <span class="sr-only">Toggle Menu</span>
+        </button>
+    </div>
+    <div class="p-4 pt-5">
+        <h1><a href="/" class="logo"><span>TWYK</span></a></h1>
+        <h5>@Model.CustomerName</h5>
+        
+      
+
+        <ul class="list-unstyled components mb-5">
+            <li>
+                <a href="#homeSubmenu" data-bs-toggle="collapse" role="button" class="dropdown-toggle">Users</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    @if (Model.Customer.IsInCustomerRole(SystemCustomerRoleNames.Administrators)) {
+                        <li>
+                            <a href="@Url.RouteUrl("AdminUsers")">Users</a>
+                        </li>
+                    }
+                    @if (Model.Customer.IsInCustomerRole(SystemCustomerRoleNames.Teachers)) {
+                        <li>
+                            <a href="@Url.RouteUrl("TeacherUsers")">Users</a>
+                        </li>
+                    }
+                       
+                </ul>
+            </li>
+            @if (Model.Customer.IsInCustomerRole(SystemCustomerRoleNames.Teachers)) {
+                <li>
+                    <a href="#usersSubmenu" data-bs-toggle="collapse" role="button" class="dropdown-toggle">Courses</a>
+                    <ul class="collapse list-unstyled" id="usersSubmenu">
+                        <li>
+                            <a href="@Url.RouteUrl("TeacherTopics")">Μαθήματα</a>
+                        </li>
+                        <li>
+                            <a href="@Url.RouteUrl("Chapters")">Κεφάλαια</a>
+                        </li>
+                    </ul>
+                </li>
+            }
+            
+
+        </ul>
+        
+        <a href="@Url.Action("SignOut", "Account")" class="btn btn-outline-light text-light flex-shrink-0 mb-5" type="button">
+            <i class="bi bi-box-arrow-right"></i>
+            Logout
+        </a>
+
+        <div class="footer">
+            <p>Copyright &copy; @DateTime.Now.Year Test What You Know  All rights reserved </p>
+        </div>
+
+    </div>
+</nav>

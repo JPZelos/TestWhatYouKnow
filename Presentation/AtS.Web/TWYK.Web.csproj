@@ -195,8 +195,6 @@
     <Compile Include="Controllers\CatalogController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ShoppingCartController.cs" />
-    <Compile Include="Factories\ShoppingCartModelFactory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -204,22 +202,55 @@
     <Compile Include="Infrastructure\Mapper\AtsMapperConfiguration.cs" />
     <Compile Include="Infrastructure\Mapper\MappingExtensions.cs" />
     <Compile Include="Models\AnswerModel.cs" />
-    <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\ChapterModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\NavLinksModel.cs" />
-    <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\QuestionModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
-    <Compile Include="Models\ShoppingCartItemModel.cs" />
-    <Compile Include="Models\ShoppingCartModel.cs" />
+    <Compile Include="Models\ResultModel.cs" />
+    <Compile Include="Models\TeacherUsersModel.cs" />
     <Compile Include="Models\TestResultModel.cs" />
     <Compile Include="Models\TestResults.cs" />
     <Compile Include="Models\TopicModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\assets\css\animation.css" />
+    <Content Include="Content\assets\css\Bootstrap\bootstrap.min.css" />
+    <Content Include="Content\assets\css\FontAwesome\all.min.css" />
+    <Content Include="Content\assets\css\responsive.css" />
+    <Content Include="Content\assets\css\result_style.css" />
+    <Content Include="Content\assets\css\style.css" />
+    <Content Include="Content\assets\fonts\font.css" />
+    <Content Include="Content\assets\images\bg.jpg" />
+    <Content Include="Content\assets\images\bh-clip.png" />
+    <Content Include="Content\assets\images\header-bg.jpg" />
+    <Content Include="Content\assets\images\loading.gif" />
+    <Content Include="Content\assets\images\logo-white.svg" />
+    <Content Include="Content\assets\images\logo.svg" />
+    <Content Include="Content\assets\images\question-sign.png" />
+    <Content Include="Content\assets\images\result.jpg" />
+    <Content Include="Content\assets\images\resultinside.jpg" />
+    <Content Include="Content\assets\images\side.png" />
+    <Content Include="Content\assets\images\svgs\agroclica-icon-ambeli.svg" />
+    <Content Include="Content\assets\images\svgs\agroclica-icon-animals.svg" />
+    <Content Include="Content\assets\images\svgs\agroclica-icon-bees.svg" />
+    <Content Include="Content\assets\images\svgs\agroclica-icon-cereals.svg" />
+    <Content Include="Content\assets\images\svgs\agroclica-icon-herbs.svg" />
+    <Content Include="Content\assets\images\svgs\agroclica-icon-houseplants.svg" />
+    <Content Include="Content\assets\images\svgs\agroclica-icon-olives.svg" />
+    <Content Include="Content\assets\images\svgs\agroclica-icon-smart-farming.svg" />
+    <Content Include="Content\assets\images\svgs\agroclica-icon-trees.svg" />
+    <Content Include="Content\assets\images\svgs\agroclica-icon-vegetables.svg" />
+    <Content Include="Content\assets\images\svgs\chapter-1.svg" />
+    <Content Include="Content\assets\images\svgs\chapter-2.svg" />
+    <Content Include="Content\assets\images\svgs\chapter-3.svg" />
+    <Content Include="Content\assets\js\Bootstrap\bootstrap.min.js" />
+    <Content Include="Content\assets\js\custom-2.js" />
+    <Content Include="Content\assets\js\custom.js" />
+    <Content Include="Content\assets\js\jQuery\jquery-3.6.3.min.js" />
+    <Content Include="Content\assets\js\result.js" />
     <Content Include="Content\css\admin.css" />
     <Content Include="Content\css\admin.min.css" />
     <Content Include="Content\css\admin_old.css" />
@@ -245,48 +276,23 @@
     <Content Include="Content\Images\data-missing-creative.svg" />
     <Content Include="Content\Images\lost.svg" />
     <Content Include="Content\Images\missing-database.svg" />
-    <Content Include="Content\Images\Products\bowling-1.jpg" />
-    <Content Include="Content\Images\Products\bowling-2.jpg" />
-    <Content Include="Content\Images\Products\bowling-3.jpg" />
-    <Content Include="Content\Images\Products\bowling-4.jpg" />
-    <Content Include="Content\Images\Products\bowling-5.jpg" />
-    <Content Include="Content\Images\Products\bowling-6.jpg" />
-    <Content Include="Content\Images\Products\bowling-8.jpg" />
-    <Content Include="Content\Images\Products\Running-1.jpg" />
-    <Content Include="Content\Images\Products\Running-2.jpg" />
-    <Content Include="Content\Images\Products\Running-3.jpg" />
-    <Content Include="Content\Images\Products\Running-4.jpg" />
-    <Content Include="Content\Images\Products\Running-5.jpg" />
-    <Content Include="Content\Images\Products\Running-6.jpg" />
-    <Content Include="Content\Images\Products\Running-7.jpg" />
-    <Content Include="Content\Images\Products\Running-8.jpg" />
-    <Content Include="Content\Images\Products\soccer-1.jpg" />
-    <Content Include="Content\Images\Products\soccer-2.jpg" />
-    <Content Include="Content\Images\Products\soccer-3.jpg" />
-    <Content Include="Content\Images\Products\soccer-4.jpg" />
-    <Content Include="Content\Images\Products\soccer-5.jpg" />
-    <Content Include="Content\Images\Products\soccer-6.jpg" />
-    <Content Include="Content\Images\Products\soccer-7.jpg" />
-    <Content Include="Content\Images\Products\soccer-8.jpg" />
-    <Content Include="Content\Images\Products\tennis-1.jpg" />
-    <Content Include="Content\Images\Products\tennis-2.jpg" />
-    <Content Include="Content\Images\Products\tennis-3.jpg" />
-    <Content Include="Content\Images\Products\tennis-4.jpg" />
-    <Content Include="Content\Images\Products\tennis-5.jpg" />
-    <Content Include="Content\Images\Products\tennis-6.jpg" />
-    <Content Include="Content\Images\Products\tennis-7.jpg" />
-    <Content Include="Content\Images\Products\tennis-8.jpg" />
-    <Content Include="Content\Images\Products\Trekking-1.jpg" />
-    <Content Include="Content\Images\Products\Trekking-2.jpg" />
-    <Content Include="Content\Images\Products\Trekking-3.jpg" />
-    <Content Include="Content\Images\Products\Trekking-4.jpg" />
-    <Content Include="Content\Images\Products\Trekking-5.jpg" />
-    <Content Include="Content\Images\Products\Trekking-6.jpg" />
-    <Content Include="Content\Images\Products\Trekking-7.jpg" />
-    <Content Include="Content\Images\Products\Trekking-8.jpg" />
     <Content Include="Content\js\custom\public.ajaxcart.js" />
     <Content Include="Content\js\custom\public.common.js" />
     <Content Include="App_Data\HM_askisi.docx" />
+    <Content Include="Content\assets\fonts\MYRIADPRO-BOLD.woff" />
+    <Content Include="Content\assets\fonts\MYRIADPRO-BOLDCOND.woff" />
+    <Content Include="Content\assets\fonts\MYRIADPRO-BOLDCONDIT.woff" />
+    <Content Include="Content\assets\fonts\MYRIADPRO-BOLDIT.woff" />
+    <Content Include="Content\assets\fonts\MYRIADPRO-COND.woff" />
+    <Content Include="Content\assets\fonts\MYRIADPRO-CONDIT.woff" />
+    <Content Include="Content\assets\fonts\MyriadPro-Light.woff" />
+    <Content Include="Content\assets\fonts\MYRIADPRO-REGULAR.woff" />
+    <Content Include="Content\assets\fonts\MYRIADPRO-SEMIBOLD.woff" />
+    <Content Include="Content\assets\fonts\MYRIADPRO-SEMIBOLDIT.woff" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
     <None Include="Content\js\jquery-3.4.1.intellisense.js" />
     <Content Include="Content\js\jquery-3.4.1.js" />
     <Content Include="Content\js\jquery-3.4.1.min.js" />
@@ -313,6 +319,163 @@
     <Content Include="Content\css\site.scss" />
     <Content Include="Content\js\jquery-3.4.1.min.map" />
     <Content Include="Content\js\jquery-3.4.1.slim.min.map" />
+    <Content Include="scripts\tinymce\icons\default\icons.js" />
+    <Content Include="scripts\tinymce\icons\default\icons.min.js" />
+    <Content Include="scripts\tinymce\license.txt" />
+    <Content Include="scripts\tinymce\models\dom\model.js" />
+    <Content Include="scripts\tinymce\models\dom\model.min.js" />
+    <Content Include="scripts\tinymce\plugins\accordion\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\accordion\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\advlist\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\advlist\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\anchor\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\anchor\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\autolink\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\autolink\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\autoresize\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\autoresize\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\autosave\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\autosave\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\charmap\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\charmap\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\codesample\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\codesample\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\code\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\code\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\directionality\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\directionality\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\emoticons\js\emojiimages.js" />
+    <Content Include="scripts\tinymce\plugins\emoticons\js\emojiimages.min.js" />
+    <Content Include="scripts\tinymce\plugins\emoticons\js\emojis.js" />
+    <Content Include="scripts\tinymce\plugins\emoticons\js\emojis.min.js" />
+    <Content Include="scripts\tinymce\plugins\emoticons\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\emoticons\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\fullscreen\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\fullscreen\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\ar.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\bg_BG.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\ca.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\cs.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\da.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\de.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\el.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\en.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\es.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\eu.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\fa.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\fi.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\fr_FR.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\he_IL.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\hi.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\hr.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\hu_HU.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\id.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\it.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\ja.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\kk.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\ko_KR.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\ms.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\nb_NO.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\nl.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\pl.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\pt_BR.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\pt_PT.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\ro.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\ru.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\sk.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\sl_SI.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\sv_SE.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\th_TH.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\tr.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\uk.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\vi.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\zh_CN.js" />
+    <Content Include="scripts\tinymce\plugins\help\js\i18n\keynav\zh_TW.js" />
+    <Content Include="scripts\tinymce\plugins\help\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\help\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\image\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\image\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\importcss\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\importcss\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\insertdatetime\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\insertdatetime\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\link\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\link\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\lists\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\lists\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\media\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\media\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\nonbreaking\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\nonbreaking\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\pagebreak\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\pagebreak\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\preview\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\preview\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\quickbars\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\quickbars\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\save\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\save\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\searchreplace\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\searchreplace\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\table\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\table\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\template\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\template\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\visualblocks\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\visualblocks\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\visualchars\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\visualchars\plugin.min.js" />
+    <Content Include="scripts\tinymce\plugins\wordcount\plugin.js" />
+    <Content Include="scripts\tinymce\plugins\wordcount\plugin.min.js" />
+    <Content Include="scripts\tinymce\skins\content\dark\content.css" />
+    <Content Include="scripts\tinymce\skins\content\dark\content.min.css" />
+    <Content Include="scripts\tinymce\skins\content\default\content.css" />
+    <Content Include="scripts\tinymce\skins\content\default\content.min.css" />
+    <Content Include="scripts\tinymce\skins\content\document\content.css" />
+    <Content Include="scripts\tinymce\skins\content\document\content.min.css" />
+    <Content Include="scripts\tinymce\skins\content\tinymce-5-dark\content.css" />
+    <Content Include="scripts\tinymce\skins\content\tinymce-5-dark\content.min.css" />
+    <Content Include="scripts\tinymce\skins\content\tinymce-5\content.css" />
+    <Content Include="scripts\tinymce\skins\content\tinymce-5\content.min.css" />
+    <Content Include="scripts\tinymce\skins\content\writer\content.css" />
+    <Content Include="scripts\tinymce\skins\content\writer\content.min.css" />
+    <Content Include="scripts\tinymce\skins\ui\oxide-dark\content.css" />
+    <Content Include="scripts\tinymce\skins\ui\oxide-dark\content.inline.css" />
+    <Content Include="scripts\tinymce\skins\ui\oxide-dark\content.inline.min.css" />
+    <Content Include="scripts\tinymce\skins\ui\oxide-dark\content.min.css" />
+    <Content Include="scripts\tinymce\skins\ui\oxide-dark\skin.css" />
+    <Content Include="scripts\tinymce\skins\ui\oxide-dark\skin.min.css" />
+    <Content Include="scripts\tinymce\skins\ui\oxide-dark\skin.shadowdom.css" />
+    <Content Include="scripts\tinymce\skins\ui\oxide-dark\skin.shadowdom.min.css" />
+    <Content Include="scripts\tinymce\skins\ui\oxide\content.css" />
+    <Content Include="scripts\tinymce\skins\ui\oxide\content.inline.css" />
+    <Content Include="scripts\tinymce\skins\ui\oxide\content.inline.min.css" />
+    <Content Include="scripts\tinymce\skins\ui\oxide\content.min.css" />
+    <Content Include="scripts\tinymce\skins\ui\oxide\skin.css" />
+    <Content Include="scripts\tinymce\skins\ui\oxide\skin.min.css" />
+    <Content Include="scripts\tinymce\skins\ui\oxide\skin.shadowdom.css" />
+    <Content Include="scripts\tinymce\skins\ui\oxide\skin.shadowdom.min.css" />
+    <Content Include="scripts\tinymce\skins\ui\tinymce-5-dark\content.css" />
+    <Content Include="scripts\tinymce\skins\ui\tinymce-5-dark\content.inline.css" />
+    <Content Include="scripts\tinymce\skins\ui\tinymce-5-dark\content.inline.min.css" />
+    <Content Include="scripts\tinymce\skins\ui\tinymce-5-dark\content.min.css" />
+    <Content Include="scripts\tinymce\skins\ui\tinymce-5-dark\skin.css" />
+    <Content Include="scripts\tinymce\skins\ui\tinymce-5-dark\skin.min.css" />
+    <Content Include="scripts\tinymce\skins\ui\tinymce-5-dark\skin.shadowdom.css" />
+    <Content Include="scripts\tinymce\skins\ui\tinymce-5-dark\skin.shadowdom.min.css" />
+    <Content Include="scripts\tinymce\skins\ui\tinymce-5\content.css" />
+    <Content Include="scripts\tinymce\skins\ui\tinymce-5\content.inline.css" />
+    <Content Include="scripts\tinymce\skins\ui\tinymce-5\content.inline.min.css" />
+    <Content Include="scripts\tinymce\skins\ui\tinymce-5\content.min.css" />
+    <Content Include="scripts\tinymce\skins\ui\tinymce-5\skin.css" />
+    <Content Include="scripts\tinymce\skins\ui\tinymce-5\skin.min.css" />
+    <Content Include="scripts\tinymce\skins\ui\tinymce-5\skin.shadowdom.css" />
+    <Content Include="scripts\tinymce\skins\ui\tinymce-5\skin.shadowdom.min.css" />
+    <Content Include="scripts\tinymce\themes\silver\theme.js" />
+    <Content Include="scripts\tinymce\themes\silver\theme.min.js" />
+    <Content Include="scripts\tinymce\tinymce-init.js" />
+    <Content Include="scripts\tinymce\tinymce.js" />
+    <Content Include="scripts\tinymce\tinymce.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -329,13 +492,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\Categories.cshtml" />
-    <Content Include="Views\Admin\Products.cshtml" />
-    <Content Include="Views\Catalog\List.cshtml" />
-    <Content Include="Views\Catalog\Category.cshtml" />
-    <Content Include="Views\Catalog\ProductDetails.cshtml" />
-    <Content Include="Views\Catalog\TopMenu.cshtml" />
-    <Content Include="Views\Catalog\SideBarMenu.cshtml" />
     <Content Include="Views\Catalog\Index.cshtml" />
     <Content Include="Views\Common\AccessDenied.cshtml" />
     <Content Include="Views\Common\DatabaseInfo.cshtml" />
@@ -343,10 +499,6 @@
     <Content Include="Views\Common\PageNotFound.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
-    <Content Include="Views\Shared\_ProductBox.cshtml" />
-    <Content Include="Views\ShoppingCart\Cart.cshtml" />
-    <Content Include="Views\ShoppingCart\Checkout.cshtml" />
-    <Content Include="Views\ShoppingCart\FlyoutShoppingCart.cshtml" />
     <Content Include="Views\Shared\_AdminSideBar.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Common\Error.cshtml" />
@@ -354,8 +506,26 @@
     <Content Include="Views\Catalog\ChaptertSummary.cshtml" />
     <Content Include="Views\Answer\DoTest.cshtml" />
     <Content Include="Views\Answer\TestResult.cshtml" />
+    <Content Include="Views\Shared\_LayoutQuiz.cshtml" />
+    <Content Include="Views\Answer\Results.cshtml" />
+    <Content Include="Views\Admin\ActionDenied.cshtml" />
+    <Content Include="Views\Admin\AdminUsers.cshtml" />
+    <Content Include="Views\Admin\AdminNavLinks.cshtml" />
+    <Content Include="Views\Admin\TeacherUsers.cshtml" />
+    <Content Include="Views\Admin\UserResults.cshtml" />
+    <Content Include="Views\Admin\Topics.cshtml" />
+    <Content Include="Views\Admin\EditTopic.cshtml" />
+    <Content Include="scripts\tinymce\langs\README.md" />
+    <Content Include="Views\Admin\Chapters.cshtml" />
+    <Content Include="Views\Admin\EdiChapter.cshtml" />
+    <Content Include="Views\Admin\Questions.cshtml" />
+    <Content Include="Views\Admin\EditQuestion.cshtml" />
+    <Content Include="Views\Admin\EditAnswer.cshtml" />
+    <Content Include="Views\Admin\Answers.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <TypeScriptCompile Include="scripts\tinymce\tinymce.d.ts" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -381,6 +551,12 @@
       <Name>TWYK.Web.Framework</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\files\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -399,7 +575,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51225</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44343/</IISUrl>
+          <IISUrl>https://localhost:44333/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -415,8 +591,10 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('..\..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets'))" />
+    <Error Condition="!Exists('..\..\packages\TinyMCE.6.5.1\build\TinyMCE.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\TinyMCE.6.5.1\build\TinyMCE.targets'))" />
   </Target>
   <Import Project="..\..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('..\..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" />
+  <Import Project="..\..\packages\TinyMCE.6.5.1\build\TinyMCE.targets" Condition="Exists('..\..\packages\TinyMCE.6.5.1\build\TinyMCE.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

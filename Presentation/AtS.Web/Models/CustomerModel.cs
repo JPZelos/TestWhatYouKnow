@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using TWYK.Core;
+using TWYK.Core.Domain;
 
 namespace TWYK.Web.Models
 {
     public class CustomerModel : BaseEntity
     {
+        private ICollection<TopicModel> _topics;
+        private ICollection<Quiz> _quizzes;
         /// <summary>
         /// Ctor
         /// </summary>
@@ -30,5 +34,15 @@ namespace TWYK.Web.Models
         /// Gets or sets the date and time of last login
         /// </summary>
         public DateTime? LastLoginDateUtc { get; set; }
+
+        public virtual ICollection<Quiz> Quizzes {
+            get => _quizzes ??= new List<Quiz>();
+            set => _quizzes = value;
+        }
+
+        public virtual ICollection<TopicModel> Topics {
+            get => _topics ??= new List<TopicModel>();
+            set => _topics = value;
+        }
     }
 }

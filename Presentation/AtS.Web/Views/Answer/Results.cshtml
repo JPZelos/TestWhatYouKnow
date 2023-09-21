@@ -1,0 +1,127 @@
+﻿@model ResultModel
+@{
+    ViewBag.Title = "Results";
+
+
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Αποτελέσματα</h2>
+    </div>
+    <div class="col-md-12">
+        <div class="card text-dark border-white mb-3 rounded-1r">
+            <div class="card-body">
+                <h5 class="card-title">Γειά σας, @Model.FullName</h5>
+                <p class="card-text">Τελειωποιήστε τις γνώσσεις σας με μας. Εξασκηθείτε και ελέγξετε τις γνώσεις, παίζοντας.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        @foreach (var topic in Model.Topics) {
+            
+            <div class="row">
+               <div class="col-md-12">
+                   <div class="card text-dark border-white mb-3 rounded-1r">
+                       <div class="card-body">
+                           <div class="card-text">
+                               <h5 class="card-title"><span style="color:gray;">Μάθημα:</span> @topic.Name</h5>
+                               <p class="card-text">Διδάσκων: @topic.Customer.FirstName @topic.Customer.LastName</p>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                @foreach (var chapter in topic.Chapters) {
+                   
+                    if (chapter.Quizzes.Count > 0) {
+                        var successCount = (chapter.SuccessProgres() * 100) / chapter.Quizzes.Count;
+                        var faultCount = chapter.Quizzes.Count - chapter.SuccessProgres();
+                        var faultPerCent = (faultCount * 100) / chapter.Quizzes.Count;
+                        <div class="col">
+                            <div class="card text-dark border-white mb-3 rounded-1r">
+                                <div class="card-body">
+                                    <div class="row">
+                                        
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <img class="img-fluid rounded-start" src="~/Content/assets/images/svgs/chapter-@(chapter.Id).svg" />
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <h5 class="card-title">@chapter.Name</h5>
+                                                    <p class="card-text">Μια προσπάθεια θεωρείται επιτυχής εάν έχει συγκεντρώσει @chapter.PasScore ή περισσότερους πόντους</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-12 mt-3 mb-3">
+                                            <p class="card-text" style="margin:0;">
+                                                Επιτυχίες (<strong>@chapter.SuccessProgres()</strong>)
+                                            </p>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-success" role="progressbar" style="width: @(successCount)%" aria-valuenow="@(successCount)" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-12 mt-0 mb-4">
+                                            <p class="card-text" style="margin:0;">
+                                                Αποτυχίες (<strong>@faultCount</strong>)
+                                            </p>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-warning" role="progressbar" style="width: @(faultPerCent)%" aria-valuenow="@(faultPerCent)" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            
+                                            <div class="card-text text-end mt-3">
+                                                <a class="colapse-icon" data-bs-toggle="collapse" href="#collapseExample@(chapter.Id)" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                    Αναλυτικά αποτελέσματα
+                                                    <i class="bi bi-chevron-down"></i>
+                                                    <i class="bi bi-chevron-up"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="collapse" id="collapseExample@(chapter.Id)">
+                                                <div class="card card-body">
+                                                    <table class="table table-sm">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Αποτέλεσμα</th>
+                                                                <th>Πόντοι</th>
+                                                                <th class="text-center">Προσπάθεια</th>
+                                                                <th>Ημ/νία</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var quiz in chapter.Quizzes)
+                                                            {
+                                                                var succesClass = quiz.Success ? "table-success" : "table-light";
+                                                                <tr class="@succesClass">
+                                                                    <td>@(quiz.Success ? "Επιτυχές" : "Μη επιτυχές")</td>
+                                                                    <td>@quiz.Score/100 </td>
+                                                                    <td class="text-center">@quiz.Tries</td>
+                                                                    <td>@quiz.LastUpdate.ToString("g")</td>
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,169 @@
+﻿@model Question
+@{
+    ViewBag.Title = "Ερώτηση";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-topic-tab" data-bs-toggle="tab" data-bs-target="#nav-topic" type="button" role="tab" aria-controls="nav-topic" aria-selected="true">Ερώτηση</button>
+                <button class="nav-link" id="nav-questions-tab" data-bs-toggle="tab" data-bs-target="#nav-questions" type="button" role="tab" aria-controls="nav-questions" aria-selected="false">Απαντήσεις</button>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-topic" role="tabpanel" aria-labelledby="nav-topic-tab">
+                <div class="row justify-content-center mb-5">
+
+
+                    <div class="col">
+                        <div class="card">
+
+                            <div class="card-header">
+                                <h3 class="card-title">Ερώτηση: @Model.Description</h3>
+                                <div class="card-options">
+
+                                    <a href="@Url.Action("EdiChapter", "Admin", new{chapterId = Model.ChapterId})#nav-questions" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Επίστροφή">
+                                        <i class="bi bi-arrow-left-square"></i> Επιστροφή
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "row g-3" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(m => m.Id)
+                                    @Html.HiddenFor(m => m.ChapterId)
+
+                                    <div class="col-md-12">
+                                        @Html.LabelFor(m => m.Description, new { @class = "form-label" })
+                                        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.Description)
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(m => m.SuccessValue, new { @class = "form-label" })
+                                        @Html.TextBoxFor(m => m.SuccessValue, new { @class = "form-control", cols = 80, rows = 10 })
+                                        @Html.ValidationMessageFor(m => m.SuccessValue)
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(m => m.Score, new { @class = "form-label" })
+                                        @Html.TextBoxFor(m => m.Score, new { @class = "form-control", cols = 80, rows = 10 })
+                                        @Html.ValidationMessageFor(m => m.Score)
+                                    </div>
+
+
+
+                                    <div class="col-md-6">
+                                        <button class="btn btn-primary">Απόθήκευση</button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="tab-pane fade" id="nav-questions" role="tabpanel" aria-labelledby="nav-questions-tab">
+                <div class="row justify-content-center">
+
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Απαντήσεις</h3>
+                                <div class="card-options">
+                                    <a href="@Url.Action("EdiChapter", "Admin", new{chapterId = Model.ChapterId})#nav-questions" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Επίστροφή">
+                                        <i class="bi bi-arrow-left-square"></i> Επιστροφή
+                                    </a>
+                                    <a href="@Url.Action("EditAnswer", "Admin", new { answerId = 0, qustionId = Model.Id })" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Νέα Απάντηση">
+                                        <i class="bi bi-plus-square"></i> Νέα Απάντηση
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Απάντηση</th>
+                                            <th scope="col">Αριθμός απάντησης</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var answer in Model.Answers)
+                                        {
+                                            <tr>
+                                                <td style="width: 45%;">@answer.Label</td>
+                                                <td style="width: 45%;">@answer.Value</td>
+                                                <td style="text-align: center;">
+                                                    <a href="@Url.Action("EditAnswer","Admin", new{answerId=answer.Id})"
+                                                       data-bs-toggle="tooltip"
+                                                       data-bs-placement="top"
+                                                       title="Click to Edit">
+                                                        <i class="bi bi-pencil-square"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    <script>
+
+        const pillsTab = document.querySelector('#nav-tab');
+        const pills = pillsTab.querySelectorAll('button[data-bs-toggle="tab"]');
+
+        pills.forEach(pill => {
+            pill.addEventListener('shown.bs.tab', (event) => {
+                const { target } = event;
+                const { id: targetId } = target;
+
+                savePillId(targetId);
+            });
+        });
+
+        const savePillId = (selector) => {
+            localStorage.setItem('activePillId', selector);
+        };
+
+        const getPillId = () => {
+            const activePillId = localStorage.getItem('activePillId');
+
+            // if local storage item is null, show default tab
+            if (!activePillId) return;
+
+            // call 'show' function
+            const someTabTriggerEl = document.querySelector(`#${activePillId}`)
+            const tab = new bootstrap.Tab(someTabTriggerEl);
+
+            tab.show();
+        };
+
+        // get pill id on load
+        getPillId();
+
+
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+
+    
+    </script>
+}

@@ -1,0 +1,77 @@
+﻿@model Answer
+@{
+    ViewBag.Title = "EditAnswer";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-topic-tab" data-bs-toggle="tab" data-bs-target="#nav-topic" type="button" role="tab" aria-controls="nav-topic" aria-selected="true">Απάντηση</button>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-topic" role="tabpanel" aria-labelledby="nav-topic-tab">
+                <div class="row justify-content-center mb-5">
+
+
+                    <div class="col">
+                        <div class="card">
+
+                            <div class="card-header">
+                                <h3 class="card-title">Ερώτηση: @Model.Question.Description, Απάντηση: @Model.Label</h3>
+                                <div class="card-options">
+
+                                    <a href="@Url.Action("EditQuestion", "Admin", new{questionId = Model.QuestionId})#nav-questions" type="button" class="btn-block-option" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Επίστροφή">
+                                        <i class="bi bi-arrow-left-square"></i> Επιστροφή
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "row g-3" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(m => m.Id)
+                                    @Html.HiddenFor(m => m.QuestionId)
+
+                                    <div class="col-md-10">
+                                        @Html.LabelFor(m => m.Label, new { @class = "form-label" })
+                                        @Html.TextBoxFor(m => m.Label, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.Label)
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        @Html.LabelFor(m => m.Value, new { @class = "form-label" })
+                                        @Html.TextBoxFor(m => m.Value, new { @class = "form-control", cols = 80, rows = 10 })
+                                        @Html.ValidationMessageFor(m => m.Value)
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <button class="btn btn-primary">Απόθήκευση</button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    <script>
+
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+
+    </script>
+}

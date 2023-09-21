@@ -5,35 +5,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace TWYK.Core.Domain
 {
     [Table("Question")]
-    // Remove this line if you no have an entity validator
-    //[Validator(typeof(QuestionValidator))]
     public class Question : BaseEntity
     {
         private ICollection<Answer> _answer;
 
-        [Column("Id")]
-        [Display(Name = "Question Id")]
-        public int Id { get; set; }
-
-
         [Column("Description")]
-        [Display(Name = "Question Description")]
+        [Display(Name = "Ερώτηση")]
+        [Required(ErrorMessage = "Η Ερώτηση είναι απαραίτητη")]
         public string Description { get; set; }
 
 
         [Column("Score")]
-        [Display(Name = "Question Score")]
+        [Display(Name = "Score")]
         public int Score { get; set; }
         
-        [Column("SuccessMsg")]
-        [Display(Name = "Question Success Msg")]
-        public string SuccessMsg { get; set; }
-
-
-        [Column("FaultMsg")]
-        [Display(Name = "Question Fault Msg")]
-        public string FaultMsg { get; set; }
-
 
         [Column("ChapterId")]
         [Display(Name = "Question ChapterId")]
@@ -41,7 +26,8 @@ namespace TWYK.Core.Domain
 
 
         [Column("SuccessValue")]
-        [Display(Name = "Question Success Value")]
+        [Display(Name = "Σωστή απάντηση")]
+        [Required(ErrorMessage = "Η Σωστή απάντηση είναι απαραίτητη")]
         public int SuccessValue { get; set; }
 
         public virtual Chapter Chapter { get; set; }

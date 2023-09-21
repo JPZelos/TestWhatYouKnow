@@ -8,9 +8,9 @@ namespace TWYK.Core.Domain
     //[Validator(typeof(AnswerValidator))]
     public class Answer : BaseEntity
     {
-        [Column("Id")]
-        [Display(Name = "Answer_Id")]
-        public int Id { get; set; }
+        //[Column("Id")]
+        //[Display(Name = "Answer_Id")]
+        //public int Id { get; set; }
 
 
         [Column("QuestionId")]
@@ -19,12 +19,14 @@ namespace TWYK.Core.Domain
 
 
         [Column("Label")]
-        [Display(Name = "Answer Label")]
+        [Display(Name = "Απάντηση")]
+        [Required(ErrorMessage = "Η Απάντηση είναι απαραίτητη")]
         public string Label { get; set; }
 
 
         [Column("Value")]
-        [Display(Name = "Answer Value")]
+        [Display(Name = "Αριθμός απάντησης")]
+        [Required(ErrorMessage = "Ο Αριθμός απάντησης είναι απαραίτητος")]
         public int Value { get; set; }
 
         public virtual Question Question { get; set; }

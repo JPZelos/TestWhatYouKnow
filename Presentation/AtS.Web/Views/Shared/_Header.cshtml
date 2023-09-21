@@ -1,9 +1,33 @@
 ﻿<!-- Header-->
-<header class="bg-dark py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Shop in style</h1>
-            <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+<style>
+    header{
+        padding: 0 !important;
+        }
+    #homePageVideo {
+        width: 100%;
+        height: calc(100vh - 118px);
+        height: 30vh;
+        object-fit: cover;
+    }
+    #header-overlay {
+        position: absolute;
+        background-color: #b31f24;
+        top: 93px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: .5;
+        height: 30vh;
+    }
+
+</style>
+<header class="bg-dark p-0">
+    <img id="homePageVideo" src="~/Content/assets/images/header-bg.jpg" />
+    @*<div id="header-overlay" class="container px-4 px-lg-5 my-5">*@
+    <div id="header-overlay" class="d-lg-flex d-md-none d-sm-none d-none flex-wrap justify-content-center align-items-center mt-4">
+        <div class="text-center">
+            <h1 class="display-4 text-white fw-bolder">Test What You Know</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Ελέγξετε τις γνώσεις σας παίζοντας</p>
         </div>
     </div>
 </header>

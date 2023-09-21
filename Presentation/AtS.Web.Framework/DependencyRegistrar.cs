@@ -14,13 +14,11 @@ using TWYK.Core.Infrastructure.DependencyManagement;
 using TWYK.Data;
 using TWYK.Services.Answers;
 using TWYK.Services.Authentication;
-using TWYK.Services.Categories;
 using TWYK.Services.Chapters;
 using TWYK.Services.Customers;
 using TWYK.Services.Installation;
-using TWYK.Services.Orders;
-using TWYK.Services.Products;
 using TWYK.Services.Questions;
+using TWYK.Services.Quizzes;
 using TWYK.Services.Security;
 using TWYK.Services.TestResults;
 using TWYK.Services.Topics;
@@ -93,9 +91,6 @@ namespace TWYK.Web.Framework
             builder.RegisterType<CustomerService>().As<ICustomerService>().InstancePerLifetimeScope();
             //TODO: Make this with Cache Manager
             builder.RegisterType<PermissionService>().As<IPermissionService>().InstancePerLifetimeScope();
-            builder.RegisterType<ProductService>().As<IProductService>().InstancePerLifetimeScope();
-            builder.RegisterType<ShoppingCartService>().As<IShoppingCartService>().InstancePerLifetimeScope();
-            builder.RegisterType<CategoryService>().As<ICategoryService>().InstancePerLifetimeScope();
             builder.RegisterType<InstallationService>().As<IInstallationService>().InstancePerLifetimeScope();
 
 
@@ -104,6 +99,7 @@ namespace TWYK.Web.Framework
             builder.RegisterType<QuestionService>().As<IQuestionService>().InstancePerLifetimeScope();
             builder.RegisterType<TopicService>().As<ITopicService>().InstancePerLifetimeScope();
             builder.RegisterType<TestResultService>().As<ITestResultService>().InstancePerLifetimeScope();
+            builder.RegisterType<QuizService>().As<IQuizService>().InstancePerLifetimeScope();
 
         }
 

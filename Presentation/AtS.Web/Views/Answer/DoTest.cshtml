@@ -1,30 +1,168 @@
-﻿@model  List<QuestionModel>
+﻿@model  ChapterModel
 @{
     ViewBag.Title = "DoTest";
+    Layout = "~/Views/Shared/_LayoutQuiz.cshtml";
 }
 
-@using (Html.BeginForm("TestResult", "Answer", FormMethod.Post, new { @class = "well" }))
-{
+@{
+    var barWidth = 100 / Model.Questions.Count;
+    var answers = new List<int>();
+    foreach (var ca in Model.Questions) {
+        answers.Add(ca.SuccessValue);
+    }
+    var allAnswers = string.Join(",", answers);
+    
+}
+<style>
+    .step-bar .bar{
+        width: @(barWidth)% !important;
+    }
+    .step-number-inner {
+        text-transform: capitalize;
+        font-family: 'Roboto';
+    }
+    .next-prev button {
+        text-transform: capitalize;
+    }
+    .radio-field label {
+        font-size: 1.2rem;
+        text-align:center;
+        padding:1rem;
+    }
+</style>
+<!-- step-number -->
+<div class="step-number">
+    <div class="step-number-inner">
+        Ερώτηση <span id="activeStep">1</span>/@Model.Questions.Count
+    </div>
+</div>
 
-    <div class="quiz">
-        @{ int idx = 0; }
-        @foreach (var questionModel in Model)
-        {
-            <h4>@questionModel.Description</h4>
-            foreach (var answer in questionModel.Answers) {
-                <div class="checkbox">
-                    <label>
-                        <span>
-                            <input type="radio" name="@questionModel.Id" value="@answer.Value" />
-                            @answer.Label
-                        </span>
-                    </label>
+
+<div class="container">
+    <div class="row">
+        <div class="tab-100 order-c col-md-5 p-relative">
+            <!-- side image -->
+            <div class="side-img">
+                <img src="~/Content/assets/images/side.png" alt="side-img">
+            </div>
+
+            <!-- bar -->
+            <div class="step-bar">
+                @{ var idx = 1; }
+                @foreach (var q in Model.Questions) {
+                    var load = idx == 1 ? "w-100 fill" : "fill";
+                    <div class="bar">
+                        <div class="@load"></div>
+                    </div>
+                    idx++;
+                }
+            </div>
+        </div>
+
+        <div class="tab-100 col-md-7">
+            <div class="show-section wrapper" id="quiz-wrapper">
+                @{ var idx1 = 1; }
+                @foreach (var q in Model.Questions) {
+                    <section class="steps">
+                        <!-- form -->
+                        <form id="step@(idx1)" method="post" novalidate>
+                            <input type="hidden" name="QuizId" id="QuizId" value="@Model.QuizId" />
+                            <!-- heading -->
+                            <h2 class="q-heading">
+                                @q.Description
+                            </h2>
+
+                            <!-- form field -->
+                            <div class="form-inner">
+                                @foreach (var answer in q.Answers) {
+                                    <div class="bounce-left radio-field">
+                                        <input class="checkmark" type="radio" name="@q.Id" value="@answer.Value">
+                                        <label>@answer.Label</label>
+                                    </div>
+                                }
+                            </div>
+                            <!-- next previous button -->
+                            @if (idx1 == Model.Questions.Count) {
+                                <div class="next-prev">
+                                    <button type="button" class="prev">
+                                        <i class="fa-solid fa-arrow-left"></i>προηγούμενη
+                                    </button>
+                                    <button type="button" class="apply" id="sub">
+                                        Υποβολή<i class="fa-solid fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            }
+                            else {
+                                <div class="next-prev">
+                                    <button type="button" class="prev">
+                                        <i class="fa-solid fa-arrow-left"></i>προηγούμενη
+                                    </button>
+                                    <button type="button" data-id="@(idx1)" class="next" id="step@(idx1)btn">
+                                        επόμενη<i class="fa-solid fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            }
+
+
+                        </form>
+                    </section>
+                    idx1++;
+                }
+
+                <div class="question overflow-hidden">
+                    <img src="~/Content/assets/images/question-sign.png" alt="question">
                 </div>
-            }
-           
-        }
+            </div>
+        </div>
     </div>
-    <div class="form-actions">
-        <input type="submit" class="btn btn-primary" value="Send" />
+</div>
+
+<!-- result -->
+<div class="loadingresult">
+    <img src="~/Content/assets/images/loading.gif" alt="loading">
+</div>
+
+<div class="result_page">
+    <div class="result_inner">
+        <div class="result_inner2">
+            <h2>Τέστ Γνώσεων</h2>
+            <div class="u_result">
+                <div class="u_score">Οι πόντοι σας: </div>
+                <div class="u_prcnt">
+                    20%
+                </div>
+                <span>20 Πόντοι</span>
+            </div>
+            <div class="p_result">
+                <div class="p_score">Ελάχιστο όριο: </div>
+                <div class="p_prcnt">
+                    @(Model.PasScore)%
+                </div>
+                <span>@Model.PasScore Πόντοι</span>
+            </div>
+            <div class="line"></div>
+            <div class="result_show">
+                <h2>Αποτελέσματα</h2>
+                <div class="pass_check">
+                    <i class="fa-solid fa-xmark"></i>Δυστυχώς δεν περάσατε
+                </div>
+                <div class="result_msg">
+                    Με μεγαλύτερη προσπάθεια θα έχετε καλύτερη τύχη την επόμενη φορά!
+                </div>
+                <div class="mt-3">
+                    <a class="btn btn-sm btn-primary" href="/">Επιστροφή</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- rectangle -->
+        <img class="behind_bg" src="~/Content/assets/images/bh-clip.png" alt="rectangle">
     </div>
+</div>
+
+@section scripts {
+    <script src="~/Content/assets/js/custom-2.js"></script>
+    <script>
+        var quiz = $("#quiz-wrapper").Quiz({stepLenth:@Model.Questions.Count, correctAnswers: [@allAnswers], pasScore : @Model.PasScore});
+    </script>
 }

@@ -60,5 +60,7 @@ namespace TWYK.Services.Customers
         #endregion
 
         bool UniqueUserName(string username);
+        IList<Customer> GetAllByTeacher(int teacherId);
+        Customer GetCustomerById(int id);
     }
 }

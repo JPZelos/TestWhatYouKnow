@@ -3,22 +3,58 @@
 @{
     ViewBag.Title = "ChaptertDetails";
 }
-
-<h2>@Model.Topic.Name / @Model.Name</h2>
-
-
-
-<p>@Model.Description</p>
-
-
-<h3><span>Καθηγητής:</span> @(Model.Topic.Customer.FirstName) @(Model.Topic.Customer.LastName)</h3>
-
-
-<h3>Ερωτήσεις</h3>
-<ul>
-    @foreach (var q in Model.Questions) {
-        <li>@q.Description</li>
+<style>
+    .card-text ul {
+        list-style: none;
+        margin-left: 0;
+        padding-left: 2em;
+        text-indent: -0.6em;
     }
-</ul>
+    .chapter .card-header {
+        background: #b31f24;
+        color:white;
+        text-weight:800;
+    }
+    .chapter .list-group-item {
+        font-weight:700;
+    }
+</style>
 
-<a href="@Url.RouteUrl("DoTest", new {chapterId = Model.Id})" class="btn btn-primary">Κάντε αυτό το τεστ</a>
+<div class="row">
+    <div class="col-md-8">
+        @Html.Raw(Model.Description)
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow  mb-5 bg-body rounded sticky-top chapter">
+            <div class="card-header">
+                @Model.Topic.Name
+            </div>
+
+            <div class="card-body">
+
+
+                <div class="card-text">
+                    <h5 class="card-title">@Model.Name</h5>
+                    <h6>Το κεφάλαιο έχει @Model.Questions.Count Ερωτήσεις</h6>
+                    <p>
+                        Μελετήστε το υλικό και δοκιμάστε να κάνετε αυτό το τεστ, για να δοκιμάσετε τις γνώσεις σας.
+                    </p>
+                    <p><strong>Καλή επιτυχία</strong></p>
+                    @*<ul>
+            @foreach (var q in Model.Questions) {
+                <li><i class="bi bi-check2"></i> @q.Description</li>
+            }
+        </ul>*@
+                </div>
+                <div class="text-end">
+                    <a href="@Url.RouteUrl("DoTest", new { chapterId = Model.Id })" class="btn btn-primary">Δοκιμάστε</a>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                <span>Καθηγητής:</span> @(Model.Topic.Customer.FirstName) @(Model.Topic.Customer.LastName)
+            </div>
+        </div>
+
+    </div>
+
+</div>
